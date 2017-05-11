@@ -57,9 +57,4 @@ public class RecuperarDatos extends AppCompatActivity {
 
     }
 
-    public void goToLogin(View view){
-        Intent inb1 = new Intent(RecuperarDatos.this, Login.class);
-        startActivity(inb1);
-    }
-
 }

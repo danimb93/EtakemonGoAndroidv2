@@ -17,7 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Registrar" />
-        <activity android:name=".RecuperarDatos"></activity>
+        <activity android:name=".RecuperarDatos" />
+        <activity android:name=".AjustesUsuario" />
+        <activity android:name=".ModificarUsuario"></activity>
     </application>
 
 </manifest>

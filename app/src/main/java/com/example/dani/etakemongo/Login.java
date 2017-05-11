@@ -16,4 +16,8 @@ public class Login extends AppCompatActivity {
         Intent i=new Intent(this,Registrar.class);
         startActivity(i);
     }
+    public void goToRecuperarDatos(View view){
+        Intent inb1 = new Intent(this,RecuperarDatos.class);
+        startActivity(inb1);
+    }
 }

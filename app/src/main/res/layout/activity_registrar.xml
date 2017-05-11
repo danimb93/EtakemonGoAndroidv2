@@ -159,7 +159,9 @@
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Registrar" />
+                android:text="Registrar"
+                />
+
         </LinearLayout>
 
         <LinearLayout
