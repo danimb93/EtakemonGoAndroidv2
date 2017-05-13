@@ -79,7 +79,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/etPasswprd"
+                android:id="@+id/etPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -87,7 +87,7 @@
                 android:ems="10"
                 android:gravity="center"
                 android:inputType="textPassword"
-                android:hint = "Semos las niñas del colegio"/>
+                android:hint = "Password"/>
         </LinearLayout>
 
         <LinearLayout

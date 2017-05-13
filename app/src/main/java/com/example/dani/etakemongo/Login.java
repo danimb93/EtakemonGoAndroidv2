@@ -20,4 +20,6 @@ public class Login extends AppCompatActivity {
         Intent inb1 = new Intent(this,RecuperarDatos.class);
         startActivity(inb1);
     }
+
+
 }
