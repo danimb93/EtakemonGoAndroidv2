@@ -8,7 +8,8 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.1'
         // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle fil
+        // in the individual module build.gradle file
+
     }
 }
 allprojects {
@@ -19,10 +20,4 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-dependencies {
-    // Retrofit & OkHttp
-    compile 'com.squareup.retrofit2:retrofit:2.2.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
 }

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.dani.etakemongo.ModificarUsuario">
+    android:background="@drawable/fondo">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -32,13 +33,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Modificar datos" />
+                android:text="Modificar datos"
+                />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"></LinearLayout>
+            android:orientation="horizontal"
+            android:layout_weight="0.52">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/eetakemongo"
+                tools:layout_editor_absoluteX="-105dp"
+                tools:layout_editor_absoluteY="625dp" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,17 +68,24 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="84dp"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/etNombre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Nombre" />
+                android:text="Nombre"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:hint="Nick"/>
         </LinearLayout>
 
         <LinearLayout
@@ -75,11 +95,17 @@
 
             <EditText
                 android:id="@+id/etPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:hint="Contraseña"/>
         </LinearLayout>
 
         <LinearLayout
@@ -95,4 +121,5 @@
                 android:text="Modificar" />
         </LinearLayout>
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
