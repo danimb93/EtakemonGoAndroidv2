@@ -8,9 +8,11 @@ public class Contributor {
 
     public final String login;
     public final int contributions;
+    public final String url;
 
-    public Contributor(String login, int contributions, String email) {
+    public Contributor(String login, int contributions, String url) {
         this.login = login;
         this.contributions = contributions;
+        this.url=url;
     }
 }

@@ -3,6 +3,7 @@
     package="com.example.dani.etakemongo">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -21,7 +22,7 @@
         <activity android:name=".Registrar" />
         <activity android:name=".RecuperarDatos" />
         <activity android:name=".AjustesUsuario" />
-        <activity android:name=".ModificarUsuario"></activity>
+        <activity android:name=".ModificarUsuario" />
     </application>
 
 </manifest>

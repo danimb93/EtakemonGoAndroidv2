@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Login extends AppCompatActivity {
 
     private EditText email, password;
+    private Button login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +31,11 @@ public class Login extends AppCompatActivity {
 
         email = (EditText) findViewById(R.id.etEmail);
         password = (EditText) findViewById(R.id.etPassword);
+        login= (Button) findViewById(R.id.btnLogin);
 
-
+//****************************Retrofit***********
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         Retrofit.Builder builder = new Retrofit.Builder()
-                // .baseUrl("https://translation.googleapis.com")
                 .baseUrl("https://api.github.com/")
                 .addConverterFactory(GsonConverterFactory.create());
 
@@ -45,12 +47,7 @@ public class Login extends AppCompatActivity {
                         )
                         .build();
 
-      //  GitHubClient client = retrofit.create(GitHubClient.class);
 
-//        Call call = client.google();
-
-
-        //NUEVO CODIGO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // Create an instance of our GitHub API interface.
         GitHubClient github = retrofit.create(GitHubClient.class);
 
@@ -59,8 +56,9 @@ public class Login extends AppCompatActivity {
 
         // Fetch and print a list of the contributors to the library.
 
-            //FIN NUEVO CODIGO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
         call.enqueue(new Callback() {
+            //***************Comprobacion de que recoge los datos**********
             @Override
             public void onResponse(Call call, Response response){
                 List<Contributor> contributors = (List<Contributor>)response.body();
@@ -75,33 +73,16 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+    public void abrirRegistrar (View view) {
+        Intent i = new Intent(this, Registrar.class);
+        startActivity(i);
+    }
+    public void abrirRecuperar (View view) {
+        Intent i = new Intent(this, Registrar.class);
+        startActivity(i);
+    }
 }
-/*
-        List<Contributor> contributors = null;
 
-        for (Contributor contributor : contributors) {
-            System.out.println(contributor.login + " (" + contributor.contributions + ")");
-        }
-try {
-            contributors = call.execute().body();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
- */
-/*
-        call.enqueue(new Callback() {
-            @Override
-            public void onResponse(Call call, Response response){
-                response.body();
-
-            }
-            @Override
-            public void onFailure(Call call, Throwable t){
-                Toast.makeText(Login.this, t.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        /*/
 
 
 
