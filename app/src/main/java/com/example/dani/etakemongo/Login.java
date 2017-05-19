@@ -78,7 +78,7 @@ public class Login extends AppCompatActivity {
         startActivity(i);
     }
     public void abrirRecuperar (View view) {
-        Intent i = new Intent(this, Registrar.class);
+        Intent i = new Intent(this, RecuperarDatos.class);
         startActivity(i);
     }
 }
