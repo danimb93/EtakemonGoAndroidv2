@@ -64,7 +64,8 @@ public class Login extends AppCompatActivity {
                 List<Contributor> contributors = (List<Contributor>)response.body();
                 System.out.println("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA*********");
                 for (Contributor contributor : contributors) {
-                    System.out.println(contributor.login + " (" + contributor.contributions + ")");
+                    System.out.println(contributor.login +
+                            " (" + contributor.contributions + "); La url es: (" +contributor.url+ ")");
                 }
             }
             @Override
