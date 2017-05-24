@@ -46,18 +46,14 @@ public class Registrar extends AppCompatActivity {
             @Override
             public void onClick (View v){
 
-                String snombre= nombre.getText().toString();
+                final String snombre= nombre.getText().toString();
                 String snick = nick.getText().toString();
                 String spassword=password.getText().toString();
-                String semail= email.getText().toString();
+                final String semail= email.getText().toString();
                 String semailR= emailR.getText().toString();
 
 
                 datos.setText(snombre + snick + spassword + semail);
-
-
-             //prueba chunga
-                    System.out.println("***********DATOS**************************");
 
                     OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
                     Retrofit.Builder builder = new Retrofit.Builder()
@@ -77,8 +73,6 @@ public class Registrar extends AppCompatActivity {
 
                     // Create a call instance for looking up Retrofit contributors.
                     Call<Usuario> call = registrar.registrar(usuario);
-                    System.out.println("***********DATOS**************************");
-
 
                     // Fetch and print a list of the contributors to the library.
                     call.enqueue(new Callback() {
@@ -88,13 +82,23 @@ public class Registrar extends AppCompatActivity {
                         public void onResponse(Call call, Response response) {
                             Usuario contributor = (Usuario) response.body();
                             Log.d(tag, "Registrado correctamente");
-                            System.out.println(contributor.getEmail() + " y " + contributor.getContrasena());
+
+                            //devuelvo por el intent que me habia llamado el email del usuario registrado
+                            //y el codigo de respuesta 1600 (OK) a la pantalla LOGIN
+                            //para alli mostrarle al usuario el email de forma que pueda loguearse
+                            Intent intres = getIntent();
+                            intres.putExtra("registrado",semail);
+                            setResult(1600, intres);
+                            finish();
                         }
 
                         @Override
                         public void onFailure(Call call, Throwable t) {
                             Toast.makeText(Registrar.this, t.toString(), Toast.LENGTH_SHORT).show();
                             Log.d(tag, "ERROR al Registrar");
+                            Intent intres = getIntent();
+                            setResult(RESULT_CANCELED, intres);
+                            finish();
                         }
                     });
                 }

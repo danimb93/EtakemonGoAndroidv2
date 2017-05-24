@@ -95,6 +95,12 @@ public class Login extends AppCompatActivity {
         Bundle result = data.getExtras();
 
         //operar segun el resultCode recibido por las otras actividades
+
+        if (requestCode==200 && resultCode == 1600){
+            email = (EditText) findViewById(R.id.etEmail);
+            String emailToShow = result.getString("registrado");
+            email.setText(emailToShow);
+        }
     }
 
 
