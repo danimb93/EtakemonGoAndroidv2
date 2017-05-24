@@ -6,15 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.dani.etakemongo.Modelo.Usuario;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.gson.Gson;
-import com.google.gson.internal.UnsafeAllocator;
-
-import java.io.IOException;
-import java.util.List;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -48,7 +43,7 @@ public class Login extends AppCompatActivity {
 
                 OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
                 Retrofit.Builder builder = new Retrofit.Builder()
-                        .baseUrl("http://172.16.10.111:8080")
+                        .baseUrl("http://localhost:8080/")
                         .addConverterFactory(GsonConverterFactory.create());
 //
                 Retrofit retrofit =

@@ -1,4 +1,4 @@
-package com.example.dani.etakemongo;
+package com.example.dani.etakemongo.Modelo;
 
 /**
  * Created by Dani on 23/05/2017.
