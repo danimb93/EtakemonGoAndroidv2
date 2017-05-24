@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.google.gson.Gson;
 import com.google.gson.internal.UnsafeAllocator;
 
@@ -47,7 +48,7 @@ public class Login extends AppCompatActivity {
 
                 OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
                 Retrofit.Builder builder = new Retrofit.Builder()
-                        .baseUrl("http://147.83.201.98:8080")
+                        .baseUrl("http://172.16.10.111:8080")
                         .addConverterFactory(GsonConverterFactory.create());
 
                 Retrofit retrofit =
@@ -87,7 +88,7 @@ public class Login extends AppCompatActivity {
 
 
     public void abrirRegistrar (View view) {
-        Intent i = new Intent(this, Registrar.class);
+        Intent i = new Intent(this, GoogleMap.class);
         startActivity(i);
     }
     public void abrirRecuperar (View view) {
