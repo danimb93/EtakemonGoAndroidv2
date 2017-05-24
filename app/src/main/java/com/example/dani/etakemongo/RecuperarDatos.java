@@ -14,6 +14,7 @@ public class RecuperarDatos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recuperar_datos);
+        Log.d(tag, "Event onCreate()");
     }
 
     @Override
