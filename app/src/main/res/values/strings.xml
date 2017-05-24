@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">EtakemonGo</string>
     <string name="forget_pass">Olvide mi usuario o contraseña</string>
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>

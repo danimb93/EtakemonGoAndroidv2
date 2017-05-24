@@ -9,6 +9,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.internal.UnsafeAllocator;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -33,47 +36,56 @@ public class Login extends AppCompatActivity {
         password = (EditText) findViewById(R.id.etPassword);
         login= (Button) findViewById(R.id.btnLogin);
 
-//****************************Retrofit***********
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
-                .addConverterFactory(GsonConverterFactory.create());
 
-
-        Retrofit retrofit =
-                builder
-                        .client(
-                                httpClient.build()
-                        )
-                        .build();
-
-
-        // Create an instance of our GitHub API interface.
-        GitHubClient github = retrofit.create(GitHubClient.class);
-
-        // Create a call instance for looking up Retrofit contributors.
-        Call<List<Contributor>> call = github.contributors("munozloisivan", "EetakemonGoCBL");
-
-        // Fetch and print a list of the contributors to the library.
-
-
-        call.enqueue(new Callback() {
-            //***************Comprobacion de que recoge los datos**********
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call call, Response response){
-                List<Contributor> contributors = (List<Contributor>)response.body();
-                System.out.println("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA*********");
-                for (Contributor contributor : contributors) {
-                    System.out.println(contributor.login +
-                            " (" + contributor.contributions + "); La url es: (" +contributor.url+ ")");
-                }
-            }
-            @Override
-            public void onFailure(Call call, Throwable t){
-                Toast.makeText(Login.this, t.toString(), Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                String semail=  email.getText().toString();
+                String spassword= password.getText().toString();
+
+                System.out.println("***********DATOS**************************");
+
+                OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+                Retrofit.Builder builder = new Retrofit.Builder()
+                        .baseUrl("http://147.83.201.98:8080")
+                        .addConverterFactory(GsonConverterFactory.create());
+
+                Retrofit retrofit =
+                        builder
+                                .client(
+                                        httpClient.build()
+                                )
+                                .build();
+
+                // Create an instance of our GitHub API interface.
+                GitHubClient login = retrofit.create(GitHubClient.class);
+                Usuario usuario= new Usuario(semail, spassword);
+
+                // Create a call instance for looking up Retrofit contributors.
+                Call<Usuario> call = login.login(usuario);
+                System.out.println("***********DATOS**************************");
+
+
+                // Fetch and print a list of the contributors to the library.
+                call.enqueue(new Callback() {
+
+                    //***************Comprobacion de que recoge los datos**********
+                    @Override
+                    public void onResponse(Call call, Response response) {
+                        Usuario contributor = (Usuario) response.body();
+                        System.out.println(contributor.getEmail() +" y "+ contributor.getContrasena());
+                    }
+
+                    @Override
+                    public void onFailure(Call call, Throwable t) {
+                        Toast.makeText(Login.this, t.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
+
+
     public void abrirRegistrar (View view) {
         Intent i = new Intent(this, Registrar.class);
         startActivity(i);
@@ -83,14 +95,3 @@ public class Login extends AppCompatActivity {
         startActivity(i);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
