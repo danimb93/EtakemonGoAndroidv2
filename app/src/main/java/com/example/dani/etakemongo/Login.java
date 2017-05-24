@@ -33,14 +33,14 @@ public class Login extends AppCompatActivity {
 
         email = (EditText) findViewById(R.id.etEmail);
         password = (EditText) findViewById(R.id.etPassword);
-        login= (Button) findViewById(R.id.btnLogin);
+        login = (Button) findViewById(R.id.btnLogin);
 
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String semail=  email.getText().toString();
-                String spassword= password.getText().toString();
+            public void onClick(final View v) {
+                String semail = email.getText().toString();
+                String spassword = password.getText().toString();
 
                 System.out.println("***********DATOS**************************");
 
@@ -58,7 +58,7 @@ public class Login extends AppCompatActivity {
 
                 // Create an instance of our GitHub API interface.
                 GitHubClient login = retrofit.create(GitHubClient.class);
-                Usuario usuario= new Usuario(semail, spassword);
+                Usuario usuario = new Usuario(semail, spassword);
 
                 // Create a call instance for looking up Retrofit contributors.
                 Call<Usuario> call = login.login(usuario);
@@ -72,17 +72,33 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onResponse(Call call, Response response) {
                         Usuario contributor = (Usuario) response.body();
-                        System.out.println(contributor.getEmail() +" y "+ contributor.getContrasena());
+                        goToMapsActivity(v);  //si se ha logueado llamas a la funcion que te pasa a la siguiente actividad
+                        Log.d(tag, "Logueado correctamente");
+                        System.out.println(contributor.getEmail() + " y " + contributor.getContrasena());
                     }
 
                     @Override
                     public void onFailure(Call call, Throwable t) {
                         Toast.makeText(Login.this, t.toString(), Toast.LENGTH_SHORT).show();
+                        Log.d(tag, "ERROR al loguear");
                     }
                 });
             }
         });
+
     }
+
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Bundle result = data.getExtras();
+
+        //operar segun el resultCode recibido por las otras actividades
+    }
+
+
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -125,11 +141,16 @@ public class Login extends AppCompatActivity {
     }
 
     public void abrirRegistrar (View view) {
-        Intent i = new Intent(this, GoogleMap.class);
-        startActivity(i);
+        Intent intent = new Intent(this, Registrar.class);
+        startActivityForResult(intent, 200);
     }
     public void abrirRecuperar (View view) {
-        Intent i = new Intent(this, RecuperarDatos.class);
-        startActivity(i);
+        Intent intent = new Intent(this, RecuperarDatos.class);
+        startActivityForResult(intent, 300);
+    }
+
+    public void goToMapsActivity(View view){
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivityForResult(intent, 100);    //ponemos el codigo 100 para monitorizar esta actividad y sus futuros resultados
     }
 }

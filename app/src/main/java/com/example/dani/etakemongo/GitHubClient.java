@@ -21,6 +21,9 @@ public interface GitHubClient {
 
         @POST("/myapp/usuario/login")
         Call<Usuario> login(@Body Usuario body);
+
+        @POST("/myapp/usuario/new")
+        Call<Usuario> registrar(@Body Usuario body);
 }
 
 
