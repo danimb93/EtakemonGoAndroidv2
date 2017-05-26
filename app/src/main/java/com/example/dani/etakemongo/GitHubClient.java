@@ -13,6 +13,8 @@ import retrofit2.http.POST;
  */
 public interface GitHubClient {
 
+
+
         /*@GET("/repos/{owner}/{repo}/contributors")
         Call<List<Contributor>> contributors(
                 @Path("owner") String owner,
@@ -24,6 +26,13 @@ public interface GitHubClient {
 
         @POST("/myapp/usuario/new")
         Call<Usuario> registrar(@Body Usuario body);
+
+        @POST("/myapp/usuario/edit")
+        Call<Usuario> modificar (@Body Usuario body);
+
+        @POST ("/myapp/usuario/delete")
+        Call<Usuario> borrar (@Body Usuario body);
+
 }
 
 

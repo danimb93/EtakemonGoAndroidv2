@@ -52,10 +52,7 @@ public class Registrar extends AppCompatActivity {
                 final String semail= email.getText().toString();
                 String semailR= emailR.getText().toString();
 
-
-                datos.setText(snombre + snick + spassword + semail);
-
-                    OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+                OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
                     Retrofit.Builder builder = new Retrofit.Builder()
                             .baseUrl("http://10.0.2.2:8080")                //poner esta para atacar a la api nuestra 10.0.2.2
                             .addConverterFactory(GsonConverterFactory.create());

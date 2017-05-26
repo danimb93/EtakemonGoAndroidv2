@@ -1,20 +1,34 @@
 package com.example.dani.etakemongo;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     String tag = "MapsActivity";
     private GoogleMap mMap;
+    private Marker marcador;
+    double lat = 0.0;
+    double ing = 0.0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +54,77 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        miUbicacion();
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
     }
 
+    //Metodo para incluir un marker, CameraUpdate para centrar la camara a la posicion del marker
+    private void agregarMarcador(double lat, double Ing) {
+        LatLng coordenadas = new LatLng(lat, ing);
+        CameraUpdate miUbivcacion = CameraUpdateFactory.newLatLngZoom(coordenadas, 16);
+        if (marcador != null)
+            marcador.remove(); //Si el marcador diferente de null le añadimos propiedades, titulo, imagen
+        marcador = mMap.addMarker(new MarkerOptions()
+                .position(coordenadas)
+                .title("Mi posicion")
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
+        mMap.animateCamera(miUbivcacion);
+    }
+
+    //Metodo para obtener latitud y longitud de nuestra posicion actual
+
+
+    private void actualizarUbicacion(Location location) {
+        if (location != null) {  //Comrpobamos la localizacion recibida esd diferente de null antes de asignar valores a las valariables
+            lat = location.getLatitude();
+            ing = location.getLongitude();
+            agregarMarcador(lat, ing);
+        }
+    }
+    //Implementamos un objeto del tipo LocationListener, su funcion es estar atento a cambio de localidad recividio por el GPS
+
+    LocationListener locListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            actualizarUbicacion(location);//Llamamos anuestro metodo para actualizar la ubicacion
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
+
+    //Metodo para obtener servicio de posicionamiento, nos da la ultima posicion obtenida y se actualiza cada 15 segundos
+
+    private void miUbicacion() {
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        actualizarUbicacion(location);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,15000,0,locListener);
+    }
     @Override
     protected void onStart() {
         super.onStart();
