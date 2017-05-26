@@ -14,13 +14,6 @@ import retrofit2.http.POST;
 public interface GitHubClient {
 
 
-
-        /*@GET("/repos/{owner}/{repo}/contributors")
-        Call<List<Contributor>> contributors(
-                @Path("owner") String owner,
-                @Path("repo") String repo);
-        */
-
         @POST("/myapp/usuario/login")
         Call<Usuario> login(@Body Usuario body);
 
