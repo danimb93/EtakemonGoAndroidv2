@@ -146,6 +146,8 @@ public class Login extends AppCompatActivity {
 
     }
 
+
+
     public void abrirRegistrar (View view) {
         Intent intent = new Intent(this, Registrar.class);
         startActivityForResult(intent, 200);
