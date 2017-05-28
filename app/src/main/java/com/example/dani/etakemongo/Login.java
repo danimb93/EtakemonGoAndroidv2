@@ -44,6 +44,8 @@ public class Login extends AppCompatActivity {
 
                 System.out.println("***********DATOS**************************");
 
+
+
                 OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
                 Retrofit.Builder builder = new Retrofit.Builder()
                         .baseUrl("http://10.0.2.2:8080")                //poner esta para atacar a la api nuestra 10.0.2.2

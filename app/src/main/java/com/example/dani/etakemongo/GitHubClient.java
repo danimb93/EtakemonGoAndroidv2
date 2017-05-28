@@ -4,8 +4,11 @@ package com.example.dani.etakemongo;
 
 import com.example.dani.etakemongo.Modelo.Usuario;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
@@ -26,8 +29,9 @@ public interface GitHubClient {
         @POST ("/myapp/usuario/delete")
         Call<Usuario> borrar (@Body Usuario body);
 
-        @POST ("/myapp/usuario/datos")
-        Call<Usuario> recuperardatos(@Body String body);
+        @GET ("/myapp/usuario/delete")
+        Call<List<Usuario>> listaObjetos();
+
 
 }
 

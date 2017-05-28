@@ -1,18 +1,18 @@
 package com.example.dani.etakemongo;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageButton;
 
 public abstract class AjustesUsuario extends AppCompatActivity {
 
     String tag = "AjustesUsuario";
-    private Button modificar, borrar;
+    private Button modificar;
+    private ImageButton borrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,7 @@ public abstract class AjustesUsuario extends AppCompatActivity {
 
         modificar = (Button) findViewById(R.id.btnModificar);
         //PORQUE NO VA?
-        //borrar=(Button) findViewById(R.id.btnBorrar);
+        borrar=(ImageButton) findViewById(R.id.btnBorrar);
     }
 
     public void abrirModificar(View view) {
@@ -31,7 +31,7 @@ public abstract class AjustesUsuario extends AppCompatActivity {
     }
 
     public void abrirBorrar(View view) {
-        Intent intent = new Intent(this, Borrar.class);
+        Intent intent = new Intent(this, BorrarListDialogFragment.class);
         startActivityForResult(intent, 500);
     }
 

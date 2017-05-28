@@ -34,26 +34,17 @@ public class ModificarUsuario extends AppCompatActivity {
 
          String snick= nick.getText().toString();
          String spassword=password.getText().toString();
-/*
-        //****************************RETROFIT****************************
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080")                //poner esta para atacar a la api nuestra 10.0.2.2
-                .addConverterFactory(GsonConverterFactory.create());
-//
-        Retrofit retrofit =
-                builder
-                        .client(
-                                httpClient.build()
-                        )
-                        .build();
+
+        com.example.dani.etakemongo.RetrofitOwn retro = new com.example.dani.etakemongo.RetrofitOwn();
+        Retrofit retrofit = retro.getObjectRetrofit();
+
 
         // Create an instance of our GitHub API interface.
         GitHubClient registrar = retrofit.create(GitHubClient.class);
         Usuario usuario = new Usuario(snick,spassword);
 
         // Create a call instance for looking up Retrofit contributors.
-        Call<Usuario> call = modificar.modificar(usuario); //porque peta
+        Call<Usuario> call = registrar.modificar(usuario); //porque??
 
         // Fetch and print a list of the contributors to the library.
         call.enqueue(new Callback() {
@@ -74,7 +65,7 @@ public class ModificarUsuario extends AppCompatActivity {
 
             }
     });
-    */
+    //*/
     }
     @Override
     protected void onStart() {
