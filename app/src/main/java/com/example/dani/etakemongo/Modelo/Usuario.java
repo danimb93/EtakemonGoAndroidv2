@@ -48,6 +48,10 @@ public class Usuario  {
         this.contrasena = contrasena;
     }
 
+    public Usuario(String email){
+        this.email = email;
+    }
+
     public int getId() {
         return id;
     }

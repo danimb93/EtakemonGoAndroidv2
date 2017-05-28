@@ -26,6 +26,9 @@ public interface GitHubClient {
         @POST ("/myapp/usuario/delete")
         Call<Usuario> borrar (@Body Usuario body);
 
+        @POST ("/myapp/usuario/datos")
+        Call<Usuario> recuperardatos(@Body Usuario body);
+
 }
 
 
