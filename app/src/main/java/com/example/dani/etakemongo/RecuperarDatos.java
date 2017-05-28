@@ -54,10 +54,10 @@ public class RecuperarDatos extends AppCompatActivity {
 
                 // Create an instance of our GitHub API interface.
                 GitHubClient recuperardatos = retrofit.create(GitHubClient.class);
-                Usuario usuario = new Usuario(semail);
+              //  Usuario usuario = new Usuario(semail);
 
                 // Create a call instance for looking up Retrofit contributors.
-                Call<Usuario> call = recuperardatos.recuperardatos(usuario);
+                Call<Usuario> call = recuperardatos.recuperardatos(semail);
                 System.out.println("***********DATOS**************************");
 
 

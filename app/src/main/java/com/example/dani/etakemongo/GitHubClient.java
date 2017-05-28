@@ -27,7 +27,7 @@ public interface GitHubClient {
         Call<Usuario> borrar (@Body Usuario body);
 
         @POST ("/myapp/usuario/datos")
-        Call<Usuario> recuperardatos(@Body Usuario body);
+        Call<Usuario> recuperardatos(@Body String body);
 
 }
 
