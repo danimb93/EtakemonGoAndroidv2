@@ -38,7 +38,7 @@ public class ModificarUsuario extends AppCompatActivity {
         com.example.dani.etakemongo.RetrofitOwn retro = new com.example.dani.etakemongo.RetrofitOwn();
         Retrofit retrofit = retro.getObjectRetrofit();
 
-
+/*
         // Create an instance of our GitHub API interface.
         GitHubClient registrar = retrofit.create(GitHubClient.class);
         Usuario usuario = new Usuario(snick,spassword);
@@ -65,7 +65,7 @@ public class ModificarUsuario extends AppCompatActivity {
 
             }
     });
-    //*/
+    */
     }
     @Override
     protected void onStart() {
