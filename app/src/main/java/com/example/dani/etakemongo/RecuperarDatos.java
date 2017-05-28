@@ -36,7 +36,7 @@ public class RecuperarDatos extends AppCompatActivity {
         recuperardatos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                String semail = email.getText().toString();
+                final String sssemail = email.getText().toString();
 
                 System.out.println("***********DATOS**************************");
 
@@ -57,7 +57,7 @@ public class RecuperarDatos extends AppCompatActivity {
               //  Usuario usuario = new Usuario(semail);
 
                 // Create a call instance for looking up Retrofit contributors.
-                Call<Usuario> call = recuperardatos.recuperardatos(semail);
+                Call<Usuario> call = recuperardatos.recuperardatos(sssemail);
                 System.out.println("***********DATOS**************************");
 
 
@@ -70,13 +70,21 @@ public class RecuperarDatos extends AppCompatActivity {
                         Usuario contributor = (Usuario) response.body();
                         //si se ha logueado llamas a la funcion que te pasa a la siguiente actividad
                         Log.d(tag, "Email enviado correctamente");
-                        System.out.println(contributor.getEmail() + " y " + contributor.getContrasena());
+                        String msg = "email enviado correctamente";
+                        Toast.makeText(RecuperarDatos.this, msg.toString() ,Toast.LENGTH_LONG).show();
+                        Intent intres = getIntent();
+                        intres.putExtra("enviado",sssemail);
+                        setResult(1700, intres);
+                        finish();
                     }
 
                     @Override
                     public void onFailure(Call call, Throwable t) {
-                        Toast.makeText(RecuperarDatos.this, t.toString(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(RecuperarDatos.this, t.toString(), Toast.LENGTH_SHORT).show();
                         Log.d(tag, "ERROR al enviar el email");
+                        Intent intres = getIntent();
+                        setResult(RESULT_CANCELED, intres);
+                        finish();
                     }
                 });
             }

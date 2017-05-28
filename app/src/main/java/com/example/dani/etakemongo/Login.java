@@ -72,7 +72,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onResponse(Call call, Response response) {
                         Usuario contributor = (Usuario) response.body();
-                        goToMapsActivity(v);  //si se ha logueado llamas a la funcion que te pasa a la siguiente actividad
+                        goToEnviarTicket(v);  //si se ha logueado llamas a la funcion que te pasa a la siguiente actividad
                         Log.d(tag, "Logueado correctamente");
                         System.out.println(contributor.getEmail() + " y " + contributor.getContrasena());
                     }
@@ -91,15 +91,20 @@ public class Login extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        email = (EditText) findViewById(R.id.etEmail);
         Bundle result = data.getExtras();
 
         //operar segun el resultCode recibido por las otras actividades
 
-        if (requestCode==200 && resultCode == 1600){
-            email = (EditText) findViewById(R.id.etEmail);
+       if (requestCode==200 && resultCode == 1600){
             String emailToShow = result.getString("registrado");
             email.setText(emailToShow);
+        }
+
+        else if (requestCode==300 && resultCode == 1700){                   // no se por que no lo hace. REVISAR
+            Log.d(tag,"ENTRA EN ACTIV RES");
+            String emailMostrar = (String) result.get("enviado");
+            email.setText(emailMostrar);
         }
     }
 
@@ -160,5 +165,10 @@ public class Login extends AppCompatActivity {
     public void goToMapsActivity(View view){
         Intent intent = new Intent(this, MapsActivity.class);
         startActivityForResult(intent, 100);    //ponemos el codigo 100 para monitorizar esta actividad y sus futuros resultados
+    }
+
+    public void goToEnviarTicket(View view){
+        Intent intent = new Intent(this, EnviarTicket.class);
+        startActivityForResult(intent, 400);
     }
 }
