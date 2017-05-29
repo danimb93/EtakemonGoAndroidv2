@@ -18,6 +18,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.dani.etakemongo.Modelo.Usuario;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
 /**
  * <p>A fragment that shows a list of items as a modal bottom sheet.</p>
  * <p>You can show this modal bottom sheet from your activity like this:</p>
@@ -31,6 +38,7 @@ public class BorrarListDialogFragment extends BottomSheetDialogFragment {
     // TODO: Customize parameter argument names
     private static final String ARG_ITEM_COUNT = "item_count";
     private Listener mListener;
+    String tag = "Borrar"; // tag que indica el ciclo de vida de la app
 
     // TODO: Customize parameters
     public static BorrarListDialogFragment newInstance(int itemCount) {
@@ -48,27 +56,49 @@ public class BorrarListDialogFragment extends BottomSheetDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.activity_ajustes_usuario, null);
+
         builder.setMessage("¿Seguro que quiere eliminar su cuenta?")
-                .setTitle("Confirmacion")
-                .setPositiveButton("Si", new DialogInterface.OnClickListener()  {
-                    public void onClick(DialogInterface dialog, int id) {
+            .setTitle("Confirmacion")
+            .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
 
-                        Log.i("Aviso", "Su cuenta ha sido eliminada");
+                    Log.i("Aviso", "Su cuenta ha sido eliminada");
+                    com.example.dani.etakemongo.RetrofitOwn retro = new com.example.dani.etakemongo.RetrofitOwn();
+                    Retrofit retrofit = retro.getObjectRetrofit();
 
-                        dialog.cancel();
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Log.i("Dialogos", "Confirmacion Cancelada.");
-                        dialog.cancel();
-                    }
-                });
+                    // Create an instance of our GitHub API interface.
+                    GitHubClient borrar = retrofit.create(GitHubClient.class);
+                    Usuario usuario = new Usuario();
 
-        builder.create();
-        dialog.setContentView(view);
-        return dialog;
-    }
+                    // Create a call instance for looking up Retrofit contributors.
+                    Call<Usuario> call = borrar.borrar(usuario);
+
+                    // Fetch and print a list of the contributors to the library.
+                    call.enqueue(new Callback() {
+
+                        //***************Comprobacion de que recoge los datos**********
+                        @Override
+                        public void onResponse(Call call, Response response) {
+                            Usuario contributor = (Usuario) response.body();
+                            Log.d(tag, "Los datos han borrados");
+                        }
+
+                        @Override
+                        public void onFailure(Call call, Throwable t) {
+
+                        }
+                    });
+                    dialog.cancel();
+                }
+            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    Log.i("Dialogos", "Confirmacion Cancelada.");
+                    dialog.cancel();
+                }
+            });
+            return builder.create();
+        }
+
 
     @Nullable
     @Override

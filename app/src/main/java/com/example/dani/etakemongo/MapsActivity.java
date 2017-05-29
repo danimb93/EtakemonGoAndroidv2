@@ -76,7 +76,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     private void actualizarUbicacion(Location location) {
-        if (location != null) {  //Comrpobamos la localizacion recibida esd diferente de null antes de asignar valores a las valariables
+        if (location != null) {  //Comrpobamos la localizacion recibida es diferente de null antes de asignar valores a las valariables
             lat = location.getLatitude();
             ing = location.getLongitude();
             agregarMarcador(lat, ing);

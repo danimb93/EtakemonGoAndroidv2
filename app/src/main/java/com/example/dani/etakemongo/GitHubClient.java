@@ -2,7 +2,7 @@ package com.example.dani.etakemongo;
 
 
 
-import com.example.dani.etakemongo.Modelo.Usuario;
+import com.example.dani.etakemongo.Modelo.*;
 
 import java.util.List;
 
@@ -16,24 +16,34 @@ import retrofit2.http.POST;
  */
 public interface GitHubClient {
 
-
+//login
         @POST("/myapp/usuario/login")
         Call<Usuario> login(@Body Usuario body);
 
+//Registro
         @POST("/myapp/usuario/new")
         Call<Usuario> registrar(@Body Usuario body);
 
+//Modificar datos usuario
         @POST("/myapp/usuario/edit")
         Call<Usuario> modificar (@Body Usuario body);
 
-        @POST ("/myapp/usuario/delete")
+//Eliminar Usuario
+        @GET ("/myapp/usuario/delete")
         Call<Usuario> borrar (@Body Usuario body);
 
-        @GET ("/myapp/usuario/delete")
-        Call<List<Usuario>> listaObjetos();
-
+//Recuperar datos por correo
         @POST ("/myapp/usuario/datos")
         Call<Usuario> recuperardatos(@Body String body);
+
+//Devolver lista de objetos
+        @GET("/myapp/usuario/get_objetos")
+        Call<List<com.example.dani.etakemongo.Modelo.Objetos>> ListaObjetos();
+
+//Devolver lista  informacion usuario (experiencia actual, siguiente nivel)
+        @GET ("/myapp/usuario/got_email")
+        Call<List<Usuario>> ListaExperiencia();
+
 
 
 }

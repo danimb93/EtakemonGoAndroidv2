@@ -32,19 +32,20 @@ public class ModificarUsuario extends AppCompatActivity {
         password=(EditText)findViewById(R.id.etPassword);
         modificar=(Button)findViewById(R.id.btnModificar);
 
-         String snick= nick.getText().toString();
-         String spassword=password.getText().toString();
 
+         String snick= nick.getText().toString();
+         final String spassword=password.getText().toString();
+//                             **************RETROFIT**************************
         com.example.dani.etakemongo.RetrofitOwn retro = new com.example.dani.etakemongo.RetrofitOwn();
         Retrofit retrofit = retro.getObjectRetrofit();
 
-/*
+
         // Create an instance of our GitHub API interface.
-        GitHubClient registrar = retrofit.create(GitHubClient.class);
+        GitHubClient modificar = retrofit.create(GitHubClient.class);
         Usuario usuario = new Usuario(snick,spassword);
 
         // Create a call instance for looking up Retrofit contributors.
-        Call<Usuario> call = registrar.modificar(usuario); //porque??
+        Call<Usuario> call = modificar.modificar(usuario);
 
         // Fetch and print a list of the contributors to the library.
         call.enqueue(new Callback() {
@@ -53,19 +54,22 @@ public class ModificarUsuario extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) {
                 Usuario contributor = (Usuario) response.body();
-                Log.d(tag, "Registrado correctamente");
+                Log.d(tag, "Los datos han sido modificados");
 
                 //devuelvo por el intent que me habia llamado el email del usuario registrado
                 //y el codigo de respuesta 1600 (OK) a la pantalla LOGIN
                 //para alli mostrarle al usuario el email de forma que pueda loguearse
-                Intent intres = getIntent();
-                intres.putExtra("Cambios realizados correctamente",semail);//coger el email del login para volver atras
-                setResult(1600, intres);
-                finish();
+               Intent intres = new Intent(ModificarUsuario.this,Login.class);
+                startActivity(intres);
 
             }
-    });
-    */
+//Esto es por si hay error?
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        });
+
     }
     @Override
     protected void onStart() {

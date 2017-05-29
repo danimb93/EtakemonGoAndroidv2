@@ -51,26 +51,7 @@
                 android:text="TextView"
                 android:layout_marginLeft="10dp"/>
 
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:text="TextView"
-                android:layout_marginLeft="10dp"/>
 
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:text="TextView"
-                android:layout_marginLeft="10dp"/>
-
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:text="TextView"
-                android:layout_marginLeft="10dp"/>
         </LinearLayout>
 
         <LinearLayout

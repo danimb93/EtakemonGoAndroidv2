@@ -21,7 +21,7 @@ public class AjustesUsuario extends AppCompatActivity {
         Log.d(tag, "Event onCreate()");
 
         modificar = (Button) findViewById(R.id.btnModificar);
-        //PORQUE NO VA?
+
         borrar=(ImageButton) findViewById(R.id.btnBorrar);
     }
 
