@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-public abstract class AjustesUsuario extends AppCompatActivity {
+public class AjustesUsuario extends AppCompatActivity {
 
     String tag = "AjustesUsuario";
     private Button modificar;
@@ -76,6 +76,6 @@ public abstract class AjustesUsuario extends AppCompatActivity {
 
     }
 
-    public abstract void onCreateDialog(Bundle savedInstanceState);
+   // public abstract void onCreateDialog(Bundle savedInstanceState);
 
 }

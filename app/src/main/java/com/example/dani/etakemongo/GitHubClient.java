@@ -32,6 +32,9 @@ public interface GitHubClient {
         @GET ("/myapp/usuario/delete")
         Call<List<Usuario>> listaObjetos();
 
+        @POST ("/myapp/usuario/datos")
+        Call<Usuario> recuperardatos(@Body String body);
+
 
 }
 

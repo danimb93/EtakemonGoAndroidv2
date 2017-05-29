@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".Registrar" />
         <activity android:name=".RecuperarDatos" />
-        <activity android:name=".AjustesUsuario" />
+        <activity android:name=".EnviarTicket"/>
+       <activity android:name=".AjustesUsuario" />
         <activity android:name=".ModificarUsuario" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

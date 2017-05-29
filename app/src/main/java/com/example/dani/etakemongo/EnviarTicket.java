@@ -36,6 +36,10 @@ public class EnviarTicket extends AppCompatActivity {
                 emailIntent.setType("message/rfc822");
                 //Damos la opción al usuario que elija desde que app enviamos el email.
                 startActivity(Intent.createChooser(emailIntent, "Selecciona aplicación..."));
+
+                Intent intent = getIntent();
+                setResult(RESULT_OK,intent);
+                finish();
             }
         });
     }

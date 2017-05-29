@@ -76,7 +76,6 @@ public class Login extends AppCompatActivity {
                         Usuario contributor = (Usuario) response.body();
                         goToEnviarTicket(v);  //si se ha logueado llamas a la funcion que te pasa a la siguiente actividad
                         Log.d(tag, "Logueado correctamente");
-                        System.out.println(contributor.getEmail() + " y " + contributor.getContrasena());
                     }
 
                     @Override
@@ -108,6 +107,12 @@ public class Login extends AppCompatActivity {
             String emailMostrar = (String) result.get("enviado");
             email.setText(emailMostrar);
         }
+
+        else if (requestCode == 500 ){
+           if (resultCode == RESULT_OK){
+               Log.d(tag, "E-mail enviado ok");
+           }
+       }
     }
 
 
@@ -171,6 +176,6 @@ public class Login extends AppCompatActivity {
 
     public void goToEnviarTicket(View view){
         Intent intent = new Intent(this, EnviarTicket.class);
-        startActivityForResult(intent, 400);
+        startActivityForResult(intent, 500);
     }
 }
