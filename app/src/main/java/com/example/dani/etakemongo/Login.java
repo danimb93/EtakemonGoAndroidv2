@@ -74,7 +74,8 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onResponse(Call call, Response response) {
                         Usuario contributor = (Usuario) response.body();
-                        goToEnviarTicket(v);  //si se ha logueado llamas a la funcion que te pasa a la siguiente actividad
+                        goToMapsActivity(v);
+                        //goToEnviarTicket(v);  //si se ha logueado llamas a la funcion que te pasa a la siguiente actividad
                         Log.d(tag, "Logueado correctamente");
                     }
 
@@ -178,4 +179,5 @@ public class Login extends AppCompatActivity {
         Intent intent = new Intent(this, EnviarTicket.class);
         startActivityForResult(intent, 500);
     }
+
 }
