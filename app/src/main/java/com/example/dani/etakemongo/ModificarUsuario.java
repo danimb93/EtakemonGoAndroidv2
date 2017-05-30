@@ -35,6 +35,7 @@ public class ModificarUsuario extends AppCompatActivity {
 
          String snick= nick.getText().toString();
          final String spassword=password.getText().toString();
+
 //                             **************RETROFIT**************************
         com.example.dani.etakemongo.RetrofitOwn retro = new com.example.dani.etakemongo.RetrofitOwn();
         Retrofit retrofit = retro.getObjectRetrofit();
@@ -63,7 +64,7 @@ public class ModificarUsuario extends AppCompatActivity {
                 startActivity(intres);
 
             }
-//Esto es por si hay error?
+//Esto es por si hay error
             @Override
             public void onFailure(Call call, Throwable t) {
 

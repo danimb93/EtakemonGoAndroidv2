@@ -36,7 +36,7 @@ import retrofit2.Retrofit;
         GitHubClient mostrarEstadisticas = retrofit.create(GitHubClient.class);
         Usuario usuario = new Usuario();
 
-        
+
         // Create a call instance for looking up Retrofit contributors.
         Call<List<Usuario>> call = mostrarEstadisticas.ListaExperiencia();
 

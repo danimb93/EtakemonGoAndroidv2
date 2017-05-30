@@ -43,8 +43,7 @@ public class Login extends AppCompatActivity {
                 String spassword = password.getText().toString();
 
                 System.out.println("***********DATOS**************************");
-
-
+                
 
                 OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
                 Retrofit.Builder builder = new Retrofit.Builder()
@@ -90,7 +89,6 @@ public class Login extends AppCompatActivity {
 
     }
 
-
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         email = (EditText) findViewById(R.id.etEmail);
@@ -115,8 +113,6 @@ public class Login extends AppCompatActivity {
            }
        }
     }
-
-
 
     @Override
     protected void onStart() {
@@ -158,8 +154,6 @@ public class Login extends AppCompatActivity {
         Log.d(tag, "Event onDestroy()");
 
     }
-
-
 
     public void abrirRegistrar (View view) {
         Intent intent = new Intent(this, Registrar.class);
