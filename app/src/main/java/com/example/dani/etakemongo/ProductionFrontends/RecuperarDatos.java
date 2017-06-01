@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.dani.etakemongo.Modelo.Usuario;
 import com.example.dani.etakemongo.R;
 import com.example.dani.etakemongo.SysTools.GitHubClient;
+import com.example.dani.etakemongo.SysTools.RetrofitOwn;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -40,30 +41,20 @@ public class RecuperarDatos extends AppCompatActivity {
             public void onClick(final View v) {
                 final String sssemail = email.getText().toString();
 
-                System.out.println("***********DATOS**************************");
+                //RETROFIT
+                RetrofitOwn retrofitOwn = new RetrofitOwn();
+                Retrofit retrofit = retrofitOwn.getObjectRetrofit();
 
-                OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-                Retrofit.Builder builder = new Retrofit.Builder()
-                        .baseUrl("http://10.0.2.2:8080")                //poner esta para atacar a la api nuestra 10.0.2.2
-                        .addConverterFactory(GsonConverterFactory.create());
-//
-                Retrofit retrofit =
-                        builder
-                                .client(
-                                        httpClient.build()
-                                )
-                                .build();
-
-                // Create an instance of our GitHub API interface.
+                //Creamos una instancia de retrofit
                 GitHubClient recuperardatos = retrofit.create(GitHubClient.class);
               //  Usuario usuario = new Usuario(semail);
 
-                // Create a call instance for looking up Retrofit contributors.
+                //Hacemos la llamada http
                 Call<Usuario> call = recuperardatos.recuperardatos(sssemail);
                 System.out.println("***********DATOS**************************");
 
 
-                // Fetch and print a list of the contributors to the library.
+                //Recibimos la llamada
                 call.enqueue(new Callback() {
 
                     //***************Comprobacion de que recoge los datos**********

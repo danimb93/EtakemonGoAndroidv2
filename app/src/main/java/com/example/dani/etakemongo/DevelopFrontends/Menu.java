@@ -1,21 +1,20 @@
-package com.example.dani.etakemongo.ProductionFrontends;
+package com.example.dani.etakemongo.DevelopFrontends;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.dani.etakemongo.R;
 import android.util.Log;
 
-public class ObjetosUsuario extends AppCompatActivity {
+public class Menu extends AppCompatActivity {
 
-    String tag = "ObjetosUsuario";
-
+    String tag = "Manu";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_objetos);
+        setContentView(R.layout.activity_menu);
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -56,5 +55,4 @@ public class ObjetosUsuario extends AppCompatActivity {
         Log.d(tag, "Event onDestroy()");
 
     }
-
 }
