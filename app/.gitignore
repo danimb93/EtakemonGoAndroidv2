@@ -1,1 +1,3 @@
 /build
+.idea
+app\src\main\java\com\example\dani\etakemongo\SysTools\RetrofitOwn

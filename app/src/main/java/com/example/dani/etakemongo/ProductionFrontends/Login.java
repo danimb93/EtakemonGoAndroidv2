@@ -22,6 +22,7 @@ import retrofit2.Retrofit;
 
 public class Login extends AppCompatActivity {
 
+    //Variables necesarias de los objetos del layout
     String tag = "Login"; // tag que indica el ciclo de vida de la app
     private EditText email, password;
     private Button login;
@@ -32,52 +33,10 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Log.d(tag, "Event onCreate()");
 
+        //Traemos a las variables los objetos del layout
         email = (EditText) findViewById(R.id.etEmail);
         password = (EditText) findViewById(R.id.etPassword);
         login = (Button) findViewById(R.id.btnLogin);
-
-
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                String semail = email.getText().toString();
-                String spassword = password.getText().toString();
-
-                System.out.println("***********DATOS**************************");
-                
-
-                RetrofitOwn retrofitOwn = new RetrofitOwn();
-                Retrofit retrofit = retrofitOwn.getObjectRetrofit();
-
-                    // Create an instance of our GitHub API interface.
-                GitHubClient login = retrofit.create(GitHubClient.class);
-                Usuario usuario = new Usuario(semail, spassword);
-
-                // Create a call instance for looking up Retrofit contributors.
-                Call<Usuario> call = login.login(usuario);
-                System.out.println("***********DATOS**************************");
-
-
-                // Fetch and print a list of the contributors to the library.
-                call.enqueue(new Callback() {
-
-                    //***************Comprobacion de que recoge los datos**********
-                    @Override
-                    public void onResponse(Call call, Response response) {
-                        Usuario contributor = (Usuario) response.body();
-                        goToMapsActivity(v);
-                        //goToEnviarTicket(v);  //si se ha logueado llamas a la funcion que te pasa a la siguiente actividad
-                        Log.d(tag, "Logueado correctamente");
-                    }
-
-                    @Override
-                    public void onFailure(Call call, Throwable t) {
-                        Toast.makeText(Login.this, t.toString(), Toast.LENGTH_SHORT).show();
-                        Log.d(tag, "ERROR al loguear");
-                    }
-                });
-            }
-        });
 
     }
 
@@ -144,6 +103,40 @@ public class Login extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.d(tag, "Event onDestroy()");
+
+    }
+
+    public void doLogin(View v){
+
+        RetrofitOwn retrofitOwn = new RetrofitOwn();
+        Retrofit retrofit = retrofitOwn.getObjectRetrofit();
+
+        // Create an instance of our GitHub API interface.
+        GitHubClient login = retrofit.create(GitHubClient.class);
+        Usuario usuario = new Usuario(email.getText().toString() ,password.getText().toString());
+
+        // Create a call instance for looking up Retrofit contributors.
+        Call<Usuario> call = login.login(usuario);
+        System.out.println("***********DATOS**************************");
+
+
+        // Fetch and print a list of the contributors to the library.
+        call.enqueue(new Callback() {
+
+            //***************Comprobacion de que recoge los datos**********
+            @Override
+            public void onResponse(Call call, Response response) {
+                Usuario contributor = (Usuario) response.body();
+                //goToEnviarTicket(v);  //si se ha logueado llamas a la funcion que te pasa a la siguiente actividad
+                Log.d(tag, "Logueado correctamente");
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Toast.makeText(Login.this, t.toString(), Toast.LENGTH_SHORT).show();
+                Log.d(tag, "ERROR al loguear");
+            }
+        });
 
     }
 
