@@ -1,4 +1,4 @@
-package com.example.dani.etakemongo;
+package com.example.dani.etakemongo.SysTools;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -10,14 +10,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitOwn {
 
-    public static Retrofit getObjectRetrofit(){
-
+    public Retrofit getObjectRetrofit(){
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         Retrofit.Builder builder = new retrofit2.Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8080")                //poner esta para atacar a la api nuestra 10.0.2.2
                 .addConverterFactory(GsonConverterFactory.create());
-//
+
         Retrofit retrofit =
                 builder
                         .client(
@@ -27,8 +26,5 @@ public class RetrofitOwn {
 
 
         return retrofit;
-
     }
-
-
 }

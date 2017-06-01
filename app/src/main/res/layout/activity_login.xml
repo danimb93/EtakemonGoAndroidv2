@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dani.etakemongo.Login"
+    tools:context="com.example.dani.etakemongo.ProductionFrontends.Login"
     android:background="@drawable/fondo">
 
     <LinearLayout
@@ -107,7 +107,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_weight="1"
                 android:gravity="center"
-
                 android:onClick="abrirRecuperar"
                 android:text="@string/forget_pass" />
         </LinearLayout>

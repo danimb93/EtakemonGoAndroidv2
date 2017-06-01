@@ -1,4 +1,4 @@
-package com.example.dani.etakemongo;
+package com.example.dani.etakemongo.DevelopFrontends;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.dani.etakemongo.Modelo.Usuario;
+import com.example.dani.etakemongo.R;
+import com.example.dani.etakemongo.SysTools.GitHubClient;
+import com.example.dani.etakemongo.SysTools.RetrofitOwn;
 
 import java.util.List;
 
@@ -28,7 +31,7 @@ import retrofit2.Retrofit;
         ajustes=(ImageButton)findViewById(R.id.btnAjustes);
         informacion=(ImageButton)findViewById(R.id.btnInfo);
 
-        com.example.dani.etakemongo.RetrofitOwn retro = new com.example.dani.etakemongo.RetrofitOwn();
+        RetrofitOwn retro = new RetrofitOwn();
         Retrofit retrofit = retro.getObjectRetrofit();
 
 

@@ -1,4 +1,4 @@
-package com.example.dani.etakemongo;
+package com.example.dani.etakemongo.ProductionFrontends;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dani.etakemongo.Modelo.Usuario;
+import com.example.dani.etakemongo.R;
+import com.example.dani.etakemongo.SysTools.GitHubClient;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;

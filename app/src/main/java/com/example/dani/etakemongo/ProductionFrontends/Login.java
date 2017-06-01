@@ -1,4 +1,4 @@
-package com.example.dani.etakemongo;
+package com.example.dani.etakemongo.ProductionFrontends;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,14 +10,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.dani.etakemongo.Modelo.Usuario;
-import com.google.android.gms.maps.GoogleMap;
+import com.example.dani.etakemongo.R;
+import com.example.dani.etakemongo.SysTools.EnviarTicket;
+import com.example.dani.etakemongo.SysTools.GitHubClient;
+import com.example.dani.etakemongo.SysTools.RetrofitOwn;
 
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Login extends AppCompatActivity {
 
@@ -45,28 +46,19 @@ public class Login extends AppCompatActivity {
                 System.out.println("***********DATOS**************************");
                 
 
-                OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-                Retrofit.Builder builder = new Retrofit.Builder()
-                        .baseUrl("http://10.0.2.2:8080")                //poner esta para atacar a la api nuestra 10.0.2.2
-                        .addConverterFactory(GsonConverterFactory.create());
-//
-                Retrofit retrofit =
-                        builder
-                                .client(
-                                        httpClient.build()
-                                )
-                                .build();
+                RetrofitOwn retrofitOwn = new RetrofitOwn();
+                Retrofit retrofit = retrofitOwn.getObjectRetrofit();
 
                     // Create an instance of our GitHub API interface.
-                    GitHubClient login = retrofit.create(GitHubClient.class);
-                    Usuario usuario = new Usuario(semail, spassword);
+                GitHubClient login = retrofit.create(GitHubClient.class);
+                Usuario usuario = new Usuario(semail, spassword);
 
-                    // Create a call instance for looking up Retrofit contributors.
-                    Call<Usuario> call = login.login(usuario);
+                // Create a call instance for looking up Retrofit contributors.
+                Call<Usuario> call = login.login(usuario);
                 System.out.println("***********DATOS**************************");
 
 
-                    // Fetch and print a list of the contributors to the library.
+                // Fetch and print a list of the contributors to the library.
                 call.enqueue(new Callback() {
 
                     //***************Comprobacion de que recoge los datos**********
@@ -156,7 +148,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void abrirRegistrar (View view) {
-        Intent intent = new Intent(this, Registrar.class);
+        Intent intent = new Intent(this, MapsActivity.class);
         startActivityForResult(intent, 200);
     }
     public void abrirRecuperar (View view) {
