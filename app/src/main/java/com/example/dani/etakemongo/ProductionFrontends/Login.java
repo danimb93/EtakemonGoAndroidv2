@@ -41,6 +41,26 @@ public class Login extends AppCompatActivity {
         password = (EditText) findViewById(R.id.etPassword);
         login = (Button) findViewById(R.id.btnLogin);
 
+        final String isemail, ispassword;
+        isemail = email.getText().toString();
+        ispassword = password.getText().toString();
+
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isemail!=null && ispassword != null){
+                    try{
+                        doLogin(v);
+                    }
+                    catch (Exception ex){
+                        ex.getMessage();
+                    }
+                }
+            }
+        });
+
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -128,7 +148,8 @@ public class Login extends AppCompatActivity {
                 //Si OK, procedemos a entrar en el mapa
                 if (response.isSuccessful()){
                     Usuario loged = (Usuario) response.body();
-                    goToMapsActivity(v);
+                   // goToMapsActivity(v);
+                    goToEnviarTicket(v);
                     Log.d(tag, "Logueado correctamente");
                 }
                 else{
