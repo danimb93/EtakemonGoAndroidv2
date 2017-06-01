@@ -1,4 +1,4 @@
-package com.example.dani.etakemongo;
+package com.example.dani.etakemongo.ProductionFrontends;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -19,6 +19,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.dani.etakemongo.Modelo.Usuario;
+import com.example.dani.etakemongo.R;
+import com.example.dani.etakemongo.SysTools.GitHubClient;
+import com.example.dani.etakemongo.SysTools.RetrofitOwn;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,7 +66,7 @@ public class BorrarListDialogFragment extends BottomSheetDialogFragment {
                 public void onClick(DialogInterface dialog, int id) {
 
                     Log.i("Aviso", "Su cuenta ha sido eliminada");
-                    com.example.dani.etakemongo.RetrofitOwn retro = new com.example.dani.etakemongo.RetrofitOwn();
+                    RetrofitOwn retro = new RetrofitOwn();
                     Retrofit retrofit = retro.getObjectRetrofit();
 
                     // Create an instance of our GitHub API interface.

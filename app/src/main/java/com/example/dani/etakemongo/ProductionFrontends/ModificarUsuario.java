@@ -1,4 +1,4 @@
-package com.example.dani.etakemongo;
+package com.example.dani.etakemongo.ProductionFrontends;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,13 +8,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.dani.etakemongo.Modelo.Usuario;
+import com.example.dani.etakemongo.R;
+import com.example.dani.etakemongo.SysTools.GitHubClient;
+import com.example.dani.etakemongo.SysTools.RetrofitOwn;
 
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ModificarUsuario extends AppCompatActivity {
 
@@ -37,9 +38,8 @@ public class ModificarUsuario extends AppCompatActivity {
          final String spassword=password.getText().toString();
 
 //                             **************RETROFIT**************************
-        com.example.dani.etakemongo.RetrofitOwn retro = new com.example.dani.etakemongo.RetrofitOwn();
+        RetrofitOwn retro = new RetrofitOwn();
         Retrofit retrofit = retro.getObjectRetrofit();
-
 
         // Create an instance of our GitHub API interface.
         GitHubClient modificar = retrofit.create(GitHubClient.class);

@@ -1,4 +1,4 @@
-package com.example.dani.etakemongo;
+package com.example.dani.etakemongo.DevelopFrontends;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import com.example.dani.etakemongo.ProductionFrontends.BorrarListDialogFragment;
+import com.example.dani.etakemongo.ProductionFrontends.ModificarUsuario;
+import com.example.dani.etakemongo.R;
 
 public class AjustesUsuario extends AppCompatActivity {
 

@@ -7,5 +7,5 @@
     android:clipToPadding="false"
     android:paddingBottom="@dimen/list_item_spacing_half"
     android:paddingTop="@dimen/list_item_spacing_half"
-    tools:context="com.example.dani.etakemongo.BorrarListDialogFragment"
+    tools:context="com.example.dani.etakemongo.ProductionFrontends.BorrarListDialogFragment"
     tools:listitem="@layout/fragment_borrar_list_dialog_item" />
