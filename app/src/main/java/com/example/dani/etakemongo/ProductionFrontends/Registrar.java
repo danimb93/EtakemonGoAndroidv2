@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.dani.etakemongo.Modelo.Usuario;
 import com.example.dani.etakemongo.R;
 import com.example.dani.etakemongo.SysTools.GitHubClient;
+import com.example.dani.etakemongo.SysTools.RetrofitOwn;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -23,6 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Registrar extends AppCompatActivity {
 
+    //Variables necesarias de los objetos del layout
     String tag = "Registrar";
     private EditText nombre,nick,password,email,emailR;
     private Button registrar;
@@ -35,6 +37,8 @@ public class Registrar extends AppCompatActivity {
         setContentView(R.layout.activity_registrar);
         Log.d(tag, "Event onCreate()");
 
+        //Traemos a las variables los objetos del layout
+
         nombre=(EditText)findViewById(R.id.etNombre);
         nick=(EditText)findViewById(R.id.etNick);
         password=(EditText)findViewById(R.id.etPassword);
@@ -43,7 +47,7 @@ public class Registrar extends AppCompatActivity {
         registrar=(Button)findViewById(R.id.btnRegistrar);
         datos=(TextView)findViewById(R.id.tvRespuesta);
 
-
+//Al pulsar el boton lanzamos la activadad de registrar
         registrar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick (View v){
@@ -53,30 +57,20 @@ public class Registrar extends AppCompatActivity {
                 String spassword=password.getText().toString();
                 final String semail= email.getText().toString();
                 String semailR= emailR.getText().toString();
+                //RETROFIT
+                RetrofitOwn retrofitOwn = new RetrofitOwn();
+                Retrofit retrofit = retrofitOwn.getObjectRetrofit();
 
-                OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-                    Retrofit.Builder builder = new Retrofit.Builder()
-                            .baseUrl("http://10.0.2.2:8080")                //poner esta para atacar a la api nuestra 10.0.2.2
-                            .addConverterFactory(GsonConverterFactory.create());
-//
-                    Retrofit retrofit =
-                            builder
-                                    .client(
-                                            httpClient.build()
-                                    )
-                                    .build();
+                //Creamos una instancia de retrofit
+                GitHubClient registrar = retrofit.create(GitHubClient.class);
+                Usuario usuario = new Usuario(snombre,snick,semail,spassword);
 
-                    // Create an instance of our GitHub API interface.
-                    GitHubClient registrar = retrofit.create(GitHubClient.class);
-                    Usuario usuario = new Usuario(snombre,snick,semail,spassword);
+                //Hacemos la llamada http
+                Call<Usuario> call = registrar.registrar(usuario);
 
-                    // Create a call instance for looking up Retrofit contributors.
-                    Call<Usuario> call = registrar.registrar(usuario);
-
-                    // Fetch and print a list of the contributors to the library.
-                    call.enqueue(new Callback() {
-
-                        //***************Comprobacion de que recoge los datos**********
+                //Recibimos la llamada
+                call.enqueue(new Callback() {
+                    //Si va bien va al login
                         @Override
                         public void onResponse(Call call, Response response) {
                             Usuario contributor = (Usuario) response.body();
