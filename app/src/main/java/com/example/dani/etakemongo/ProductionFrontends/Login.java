@@ -15,6 +15,8 @@ import com.example.dani.etakemongo.SysTools.EnviarTicket;
 import com.example.dani.etakemongo.SysTools.GitHubClient;
 import com.example.dani.etakemongo.SysTools.RetrofitOwn;
 
+import java.io.Serializable;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,6 +28,7 @@ public class Login extends AppCompatActivity {
     String tag = "Login"; // tag que indica el ciclo de vida de la app
     private EditText email, password;
     private Button login;
+    private Usuario loged;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,38 +109,41 @@ public class Login extends AppCompatActivity {
 
     }
 
-    public void doLogin(View v){
+    public void doLogin(final View v){
 
         RetrofitOwn retrofitOwn = new RetrofitOwn();
         Retrofit retrofit = retrofitOwn.getObjectRetrofit();
 
-        // Create an instance of our GitHub API interface.
+        //Creamos una instancia de retrofit
         GitHubClient login = retrofit.create(GitHubClient.class);
         Usuario usuario = new Usuario(email.getText().toString() ,password.getText().toString());
 
-        // Create a call instance for looking up Retrofit contributors.
+        //Hacemos la llamada http
         Call<Usuario> call = login.login(usuario);
-        System.out.println("***********DATOS**************************");
 
-
-        // Fetch and print a list of the contributors to the library.
-        call.enqueue(new Callback() {
-
-            //***************Comprobacion de que recoge los datos**********
+        //Recibimos la llamada
+        call.enqueue(new Callback<Usuario>() {
             @Override
-            public void onResponse(Call call, Response response) {
-                Usuario contributor = (Usuario) response.body();
-                //goToEnviarTicket(v);  //si se ha logueado llamas a la funcion que te pasa a la siguiente actividad
-                Log.d(tag, "Logueado correctamente");
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                //Si OK, procedemos a entrar en el mapa
+                if (response.isSuccessful()){
+                    Usuario loged = (Usuario) response.body();
+                    goToMapsActivity(v);
+                    Log.d(tag, "Logueado correctamente");
+                }
+                else{
+                    //Si los datos son erroneos y el user no esta
+                    Toast.makeText(Login.this, "Los datos introducidos son incorrectos", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
-            public void onFailure(Call call, Throwable t) {
-                Toast.makeText(Login.this, t.toString(), Toast.LENGTH_SHORT).show();
-                Log.d(tag, "ERROR al loguear");
+            //Si no hay conexión
+            public void onFailure(Call<Usuario> call, Throwable t) {
+                Toast.makeText(Login.this, "No hay conexión", Toast.LENGTH_SHORT).show();
+                Log.d(tag, "ERROR en el loguin");
             }
         });
-
     }
 
     public void abrirRegistrar (View view) {
@@ -151,6 +157,7 @@ public class Login extends AppCompatActivity {
 
     public void goToMapsActivity(View view){
         Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra("loged", (Serializable)loged); //Pasar al maps el usuario entero que hemos recibido en el registro
         startActivityForResult(intent, 100);    //ponemos el codigo 100 para monitorizar esta actividad y sus futuros resultados
     }
 
