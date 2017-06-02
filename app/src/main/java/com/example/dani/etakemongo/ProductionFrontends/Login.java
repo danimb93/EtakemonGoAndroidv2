@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.dani.etakemongo.DevelopFrontends.ActividadPrincipal;
 import com.example.dani.etakemongo.Modelo.Usuario;
 import com.example.dani.etakemongo.R;
 import com.example.dani.etakemongo.SysTools.EnviarTicket;
@@ -148,8 +149,9 @@ public class Login extends AppCompatActivity {
                 //Si OK, procedemos a entrar en el mapa
                 if (response.isSuccessful()){
                     Usuario loged = (Usuario) response.body();
-                   // goToMapsActivity(v);
-                    goToEnviarTicket(v);
+                    goToMapsActivity(v);
+                    //goToEnviarTicket(v);
+                   // goToActividadPrincipal(v);
                     Log.d(tag, "Logueado correctamente");
                 }
                 else{
@@ -185,6 +187,11 @@ public class Login extends AppCompatActivity {
     public void goToEnviarTicket(View view){
         Intent intent = new Intent(this, EnviarTicket.class);
         startActivityForResult(intent, 500);
+    }
+
+    public void goToActividadPrincipal(View view){
+        Intent intent = new Intent(this, ActividadPrincipal.class);
+        startActivity(intent);
     }
 
 }
