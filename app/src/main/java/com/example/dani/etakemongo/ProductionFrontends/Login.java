@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.dani.etakemongo.DevelopFrontends.ActividadPrincipal;
@@ -30,12 +31,17 @@ public class Login extends AppCompatActivity {
     private EditText email, password;
     private Button login;
     private Usuario loged;
+    private ProgressBar progressBarLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Log.d(tag, "Event onCreate()");
+
+        progressBarLogin = (ProgressBar) findViewById(R.id.progressLogin);
+        progressBarLogin.setVisibility(View.GONE);
+
 
         //Traemos a las variables los objetos del layout
         email = (EditText) findViewById(R.id.etEmail);
@@ -132,8 +138,11 @@ public class Login extends AppCompatActivity {
 //RETROFIT
     public void doLogin(final View v){
 
+        progressBarLogin.setVisibility(View.VISIBLE);
+
         RetrofitOwn retrofitOwn = new RetrofitOwn();
         Retrofit retrofit = retrofitOwn.getObjectRetrofit();
+
 
         //Creamos una instancia de retrofit
         GitHubClient login = retrofit.create(GitHubClient.class);
@@ -149,8 +158,8 @@ public class Login extends AppCompatActivity {
                 //Si OK, procedemos a entrar en el mapa
                 if (response.isSuccessful()){
                     Usuario loged = (Usuario) response.body();
-                    goToMapsActivity(v);
-                    //goToEnviarTicket(v);
+                    //goToMapsActivity(v);
+                    goToEnviarTicket(v);
                    // goToActividadPrincipal(v);
                     Log.d(tag, "Logueado correctamente");
                 }
@@ -158,6 +167,7 @@ public class Login extends AppCompatActivity {
                     //Si los datos son erroneos y el user no esta
                     Toast.makeText(Login.this, "Los datos introducidos son incorrectos", Toast.LENGTH_SHORT).show();
                 }
+                progressBarLogin.setVisibility(View.GONE);
             }
 
             @Override
@@ -165,6 +175,7 @@ public class Login extends AppCompatActivity {
             public void onFailure(Call<Usuario> call, Throwable t) {
                 Toast.makeText(Login.this, "No hay conexión", Toast.LENGTH_SHORT).show();
                 Log.d(tag, "ERROR en el loguin");
+                progressBarLogin.setVisibility(View.GONE);
             }
         });
     }
