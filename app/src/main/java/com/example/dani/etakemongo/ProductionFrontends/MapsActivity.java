@@ -71,8 +71,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         miUbicacion();
 
-
-
     }
 
     //Metodo para incluir un marker, CameraUpdate para centrar la camara a la posicion del marker
@@ -89,8 +87,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     //Metodo para obtener latitud y longitud de nuestra posicion actual
-
-
     private void actualizarUbicacion(Location location) {
         if (location != null) {  //Comrpobamos la localizacion recibida es diferente de null antes de asignar valores a las valariables
             lat = location.getLatitude();
@@ -98,8 +94,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             agregarMarcador(lat, ing);
         }
     }
-    //Implementamos un objeto del tipo LocationListener, su funcion es estar atento a cambio de localidad recividio por el GPS
 
+    //Implementamos un objeto del tipo LocationListener, su funcion es estar atento a cambio de localidad recividio por el GPS
     LocationListener locListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
