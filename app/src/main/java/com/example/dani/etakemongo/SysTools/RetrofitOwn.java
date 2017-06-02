@@ -14,7 +14,7 @@ public class RetrofitOwn {
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         Retrofit.Builder builder = new retrofit2.Retrofit.Builder()
-                .baseUrl("http://localhost:8080/myapp/")                //poner esta para atacar a la api nuestra 10.0.2.2
+                .baseUrl("http://10.0.2.2:8080/myapp/")                //poner esta para atacar a la api nuestra 10.0.2.2
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit =

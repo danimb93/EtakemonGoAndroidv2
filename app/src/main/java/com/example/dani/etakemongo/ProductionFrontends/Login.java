@@ -7,9 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.dani.etakemongo.DevelopFrontends.ActividadPrincipal;
 import com.example.dani.etakemongo.Modelo.Usuario;
 import com.example.dani.etakemongo.R;
 import com.example.dani.etakemongo.SysTools.EnviarTicket;
@@ -18,20 +18,19 @@ import com.example.dani.etakemongo.SysTools.RetrofitOwn;
 
 import java.io.Serializable;
 
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Login extends AppCompatActivity {
 
     //Variables necesarias de los objetos del layout
     String tag = "Login"; // tag que indica el ciclo de vida de la app
     private EditText email, password;
+    private Button login;
     private Usuario loged;
-    private ProgressBar progressBar;
+    private ProgressBar progressBarLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +38,38 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Log.d(tag, "Event onCreate()");
 
+        progressBarLogin = (ProgressBar) findViewById(R.id.progressLogin);
+        progressBarLogin.setVisibility(View.GONE);
+
+
         //Traemos a las variables los objetos del layout
         email = (EditText) findViewById(R.id.etEmail);
         password = (EditText) findViewById(R.id.etPassword);
-        progressBar = (ProgressBar) findViewById(R.id.progressLogin);
-        progressBar.setVisibility(View.GONE);
+        login = (Button) findViewById(R.id.btnLogin);
+
+        final String isemail, ispassword;
+        isemail = email.getText().toString();
+        ispassword = password.getText().toString();
+
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isemail!=null && ispassword != null){
+                    try{
+                        doLogin(v);
+                    }
+                    catch (Exception ex){
+                        ex.getMessage();
+                    }
+                }
+            }
+        });
+
+
     }
 
-    /*protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         email = (EditText) findViewById(R.id.etEmail);
         Bundle result = data.getExtras();
@@ -69,7 +92,7 @@ public class Login extends AppCompatActivity {
                Log.d(tag, "E-mail enviado ok");
            }
        }
-    }*/
+    }
 
     @Override
     protected void onStart() {
@@ -111,19 +134,15 @@ public class Login extends AppCompatActivity {
         Log.d(tag, "Event onDestroy()");
 
     }
+//RETROFIT
+    public void doLogin(final View v){
 
-    public void doLogin(View v){
+        progressBarLogin.setVisibility(View.VISIBLE);
 
-        progressBar.setVisibility(View.VISIBLE);
+        RetrofitOwn retrofitOwn = new RetrofitOwn();
+        Retrofit retrofit = retrofitOwn.getObjectRetrofit();
 
-
-        //Creamos una instancia de retrofitOkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://localhost:8080/myapp/")
-                .addConverterFactory(GsonConverterFactory.create());
-
-        Retrofit retrofit = builder.client(httpClient.build()).build();
-
+        //Creamos una instancia de retrofit
         GitHubClient login = retrofit.create(GitHubClient.class);
         Usuario usuario = new Usuario(email.getText().toString() ,password.getText().toString());
 
@@ -136,22 +155,25 @@ public class Login extends AppCompatActivity {
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                 //Si OK, procedemos a entrar en el mapa
                 if (response.isSuccessful()){
-                    loged = response.body();
+                    Usuario loged = (Usuario) response.body();
+                    goToMapsActivity(v);
+                    //goToEnviarTicket(v);
+                   // goToActividadPrincipal(v);
                     Log.d(tag, "Logueado correctamente");
                 }
                 else{
                     //Si los datos son erroneos y el user no esta
                     Toast.makeText(Login.this, "Los datos introducidos son incorrectos", Toast.LENGTH_SHORT).show();
                 }
-                progressBar.setVisibility(View.GONE);
+                progressBarLogin.setVisibility(View.GONE);
             }
 
             @Override
             //Si no hay conexión
             public void onFailure(Call<Usuario> call, Throwable t) {
                 Toast.makeText(Login.this, "No hay conexión", Toast.LENGTH_SHORT).show();
-                Log.d(tag, "ERROR en el login");
-                progressBar.setVisibility(View.GONE);
+                Log.d(tag, "ERROR en el loguin");
+                progressBarLogin.setVisibility(View.GONE);
             }
         });
     }
@@ -174,6 +196,11 @@ public class Login extends AppCompatActivity {
     public void goToEnviarTicket(View view){
         Intent intent = new Intent(this, EnviarTicket.class);
         startActivityForResult(intent, 500);
+    }
+
+    public void goToActividadPrincipal(View view){
+        Intent intent = new Intent(this, ActividadPrincipal.class);
+        startActivity(intent);
     }
 
 }
