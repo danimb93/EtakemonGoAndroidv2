@@ -205,6 +205,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void goToMenu(View view){
         Intent intent = new Intent(MapsActivity.this, Menu.class);
-        startActivity(intent);
+        startActivityForResult(intent, 800);
     }
 }

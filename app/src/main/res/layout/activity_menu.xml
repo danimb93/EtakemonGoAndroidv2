@@ -181,7 +181,7 @@
                 android:orientation="vertical">
 
                 <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/floatingActionButton8"
+                    android:id="@+id/fab_gomaps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
@@ -192,3 +192,4 @@
         </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
+
