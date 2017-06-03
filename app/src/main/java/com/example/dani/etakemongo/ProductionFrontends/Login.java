@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.dani.etakemongo.DevelopFrontends.ActividadPrincipal;
 import com.example.dani.etakemongo.Modelo.Usuario;
 import com.example.dani.etakemongo.R;
 import com.example.dani.etakemongo.SysTools.EnviarTicket;
@@ -198,11 +197,6 @@ public class Login extends AppCompatActivity {
     public void goToEnviarTicket(View view){
         Intent intent = new Intent(this, EnviarTicket.class);
         startActivityForResult(intent, 500);
-    }
-
-    public void goToActividadPrincipal(View view){
-        Intent intent = new Intent(this, ActividadPrincipal.class);
-        startActivity(intent);
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.dani.etakemongo.DevelopFrontends;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +14,7 @@ public class Menu extends AppCompatActivity {
 
     String tag = "Menu";
 
-    FloatingActionButton botonMail;
+    FloatingActionButton botonMail, botonWeb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,19 @@ public class Menu extends AppCompatActivity {
                 finish();
             }
         });
+
+        botonWeb = (FloatingActionButton) findViewById(R.id.fab_redireccion_web);
+        botonWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent viewIntent =
+                        new Intent("android.intent.action.VIEW",
+                                Uri.parse("http://10.0.2.2:8080"));   // cuando sea publico cambiar aqui la URL
+                startActivity(viewIntent);
+            }
+        });
+
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -28,12 +28,6 @@
             android:orientation="horizontal"
             android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Registrar" />
         </LinearLayout>
 
         <LinearLayout
@@ -46,11 +40,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_centerHorizontal="true"
+                android:background="@drawable/roundtext"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="30dp"
                 android:layout_weight="1"
-                android:background="#FFFFFF"
                 android:gravity="center"
                 android:hint="Nombre"
                 android:inputType="textPersonName" />
@@ -73,7 +67,7 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
-                android:background="#FFFFFF"
+                android:background="@drawable/roundtext"
                 android:gravity="center"
                 android:hint="Nick"
                 android:inputType="textPersonName" />
@@ -94,7 +88,7 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
-                android:background="#FFFFFF"
+                android:background="@drawable/roundtext"
                 android:gravity="center"
                 android:hint="Contraseña"
                 android:inputType="textPassword" />
@@ -115,7 +109,7 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
-                android:background="#FFFFFF"
+                android:background="@drawable/roundtext"
                 android:gravity="center"
                 android:hint="Email"
                 android:inputType="textEmailAddress" />
@@ -137,7 +131,7 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
-                android:background="#FFFFFF"
+                android:background="@drawable/roundtext"
                 android:gravity="center"
                 android:hint="Email (R)"
                 android:inputType="textEmailAddress" />
@@ -155,13 +149,14 @@
                 android:layout_height="60dp"
                 android:layout_below="@+id/etEmailR"
                 android:layout_centerHorizontal="true"
+                android:background="@drawable/roundbutton"
+                android:textColor="#FF0F13"
                 android:layout_marginLeft="80dp"
                 android:layout_marginRight="80dp"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Registrar"
-                />
+                android:text="Registrar" />
 
         </LinearLayout>
 
