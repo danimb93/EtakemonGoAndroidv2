@@ -158,8 +158,8 @@ public class Login extends AppCompatActivity {
                 //Si OK, procedemos a entrar en el mapa
                 if (response.isSuccessful()){
                     Usuario loged = (Usuario) response.body();
-                    //goToMapsActivity(v);
-                    goToEnviarTicket(v);
+                    goToMapsActivity(v);
+                   // goToEnviarTicket(v);
                    // goToActividadPrincipal(v);
                     Log.d(tag, "Logueado correctamente");
                 }
@@ -204,5 +204,6 @@ public class Login extends AppCompatActivity {
         Intent intent = new Intent(this, ActividadPrincipal.class);
         startActivity(intent);
     }
+
 
 }

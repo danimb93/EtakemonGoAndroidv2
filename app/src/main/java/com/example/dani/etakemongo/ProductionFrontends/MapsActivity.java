@@ -2,6 +2,7 @@ package com.example.dani.etakemongo.ProductionFrontends;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -10,7 +11,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.dani.etakemongo.DevelopFrontends.Menu;
 import com.example.dani.etakemongo.R;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,13 +36,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     double lat = 0.0;
     double ing = 0.0;
 
-
+    Button menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         Log.d(tag, "Event onCreate()");
+
+        //BOTON MENU
+        menu = (Button) findViewById(R.id.btn_menu_maps);
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    goToMenu(v);
+                } catch (Exception ex) {
+                    String error = ex.getMessage();
+                    Toast.makeText(MapsActivity.this, error, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -53,8 +75,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return;
         }
         mMap.setMyLocationEnabled(true);
-
-
     }
 
 
@@ -178,5 +198,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onDestroy();
         Log.d(tag, "Event onDestroy()");
 
+    }
+
+
+    public void goToMenu(View view){
+        Intent intent = new Intent(MapsActivity.this, Menu.class);
+        startActivityForResult(intent, 800);
     }
 }
