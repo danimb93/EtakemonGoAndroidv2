@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -36,7 +37,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     double lat = 0.0;
     double ing = 0.0;
 
-    Button menu;
+
+    FloatingActionButton menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.d(tag, "Event onCreate()");
 
         //BOTON MENU
-        menu = (Button) findViewById(R.id.btn_menu_maps);
+        menu = (FloatingActionButton) findViewById(R.id.fab_menu);
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -203,6 +205,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void goToMenu(View view){
         Intent intent = new Intent(MapsActivity.this, Menu.class);
-        startActivityForResult(intent, 800);
+        startActivity(intent);
     }
 }

@@ -5,14 +5,14 @@
     <item android:top="4dp">
         <shape>
             <solid android:color="#FFA726" />
-            <corners android:radius="4dip" />
+            <!--<corners android:radius="4dip" />-->
         </shape>
     </item>
     <!-- Contenido -->
     <item android:bottom="4dp">
         <shape>
             <solid android:color="#FFB74D" />
-            <corners android:radius="4dip" />
+            <!--<corners android:radius="4dip" />-->
         </shape>
     </item>
 </layer-list>

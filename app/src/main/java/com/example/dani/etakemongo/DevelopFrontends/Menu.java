@@ -1,26 +1,26 @@
 package com.example.dani.etakemongo.DevelopFrontends;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageButton;
 
 import com.example.dani.etakemongo.R;
 
 public class Menu extends AppCompatActivity {
+
     String tag = "Menu";
 
-    ImageButton botonMail;
+    FloatingActionButton botonMail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        botonMail = (ImageButton) findViewById(R.id.btn_ticket_menu);
+        botonMail = (FloatingActionButton) findViewById(R.id.fab_ticket);
         botonMail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

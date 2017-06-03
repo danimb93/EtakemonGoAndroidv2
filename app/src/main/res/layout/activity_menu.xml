@@ -12,14 +12,15 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="12dp"
         android:orientation="vertical"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="6dp"
-        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,9 +28,11 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="302dp"
+                android:layout_width="255dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical">
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="185dp"
@@ -37,23 +40,31 @@
                 android:orientation="vertical"
                 android:weightSum="1">
 
-                <ImageButton
-                    android:id="@+id/btn_gotoweb_menu"
-                    android:layout_marginTop="15dp"
-                    android:layout_width="42dp"
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_redireccion_web"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
-                    android:background="@color/colorPrimary" />
+                    android:layout_marginLeft="45dp"
+                    android:layout_weight="0.22"
+                    android:clickable="true"
+                    app:backgroundTint="@color/colorPrimaryDark"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/ic_redireccion_web" />
 
-                <ImageButton
-                    android:id="@+id/btn_ticket_menu"
-                    android:layout_width="39dp"
-                    android:layout_height="38dp"
-                    app:srcCompat="@drawable/ic_email_outline"
-                    android:textColor="@android:color/white"
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_ticket"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="0.22"
                     android:background="@drawable/bk_boton_plano"
+                    android:clickable="true"
                     android:stateListAnimator="@null"
-                    android:layout_weight="0.22" />
+                    android:textColor="@android:color/white"
+                    app:backgroundTint="@android:color/holo_red_light"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/ic_email_outline" />
 
             </LinearLayout>
         </LinearLayout>
@@ -65,50 +76,71 @@
             android:weightSum="1">
 
             <LinearLayout
-                android:layout_width="114dp"
+                android:layout_width="62dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="0.04"></LinearLayout>
+                android:orientation="vertical"></LinearLayout>
 
             <LinearLayout
-                android:layout_width="185dp"
+                android:layout_width="163dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btn_etakedex_menu"
-                    android:layout_width="114dp"
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_etakedex_menu"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Etakédex"
-                    android:textColor="@android:color/white"
-                    android:background="@drawable/bk_boton_plano"
-                    android:stateListAnimator="@null"/>
+                    android:layout_marginTop="30dp"
+                    android:clickable="true"
+                    app:backgroundTint="@color/colorAccent"
+                    app:fabSize="normal"
+                    app:srcCompat="@drawable/ic_etakedex" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_etakemons_menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:clickable="true"
+                    app:backgroundTint="@color/colorAccent"
+                    app:fabSize="normal"
+                    app:srcCompat="@drawable/ic_etakemons" />
+
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="162dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="1">
 
             <LinearLayout
                 android:layout_width="36dp"
                 android:layout_height="match_parent"
+                android:layout_weight="3.31"
                 android:orientation="vertical"></LinearLayout>
 
             <LinearLayout
                 android:layout_width="155dp"
                 android:layout_height="match_parent"
+                android:layout_weight="0.94"
                 android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btn_etakemons_menu"
-                    android:layout_width="126dp"
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_user_menu"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Etakemons"
-                    android:textColor="@android:color/white"
-                    android:background="@drawable/bk_boton_plano"
-                    android:stateListAnimator="@null"/>
+                    android:layout_marginLeft="65dp"
+                    android:clickable="true"
+                    app:backgroundTint="@android:color/holo_blue_dark"
+                    app:fabSize="normal"
+                    app:srcCompat="@drawable/ic_user" />
             </LinearLayout>
 
             <LinearLayout
@@ -116,14 +148,15 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btn_objetos_menu"
-                    android:layout_width="143dp"
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_objetos_menu"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Objetos"
-                    android:textColor="@android:color/white"
-                    android:background="@drawable/bk_boton_plano"
-                    android:stateListAnimator="@null"/>
+                    android:layout_marginLeft="85dp"
+                    android:clickable="true"
+                    app:backgroundTint="@color/colorAccent"
+                    app:fabSize="normal"
+                    app:srcCompat="@drawable/ic_objetos" />
             </LinearLayout>
 
         </LinearLayout>
@@ -137,8 +170,8 @@
             <LinearLayout
                 android:layout_width="131dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="0.53">
+                android:layout_weight="0.53"
+                android:orientation="vertical">
 
             </LinearLayout>
 
@@ -147,12 +180,14 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/btn_close_menu"
-                    android:layout_width="wrap_content"
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/floatingActionButton8"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@android:drawable/ic_notification_clear_all"
-                    android:background="@color/colorPrimaryDark"/>
+                    android:clickable="true"
+                    app:backgroundTint="@android:color/holo_green_dark"
+                    app:fabSize="mini"
+                    app:srcCompat="@android:drawable/ic_notification_clear_all" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
