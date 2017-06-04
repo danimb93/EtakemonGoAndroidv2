@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.dani.etakemongo.DevelopFrontends.Menu;
+import com.example.dani.etakemongo.Modelo.Usuario;
 import com.example.dani.etakemongo.R;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,6 +29,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.Serializable;
+
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -36,6 +39,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker marcador;
     double lat = 0.0;
     double ing = 0.0;
+    String email2, emailaMenu;
 
 
     FloatingActionButton menu;
@@ -45,6 +49,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         Log.d(tag, "Event onCreate()");
+
+        email2 = getIntent().getExtras().getString("email");
+        emailaMenu = email2;
 
         //BOTON MENU
         menu = (FloatingActionButton) findViewById(R.id.fab_menu);
@@ -205,6 +212,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void goToMenu(View view){
         Intent intent = new Intent(MapsActivity.this, Menu.class);
+        intent.putExtra("email2",emailaMenu);
         startActivityForResult(intent, 800);
     }
 }

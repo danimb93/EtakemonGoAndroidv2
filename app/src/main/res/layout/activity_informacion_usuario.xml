@@ -5,25 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.dani.etakemongo.DevelopFrontends.InformacionUsuario"
-    android:background="@drawable/fondo">
+    android:background="@drawable/fondo"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
 
     <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="495dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="-1dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:weightSum="1"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1"
-        android:weightSum="1">
+        tools:layout_constraintTop_creator="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,25 +36,29 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="15dp"
                 android:text="Usuario: "
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvUsuarionick"
-                android:layout_width="50dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:layout_weight="0.06"
-                android:textStyle="bold" />
+                android:layout_weight="0.14"
+                android:textColor="@android:color/background_light"
+                android:textSize="18sp"
+                android:textStyle="bold|italic"
+                android:visibility="visible" />
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/floatingActionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="215dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="0.06"
                 android:clickable="true"
-                app:backgroundTint="@android:color/holo_red_dark"
+                app:backgroundTint="@color/colorAccent"
                 app:fabSize="mini"
                 app:srcCompat="@android:drawable/ic_notification_clear_all" />
         </LinearLayout>
@@ -73,14 +75,19 @@
                 android:layout_marginLeft="5dp"
                 android:layout_weight="0.00"
                 android:text="Nivel:"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvSetNivel"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.00"
-                android:width="50dp" />
+                android:width="50dp"
+                android:textColor="@android:color/background_light"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
 
         </LinearLayout>
 
@@ -96,14 +103,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="Experiencia: "
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvSetExperiencia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.34"
                 android:width="45dp"
-                android:layout_weight="0.23" />
+                android:textColor="@android:color/background_light"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
 
         </LinearLayout>
 
@@ -130,17 +142,17 @@
             <LinearLayout
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:layout_weight="1.06"
+                android:orientation="vertical"
                 android:weightSum="1">
 
                 <ProgressBar
                     android:id="@+id/pb_nivel"
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="100dp"
                     android:progress="70"
-                    android:progressTint="@color/colorPrimaryDark"
+                    android:progressTint="@android:color/holo_orange_dark"
                     tools:visibility="visible" />
             </LinearLayout>
 
@@ -161,8 +173,11 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="42dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:backgroundTint="@color/colorAccent"
             android:orientation="horizontal">
+
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -174,10 +189,14 @@
             <TextView
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.08"
+                android:allowUndo="false"
                 android:text="LOGROS"
                 android:textAlignment="center"
-                android:textAppearance="@android:style/TextAppearance.Holo.Large" />
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/imageView3"

@@ -7,14 +7,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.dani.etakemongo.Modelo.Objetos;
+import com.example.dani.etakemongo.Modelo.Usuario;
 import com.example.dani.etakemongo.R;
+import com.example.dani.etakemongo.SysTools.GitHubClient;
+import com.example.dani.etakemongo.SysTools.RetrofitOwn;
+
+import java.io.Serializable;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
 
 public class Menu extends AppCompatActivity {
 
     String tag = "Menu";
 
+    String emailusuario, emailloged;
     private boolean enviado;
 
     FloatingActionButton botonMail, botonWeb, botonReturnMap, botonEtakedex, botonEtakemons, botonUsuario, botonObjetos;
@@ -23,6 +34,10 @@ public class Menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        emailusuario = getIntent().getExtras().getString("email2");
+        emailloged = emailusuario;
+
 
         botonMail = (FloatingActionButton) findViewById(R.id.fab_ticket);
         botonMail.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +111,7 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Menu.this, InformacionUsuario.class);
+                intent.putExtra("emailsito",emailloged);
                 startActivityForResult(intent, 910);
             }
         });
@@ -170,4 +186,7 @@ public class Menu extends AppCompatActivity {
         Log.d(tag, "Event onDestroy()");
 
     }
+
+
 }
+

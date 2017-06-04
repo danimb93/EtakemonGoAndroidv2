@@ -31,6 +31,8 @@ public class Login extends AppCompatActivity {
     private Button login;
     private Usuario loged;
     private ProgressBar progressBarLogin;
+    private String isemail, ispassword;
+    public String emilio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +49,18 @@ public class Login extends AppCompatActivity {
         password = (EditText) findViewById(R.id.etPassword);
         login = (Button) findViewById(R.id.btnLogin);
 
-        final String isemail, ispassword;
+
         isemail = email.getText().toString();
         ispassword = password.getText().toString();
 
 
         login.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 if (isemail!=null && ispassword != null){
                     try{
+                        emilio = email.getText().toString();
                         doLogin(v);
                     }
                     catch (Exception ex){
@@ -190,7 +194,7 @@ public class Login extends AppCompatActivity {
 
     public void goToMapsActivity(View view){
         Intent intent = new Intent(this, MapsActivity.class);
-        intent.putExtra("loged", (Serializable)loged); //Pasar al maps el usuario entero que hemos recibido en el registro
+        intent.putExtra("email",emilio); //Pasar al maps el usuario entero que hemos recibido en el registro
         startActivityForResult(intent, 100);    //ponemos el codigo 100 para monitorizar esta actividad y sus futuros resultados
     }
 
