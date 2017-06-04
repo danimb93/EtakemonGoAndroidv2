@@ -30,6 +30,14 @@
             android:layout_weight="0.13"
             android:orientation="horizontal">
 
+            <EditText
+                android:id="@+id/etSearch_etlist"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="125dp"
+                android:ems="10"
+                android:hint="Buscar"
+                android:inputType="textPersonName" />
         </LinearLayout>
 
         <LinearLayout

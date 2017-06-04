@@ -16,11 +16,16 @@ package com.example.dani.etakemongo.DevelopFrontends;
 
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.app.Activity;
+import java.util.ArrayList;
 
 import com.example.dani.etakemongo.R;
 
@@ -46,6 +51,10 @@ public class Etakemon_list extends Activity {
 
     };
 
+    private EditText editText;
+    private int textlenght = 0;
+    private ArrayList<String> array_sort = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +74,35 @@ public class Etakemon_list extends Activity {
             }
         });
 
+        editText = (EditText) findViewById(R.id.etSearch_etlist);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                textlenght = editText.getText().length();
+                array_sort.clear();
+
+                for (int i = 0; i < web.length; i++){
+                    if (textlenght < web[i].length()){
+                        if (editText.getText().toString().equalsIgnoreCase((String) web[i].subSequence(0, textlenght))){
+                            array_sort.add(web[i]);
+                        }
+                    }
+
+                }
+
+                list.setAdapter((new ArrayAdapter<String>(Etakemon_list.this, android.R.layout.simple_list_item_1, array_sort)));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
 }
