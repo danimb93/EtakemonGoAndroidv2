@@ -25,7 +25,9 @@ public class EtakemonsUsuario extends AppCompatActivity {
     String tag = "EtakemonsUsuario";
 
     ListView listView;
-    String[] web2;
+//    String[] web2 = {
+//    };
+    ArrayList<String> web2 = new ArrayList<>();
     Integer[] imageId2 = {
             R.drawable.davidos,
             R.drawable.livanny,
@@ -39,43 +41,43 @@ public class EtakemonsUsuario extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.listEtakemons);
 
-        RetrofitOwn retrofitOwn = new RetrofitOwn();
-        Retrofit retrofit = retrofitOwn.getObjectRetrofit();
+            RetrofitOwn retrofitOwn = new RetrofitOwn();
+            Retrofit retrofit = retrofitOwn.getObjectRetrofit();
 
 
-        //Creamos una instancia de retrofit
-        GitHubClient etakemons = retrofit.create(GitHubClient.class);
+            //Creamos una instancia de retrofit
+            GitHubClient etakemons = retrofit.create(GitHubClient.class);
 
-        //Hacemos la llamada http
-        Call<List<Captura>> call = etakemons.listaCapturas(7);  //habra que pasarle el id usuario hasta aqui
+            //Hacemos la llamada http
+            Call<List<Captura>> call = etakemons.listaCapturas(7);  //habra que pasarle el id usuario hasta aqui
 
+            call.enqueue(new Callback<List<Captura>>() {
+                @Override
+                public void onResponse(Call<List<Captura>> call, Response<List<Captura>> response) {
 
-        call.enqueue(new Callback<List<Captura>>() {
-            @Override
-            public void onResponse(Call<List<Captura>> call, Response<List<Captura>> response) {
-                if (response.isSuccessful()){
+                    System.out.println("RESPONSEE:"+response);
+                    if (response.isSuccessful()){
                     capturaList = (List<Captura>) response.body();
-                    System.out.println("TAAAAAAAAAAAAAAAAAAAAAAAAAAAMAÑOOOOOOOOOOOOOOOOOOO   "+capturaList.size());
-                    for (int i = 0; i < capturaList.size(); i++){
-                        web2[i] = capturaList.get(i).getNombreetakemon();
-                   //     imageId2[i] = capturaList.get(i);         hay que añadirle imagen al etakemon en la bbddd la url
+                    System.out.println("TAAAAAAAAAAAAAAAAAAAAAAAAAAAMAÑOOOOOOOOOOOOOOOOOOO   " + capturaList.size());
+                    for (int i = 0; i < capturaList.size(); i++) {
+                        web2.add(capturaList.get(i).getNombreetakemon());
+                        //     imageId2[i] = capturaList.get(i);         hay que añadirle imagen al etakemon en la bbddd la url
                     }
                     CustomListMisEtakemons adapter2 = new CustomListMisEtakemons(EtakemonsUsuario.this, web2, imageId2);
                     listView.setAdapter(adapter2);
-                }
+                       }
                 else{
                     //Si los datos son erroneos y el user no esta
                     Toast.makeText(EtakemonsUsuario.this, "Peticion erronea", Toast.LENGTH_SHORT).show();
                 }
-            }
+                }
 
-            @Override
-            public void onFailure(Call<List<Captura>> call, Throwable t) {
-                Toast.makeText(EtakemonsUsuario.this, "No hay conexión", Toast.LENGTH_SHORT).show();
-                Log.d(tag, "ERROR al conectar");
-            }
-        });
-
+                @Override
+                public void onFailure(Call<List<Captura>> call, Throwable t) {
+                    Toast.makeText(EtakemonsUsuario.this, "No hay conexión", Toast.LENGTH_SHORT).show();
+                    Log.d(tag, "ERROR al conectar");
+                }
+            });
 
 
 

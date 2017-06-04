@@ -30,6 +30,18 @@
             android:layout_weight="0.13"
             android:orientation="horizontal">
 
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_exit_etakedex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="48dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                app:backgroundTint="@android:color/holo_red_dark"
+                app:fabSize="mini"
+                app:srcCompat="@android:drawable/ic_notification_clear_all" />
+
             <EditText
                 android:id="@+id/etSearch_etlist"
                 android:layout_width="180dp"

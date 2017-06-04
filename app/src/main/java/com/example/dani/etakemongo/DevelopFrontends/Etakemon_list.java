@@ -15,7 +15,9 @@ package com.example.dani.etakemongo.DevelopFrontends;
 //}
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -33,7 +35,7 @@ import com.example.dani.etakemongo.SysTools.CustomListEtakedex;
 public class Etakemon_list extends Activity {
     ListView list;
     String[] web = {
-            "Alakasals \n Este es el kasalikoh",
+            "Alakasals",
             "Danisloth",
             "Davidos",
             "Livanny",
@@ -55,6 +57,7 @@ public class Etakemon_list extends Activity {
     private EditText editText;
     private int textlenght = 0;
     private ArrayList<String> array_sort = new ArrayList<>();
+    private FloatingActionButton fabExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +105,15 @@ public class Etakemon_list extends Activity {
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+
+        fabExit = (FloatingActionButton) findViewById(R.id.fab_exit_etakedex);
+        fabExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_OK);
+                finish();
             }
         });
     }
