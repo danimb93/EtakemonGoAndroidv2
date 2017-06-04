@@ -73,17 +73,17 @@ public class Menu extends AppCompatActivity {
             }
         });
 
-        botonEtakedex = (FloatingActionButton) findViewById(R.id.fab_etakedex_menu);
-        botonEtakedex.setOnClickListener(new View.OnClickListener() {
+        botonEtakemons = (FloatingActionButton) findViewById(R.id.fab_etakemons_menu);
+        botonEtakemons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Menu.this, Etakedex.class);
+                Intent intent = new Intent(Menu.this, EtakemonsUsuario.class);
                 startActivityForResult(intent, 930);
             }
         });
 
-        botonEtakemons = (FloatingActionButton) findViewById(R.id.fab_etakemons_menu);
-        botonEtakemons.setOnClickListener(new View.OnClickListener() {
+        botonEtakedex = (FloatingActionButton) findViewById(R.id.fab_etakedex_menu);
+        botonEtakedex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Menu.this, Etakemon_list.class);

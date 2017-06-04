@@ -46,7 +46,7 @@
         <activity android:name=".DevelopFrontends.InformacionUsuario" />
         <activity android:name=".DevelopFrontends.Menu" />
         <activity android:name=".DevelopFrontends.Etakemon_list" />
-        <activity android:name=".DevelopFrontends.Etakedex" />
+        <activity android:name=".DevelopFrontends.EtakemonsUsuario" />
     </application>
 
 </manifest>

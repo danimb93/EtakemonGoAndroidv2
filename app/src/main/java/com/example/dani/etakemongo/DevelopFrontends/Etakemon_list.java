@@ -28,17 +28,18 @@ import android.app.Activity;
 import java.util.ArrayList;
 
 import com.example.dani.etakemongo.R;
+import com.example.dani.etakemongo.SysTools.CustomListEtakedex;
 
 public class Etakemon_list extends Activity {
     ListView list;
     String[] web = {
-            "Google Plus \n Este es el kasalikoh",
-            "Twitter",
-            "Windows",
-            "Bing",
-            "Itunes",
-            "Wordpress",
-            "Drupal"
+            "Alakasals \n Este es el kasalikoh",
+            "Danisloth",
+            "Davidos",
+            "Livanny",
+            "Robat",
+            "Tonix",
+            "Wooperal"
     } ;
     Integer[] imageId = {
             R.drawable.alakasals,
@@ -60,8 +61,8 @@ public class Etakemon_list extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_etakemon_list);
 
-        CustomList adapter = new
-                CustomList(Etakemon_list.this, web, imageId);
+        CustomListEtakedex adapter = new
+                CustomListEtakedex(Etakemon_list.this, web, imageId);
         list=(ListView)findViewById(R.id.list);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {

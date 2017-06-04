@@ -1,4 +1,4 @@
-package com.example.dani.etakemongo.DevelopFrontends;
+package com.example.dani.etakemongo.SysTools;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -10,13 +10,13 @@ import android.widget.TextView;
 
 import com.example.dani.etakemongo.R;
 
-public class CustomList extends ArrayAdapter<String>{
+public class CustomListEtakedex extends ArrayAdapter<String>{
 
     private final Activity context;
     private final String[] web;
     private final Integer[] imageId;
-    public CustomList(Activity context,
-                      String[] web, Integer[] imageId) {
+    public CustomListEtakedex(Activity context,
+                              String[] web, Integer[] imageId) {
         super(context, R.layout.list_single, web);
         this.context = context;
         this.web = web;
