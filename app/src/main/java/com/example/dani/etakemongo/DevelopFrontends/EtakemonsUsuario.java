@@ -33,11 +33,16 @@ public class EtakemonsUsuario extends AppCompatActivity {
             R.drawable.livanny,
     };
     private List<Captura> capturaList = new ArrayList<>();
+    int idloged,idusuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.etakemons_usuario);
+
+        idusuario = getIntent().getExtras().getInt("id");    //tenemos el id del usuario para hacer las llamadas q sean necesarias
+        idloged = idusuario;
+
 
         listView = (ListView) findViewById(R.id.listEtakemons);
 

@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.dani.etakemongo.Modelo.Objetos;
 import com.example.dani.etakemongo.Modelo.Usuario;
+import com.example.dani.etakemongo.ProductionFrontends.Login;
 import com.example.dani.etakemongo.ProductionFrontends.ObjetosUsuario;
 import com.example.dani.etakemongo.R;
 import com.example.dani.etakemongo.SysTools.GitHubClient;
@@ -20,6 +21,7 @@ import java.io.Serializable;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class Menu extends AppCompatActivity {
@@ -27,6 +29,7 @@ public class Menu extends AppCompatActivity {
     String tag = "Menu";
 
     String emailusuario, emailloged;
+    int idloged, idlogedparatodos;
     private boolean enviado;
 
     FloatingActionButton botonMail, botonWeb, botonReturnMap, botonEtakedex, botonEtakemons, botonUsuario, botonObjetos;
@@ -39,6 +42,7 @@ public class Menu extends AppCompatActivity {
         emailusuario = getIntent().getExtras().getString("email2");
         emailloged = emailusuario;
 
+        doGetData(emailloged);
 
         botonMail = (FloatingActionButton) findViewById(R.id.fab_ticket);
         botonMail.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +98,7 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Menu.this, EtakemonsUsuario.class);
+                intent.putExtra("id",idlogedparatodos);
                 startActivityForResult(intent, 930);
             }
         });
@@ -123,6 +128,7 @@ public class Menu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Menu.this, ObjetosUsuario.class);
                 intent.putExtra("emailsito",emailloged);
+                intent.putExtra("id",idlogedparatodos);
                 startActivityForResult(intent, 900);
             }
         });
@@ -147,6 +153,43 @@ public class Menu extends AppCompatActivity {
 
     }
 
+    public void doGetData(String em){
+        RetrofitOwn retrofitOwn = new RetrofitOwn();
+        Retrofit retrofit = retrofitOwn.getObjectRetrofit();
+
+
+        //Creamos una instancia de retrofit
+        GitHubClient datos = retrofit.create(GitHubClient.class);
+
+        //Hacemos la llamada http
+        Call<Usuario> call2 = datos.getUsuario(em);
+
+        call2.enqueue(new Callback<Usuario>() {
+            @Override
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+
+                if (response.isSuccessful()){
+                    Usuario usuario = new Usuario();
+                    // idusuario = usuario.getId();
+                    idloged = response.body().getId();
+                    idlogedparatodos = idloged;
+                 //   Toast.makeText(Menu.this, String.valueOf(idlogedparatodos), Toast.LENGTH_SHORT).show();
+                    Log.d(tag, "Datos obtenidos correctamente");
+
+                }
+                else{
+                    Log.d(tag, "Datos mal cogidos");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Usuario> call, Throwable t) {
+                Toast.makeText(Menu.this, "Error al obtener datos del usuario", Toast.LENGTH_SHORT).show();
+                Log.d(tag, "No conectado para coger datos");
+            }
+        });
+    }
 
     @Override
     protected void onStart() {

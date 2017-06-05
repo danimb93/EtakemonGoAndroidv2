@@ -40,6 +40,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     double lat = 0.0;
     double ing = 0.0;
     String email2, emailaMenu;
+    int idusuario, idusuarioaMenu;
 
 
     FloatingActionButton menu;
@@ -50,8 +51,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         Log.d(tag, "Event onCreate()");
 
+
         email2 = getIntent().getExtras().getString("email");
         emailaMenu = email2;
+
 
         //BOTON MENU
         menu = (FloatingActionButton) findViewById(R.id.fab_menu);

@@ -36,6 +36,7 @@ public class ObjetosUsuario extends AppCompatActivity {
     String tag = "ObjetosUsuario";
 
     String emailloged, emiliologed;
+    int idloged, idusuario;
 
     ListView listViewobjetos;
     private List<Objetos> listarecibida;
@@ -66,6 +67,11 @@ public class ObjetosUsuario extends AppCompatActivity {
 
         emailloged = getIntent().getExtras().getString("emailsito");
         emiliologed = emailloged;
+
+        idusuario = getIntent().getExtras().getInt("id"); //tenemos el id del usuario logeado para hacer lo q necesitemos
+        idloged = idusuario;
+
+       // Toast.makeText(ObjetosUsuario.this, String.valueOf(idloged), Toast.LENGTH_LONG).show();
 
         exit = (FloatingActionButton) findViewById(R.id.fab_exit_objetos);
 

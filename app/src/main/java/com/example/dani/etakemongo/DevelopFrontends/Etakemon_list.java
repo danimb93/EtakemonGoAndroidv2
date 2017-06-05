@@ -25,6 +25,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
 import java.util.ArrayList;
@@ -63,6 +64,7 @@ public class Etakemon_list extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_etakemon_list);
+
 
         CustomListEtakedex adapter = new
                 CustomListEtakedex(Etakemon_list.this, web, imageId);
