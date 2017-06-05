@@ -1,6 +1,7 @@
 package com.example.dani.etakemongo.ProductionFrontends;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +28,8 @@ public class RecuperarDatos extends AppCompatActivity {
 
     private EditText email;
     private Button recuperardatos;
+    private FloatingActionButton fabexit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +83,16 @@ public class RecuperarDatos extends AppCompatActivity {
                         finish();
                     }
                 });
+            }
+        });
+
+        fabexit = (FloatingActionButton) findViewById(R.id.fab_exit_recuperar);
+        fabexit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = getIntent();
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
 

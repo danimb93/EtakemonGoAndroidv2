@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dani.etakemongo.Modelo.Usuario;
@@ -33,6 +34,8 @@ public class Login extends AppCompatActivity {
     private ProgressBar progressBarLogin;
     private String isemail, ispassword;
     public String emilio;
+
+    private TextView registrar, recordar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,22 @@ public class Login extends AppCompatActivity {
                         ex.getMessage();
                     }
                 }
+            }
+        });
+
+        registrar = (TextView) findViewById(R.id.tvRegistrar);
+        registrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirRegistrar(v);
+            }
+        });
+
+        recordar = (TextView) findViewById(R.id.tvRecordar);
+        recordar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirRecuperar(v);
             }
         });
 
@@ -162,8 +181,6 @@ public class Login extends AppCompatActivity {
                 if (response.isSuccessful()){
                     Usuario loged = (Usuario) response.body();
                     goToMapsActivity(v);
-                   // goToEnviarTicket(v);
-                   // goToActividadPrincipal(v);
                     Log.d(tag, "Logueado correctamente");
                 }
                 else{
@@ -184,7 +201,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void abrirRegistrar (View view) {
-        Intent intent = new Intent(this, MapsActivity.class);
+        Intent intent = new Intent(this, Registrar.class);
         startActivityForResult(intent, 200);
     }
     public void abrirRecuperar (View view) {

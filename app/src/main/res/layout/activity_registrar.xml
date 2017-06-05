@@ -6,27 +6,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.dani.etakemongo.ProductionFrontends.Registrar"
-    android:background="@drawable/fondo">>
+    android:background="@drawable/fondo"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">>
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="382dp"
+        android:layout_height="504dp"
         android:orientation="vertical"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="3dp">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
         </LinearLayout>
 
@@ -40,11 +36,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/roundtext"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="30dp"
                 android:layout_weight="1"
+                android:background="@drawable/roundtext"
                 android:gravity="center"
                 android:hint="Nombre"
                 android:inputType="textPersonName" />
@@ -54,7 +50,6 @@
             android:layout_width="match_parent"
             android:layout_height="71dp"
             android:orientation="horizontal">
-
 
 
             <EditText
@@ -149,34 +144,36 @@
                 android:layout_height="60dp"
                 android:layout_below="@+id/etEmailR"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/roundbutton"
-                android:textColor="#FF0F13"
                 android:layout_marginLeft="80dp"
                 android:layout_marginRight="80dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
+                android:background="@drawable/roundbutton"
                 android:gravity="center"
-                android:text="Registrar" />
+                android:text="Registrar"
+                android:textColor="#FF0F13" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.94"
+            android:layout_height="60dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvRespuesta"
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_exit_registrar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="170dp"
+                android:layout_marginTop="4dp"
                 android:layout_weight="1"
-                />
+                android:clickable="true"
+                app:fabSize="mini"
+                app:srcCompat="@android:drawable/ic_notification_clear_all" />
+
         </LinearLayout>
 
     </LinearLayout>
-
-
 
 
 </android.support.constraint.ConstraintLayout>
