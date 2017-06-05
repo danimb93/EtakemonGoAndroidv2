@@ -64,7 +64,7 @@ public class Menu extends AppCompatActivity {
                     emailIntent.setType("message/rfc822");
                     //Damos la opción al usuario que elija desde que app enviamos el email.
                     startActivityForResult(Intent.createChooser(emailIntent, "Selecciona aplicación..."),940);
-                    
+
                     Intent intent = getIntent();
                     setResult(RESULT_OK,intent);
                     finish();

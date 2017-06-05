@@ -47,7 +47,7 @@ public interface GitHubClient {
 
 //Devolver lista de etakemons de un usuario (capturas)
         @GET ("usuario/{id}/get_capturas")
-        Call<List<Captura>> listaCapturas(@Path("id") int idx);
+        Call<List<Captura>> listaCapturas(@Path("id") int id);
 
         //obtener datos del usuario
         @GET ("usuario/got_email/{email}")
@@ -64,6 +64,9 @@ public interface GitHubClient {
         //objenet todos los objetos
         @GET("objetos/get_all")
         Call<List<Objetos>> getAllObjetos();
+
+        @GET ("usuario/{id}/get_capturas")
+        Call<List<Captura>> getCapturasUsuario(@Path("id") int id);
 
 
 
