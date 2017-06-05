@@ -49,8 +49,14 @@ public interface GitHubClient {
         @GET ("usuario/{id}/get_capturas")
         Call<List<Captura>> listaCapturas(@Path("id") int idx);
 
+        //obtener datos del usuario
         @GET ("usuario/got_email/{email}")
         Call<Usuario> getUsuario(@Path("email") String email);
+
+        //obtener logros usuario
+        @GET ("usuario/{email}/logros")
+        Call<List<Logros>> getLogrosUSer(@Path("email") String email);
+
 }
 
 
