@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,8 @@ import com.example.dani.etakemongo.Modelo.Usuario;
 import com.example.dani.etakemongo.R;
 import com.example.dani.etakemongo.SysTools.GitHubClient;
 import com.example.dani.etakemongo.SysTools.RetrofitOwn;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +34,16 @@ import retrofit2.Retrofit;
 
         String emailloged, emiliologed;
 
+        private int nivel, expActual, expNextLevel, progresoFin;
+        private double res1, progreso;
+        private ProgressBar progresoNivel;
+
         private TextView tvNick;
         private TextView tvNivel;
         private TextView tvExperiencia;
+
+        private TextView tvExpeActual;
+        private TextView tvExpeNext;
 
         private List<String> logrosList;
         private List<Logros> listarecibida;
@@ -46,6 +56,10 @@ import retrofit2.Retrofit;
         tvNick = (TextView) findViewById(R.id.tvUsuarionick);
         tvNivel = (TextView) findViewById(R.id.tvSetNivel);
         tvExperiencia = (TextView) findViewById(R.id.tvSetExperiencia);
+        progresoNivel = (ProgressBar) findViewById(R.id.pb_nivel);
+
+        tvExpeActual = (TextView) findViewById(R.id.tvExpActual);
+        tvExpeNext = (TextView) findViewById(R.id.tvExpNext);
 
         emailloged = getIntent().getExtras().getString("emailsito");
         emiliologed = emailloged;
@@ -114,7 +128,7 @@ import retrofit2.Retrofit;
 
 
             // Create an instance of our GitHub API interface.
-            GitHubClient usuario = retrofit.create(GitHubClient.class);
+            final GitHubClient usuario = retrofit.create(GitHubClient.class);
 
             // Create a call instance for looking up Retrofit contributors.
             Call<Usuario> call = usuario.getUsuario(emiliologed);
@@ -131,6 +145,46 @@ import retrofit2.Retrofit;
                             tvNick.setText(usuariologeado.getNick());
                             tvNivel.setText(String.valueOf(usuariologeado.getNivel()));
                             tvExperiencia.setText(String.valueOf(usuariologeado.getExperiencia()));
+
+                            tvExpeActual.setText(String.valueOf(usuariologeado.getNivel()));
+                            tvExpeNext.setText(String.valueOf(usuariologeado.getNivel()+1));
+
+                            //barra de nivel
+                            nivel = usuariologeado.getNivel();
+                            expActual = usuariologeado.getExperiencia();
+
+                            System.out.println("ACUTAAAAAAAAL"+expActual);
+
+                            if (nivel <=5){
+                                expNextLevel = 1000;
+                                res1 = expNextLevel-expActual;
+
+                                progreso = 100 - (res1/15);
+                                progresoFin = (int) progreso;
+
+                                progresoNivel.setProgress(progresoFin);
+
+                            }
+                            else if(nivel >= 5 && nivel<= 10){
+                                expNextLevel = 1500;
+                                res1 = expNextLevel-expActual;
+
+                                progreso = 100 - (res1/15);
+                                progresoFin = (int) progreso;
+
+                                progresoNivel.setProgress(progresoFin);
+                            }
+                            else {
+                                expNextLevel = 2000;
+                                res1 = expNextLevel-expActual;
+
+                                progreso = 100 - (res1/15);
+                                progresoFin = (int) progreso;
+
+                                progresoNivel.setProgress(progresoFin);
+                            }
+
+
                         }
                         catch (Exception e){
                             e.getMessage();
@@ -163,13 +217,12 @@ import retrofit2.Retrofit;
             call.enqueue(new Callback<List<Logros>>() {
                 @Override
                 public void onResponse(Call<List<Logros>> call, Response<List<Logros>> response) {
-                    System.out.println("HOII XD");
+
                     if (response.isSuccessful()){
-                        System.out.println("EWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
                         listaUser = (ListView) findViewById(R.id.listLogros);
                         listarecibida = (List<Logros>) response.body();
                         logrosList  = new ArrayList<String>();
-                        System.out.println("TAMAÑAO"+listarecibida.size());
+
                         for (int j = 0; j < listarecibida.size(); j++) {
                             Logros item = listarecibida.get(j);
                             logrosList.add(item.getNombre()+"\n       "+item.getDescripcion());
