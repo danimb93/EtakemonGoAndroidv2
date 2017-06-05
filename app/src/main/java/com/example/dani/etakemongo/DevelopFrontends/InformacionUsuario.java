@@ -1,9 +1,12 @@
 package com.example.dani.etakemongo.DevelopFrontends;
 
+import android.content.Intent;
 import android.icu.text.IDNA;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -48,6 +51,8 @@ import retrofit2.Retrofit;
         private List<String> logrosList;
         private List<Logros> listarecibida;
 
+        private FloatingActionButton fabExit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +68,16 @@ import retrofit2.Retrofit;
 
         emailloged = getIntent().getExtras().getString("emailsito");
         emiliologed = emailloged;
+
+        fabExit = (FloatingActionButton) findViewById(R.id.fab_exit_infousuario);
+        fabExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intres = getIntent();
+                setResult(RESULT_OK, intres);
+                finish();
+            }
+        });
 
         try{
             doGetData();

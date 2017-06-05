@@ -112,7 +112,8 @@ public class Etakemon_list extends Activity {
         fabExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setResult(RESULT_OK);
+                Intent intres = getIntent();
+                setResult(RESULT_OK, intres);
                 finish();
             }
         });

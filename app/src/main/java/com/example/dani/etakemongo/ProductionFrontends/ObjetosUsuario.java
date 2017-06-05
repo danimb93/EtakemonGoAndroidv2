@@ -1,5 +1,7 @@
 package com.example.dani.etakemongo.ProductionFrontends;
 
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,6 +17,7 @@ import com.example.dani.etakemongo.SysTools.GitHubClient;
 import com.example.dani.etakemongo.SysTools.RetrofitOwn;
 
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -54,6 +57,8 @@ public class ObjetosUsuario extends AppCompatActivity {
 
     private ArrayList<String> array_sort = new ArrayList<>();
 
+    private FloatingActionButton exit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +67,8 @@ public class ObjetosUsuario extends AppCompatActivity {
         emailloged = getIntent().getExtras().getString("emailsito");
         emiliologed = emailloged;
 
+        exit = (FloatingActionButton) findViewById(R.id.fab_exit_objetos);
+
         try{
             doGetObjetos();
            // doGetAllObjetos();
@@ -69,6 +76,16 @@ public class ObjetosUsuario extends AppCompatActivity {
         catch (Exception ex){
             ex.getMessage();
         }
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intres = getIntent();
+                setResult(RESULT_OK, intres);
+                finish();
+            }
+        });
+
     }
 
 
