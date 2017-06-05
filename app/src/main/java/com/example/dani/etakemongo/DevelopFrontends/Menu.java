@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.dani.etakemongo.Modelo.Objetos;
 import com.example.dani.etakemongo.Modelo.Usuario;
+import com.example.dani.etakemongo.ProductionFrontends.ObjetosUsuario;
 import com.example.dani.etakemongo.R;
 import com.example.dani.etakemongo.SysTools.GitHubClient;
 import com.example.dani.etakemongo.SysTools.RetrofitOwn;
@@ -120,7 +121,8 @@ public class Menu extends AppCompatActivity {
         botonObjetos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Menu.this, Objetos.class);
+                Intent intent = new Intent(Menu.this, ObjetosUsuario.class);
+                intent.putExtra("emailsito",emailloged);
                 startActivityForResult(intent, 900);
             }
         });

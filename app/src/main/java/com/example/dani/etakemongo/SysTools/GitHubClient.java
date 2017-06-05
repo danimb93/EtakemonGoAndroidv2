@@ -57,6 +57,10 @@ public interface GitHubClient {
         @GET ("usuario/{email}/logros")
         Call<List<Logros>> getLogrosUSer(@Path("email") String email);
 
+        //obtener objetos usuario
+        @GET ("usuario/{email}/objetos")
+        Call<List<Objetos>> getObjetosUser(@Path("email") String email);
+
 }
 
 
