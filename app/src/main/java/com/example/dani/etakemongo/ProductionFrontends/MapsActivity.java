@@ -39,7 +39,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker marcador;
     double lat = 0.0;
     double ing = 0.0;
-    String email2, emailaMenu;
+   // String email2, emailaMenu;    ***********COMENTADO PARA HACER PRUEBAS CON MAPS******
     int idusuario, idusuarioaMenu;
 
 
@@ -51,7 +51,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         Log.d(tag, "Event onCreate()");
 
-
+/*
         email2 = getIntent().getExtras().getString("email");
         emailaMenu = email2;
 
@@ -70,7 +70,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-
+*/
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -103,6 +103,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         miUbicacion();
+        System.out.println("************************MIRAR AQUI************"+ lat+ing);
 
     }
 
@@ -118,6 +119,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .title("Mi posicion")
                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
         mMap.animateCamera(miUbicacion);
+        System.out.println("************************MIRAR AQUI************"+ lat+ing);
     }
 
     //Metodo para obtener latitud y longitud de nuestra posicion actual
@@ -126,6 +128,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             lat = location.getLatitude();
             ing = location.getLongitude();
             agregarMarcador(lat, ing);
+            System.out.println("************************MIRAR AQUI************"+ lat+ing);
         }
     }
 
@@ -134,6 +137,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         @Override
         public void onLocationChanged(Location location) {
             actualizarUbicacion(location);//Llamamos anuestro metodo para actualizar la ubicacion
+            System.out.println("************************MIRAR AQUI************"+ lat+ing);
         }
 
         @Override
@@ -170,6 +174,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         actualizarUbicacion(location);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,10000,0,locListener);
+        System.out.println("************************MIRAR AQUI************"+ lat+ing);
     }
     @Override
     protected void onStart() {
@@ -211,11 +216,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.d(tag, "Event onDestroy()");
 
     }
-
+/*
 
     public void goToMenu(View view){
         Intent intent = new Intent(MapsActivity.this, Menu.class);
         intent.putExtra("email2",emailaMenu);
         startActivityForResult(intent, 800);
     }
+    */
 }

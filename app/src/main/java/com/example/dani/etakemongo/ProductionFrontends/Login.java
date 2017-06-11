@@ -239,7 +239,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void abrirRegistrar (View view) {
-        Intent intent = new Intent(this, Registrar.class);
+        Intent intent = new Intent(this, MapsActivity.class);
         startActivityForResult(intent, 200);
     }
     public void abrirRecuperar (View view) {
