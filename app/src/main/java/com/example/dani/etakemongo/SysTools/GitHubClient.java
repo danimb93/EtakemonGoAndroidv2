@@ -10,6 +10,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 /**
  * Created by Dani on 15/05/2017.
@@ -43,6 +44,29 @@ public interface GitHubClient {
 //Devolver lista  informacion usuario (experiencia actual, siguiente nivel)
         @GET ("usuario/got_email")
         Call<List<Usuario>> ListaExperiencia();
+
+//Devolver lista de etakemons de un usuario (capturas)
+        @GET ("usuario/{id}/get_capturas")
+        Call<List<Captura>> listaCapturas(@Path("id") int id);
+
+        //obtener datos del usuario
+        @GET ("usuario/got_email/{email}")
+        Call<Usuario> getUsuario(@Path("email") String email);
+
+        //obtener logros usuario
+        @GET ("usuario/{email}/logros")
+        Call<List<Logros>> getLogrosUSer(@Path("email") String email);
+
+        //obtener objetos usuario
+        @GET ("usuario/{email}/objetos")
+        Call<List<Objetos>> getObjetosUser(@Path("email") String email);
+
+        //objenet todos los objetos
+        @GET("objetos/get_all")
+        Call<List<Objetos>> getAllObjetos();
+
+        @GET ("usuario/{id}/get_capturas")
+        Call<List<Captura>> getCapturasUsuario(@Path("id") int id);
 
 
 

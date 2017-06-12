@@ -7,9 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.dani.etakemongo.DevelopFrontends.ActividadPrincipal;
 import com.example.dani.etakemongo.Modelo.Usuario;
 import com.example.dani.etakemongo.R;
 import com.example.dani.etakemongo.SysTools.EnviarTicket;
@@ -31,6 +32,11 @@ public class Login extends AppCompatActivity {
     private Button login;
     private Usuario loged;
     private ProgressBar progressBarLogin;
+    private String isemail, ispassword;
+    private String emilio;
+    //int idusuario;
+
+    private TextView registrar, recordar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +53,19 @@ public class Login extends AppCompatActivity {
         password = (EditText) findViewById(R.id.etPassword);
         login = (Button) findViewById(R.id.btnLogin);
 
-        final String isemail, ispassword;
+
         isemail = email.getText().toString();
         ispassword = password.getText().toString();
 
 
         login.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 if (isemail!=null && ispassword != null){
                     try{
+                        emilio = email.getText().toString();
+                        //doGetData(emilio);
                         doLogin(v);
                     }
                     catch (Exception ex){
@@ -66,8 +75,60 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        registrar = (TextView) findViewById(R.id.tvRegistrar);
+        registrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirRegistrar(v);
+            }
+        });
+
+        recordar = (TextView) findViewById(R.id.tvRecordar);
+        recordar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirRecuperar(v);
+            }
+        });
+
+
 
     }
+
+//    public void doGetData(String em){
+//        RetrofitOwn retrofitOwn = new RetrofitOwn();
+//        Retrofit retrofit = retrofitOwn.getObjectRetrofit();
+//
+//
+//        //Creamos una instancia de retrofit
+//        GitHubClient datos = retrofit.create(GitHubClient.class);
+//
+//        //Hacemos la llamada http
+//        Call<Usuario> call2 = datos.getUsuario(emilio);
+//
+//        call2.enqueue(new Callback<Usuario>() {
+//            @Override
+//            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+//
+//                if (response.isSuccessful()){
+//                    Usuario usuario = new Usuario();
+//                    // idusuario = usuario.getId();
+//                    idusuario = response.body().getId();
+//                    Log.d(tag, "Datos obtenidos correctamente");
+//                }
+//                else{
+//                    Log.d(tag, "Datos mal cogidos");
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Usuario> call, Throwable t) {
+//                Toast.makeText(Login.this, "Error al obtener datos del usuario", Toast.LENGTH_SHORT).show();
+//                Log.d(tag, "No conectado para coger datos");
+//            }
+//        });
+//    }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -142,6 +203,7 @@ public class Login extends AppCompatActivity {
         RetrofitOwn retrofitOwn = new RetrofitOwn();
         Retrofit retrofit = retrofitOwn.getObjectRetrofit();
 
+
         //Creamos una instancia de retrofit
         GitHubClient login = retrofit.create(GitHubClient.class);
         Usuario usuario = new Usuario(email.getText().toString() ,password.getText().toString());
@@ -157,8 +219,6 @@ public class Login extends AppCompatActivity {
                 if (response.isSuccessful()){
                     Usuario loged = (Usuario) response.body();
                     goToMapsActivity(v);
-                    //goToEnviarTicket(v);
-                   // goToActividadPrincipal(v);
                     Log.d(tag, "Logueado correctamente");
                 }
                 else{
@@ -189,7 +249,7 @@ public class Login extends AppCompatActivity {
 
     public void goToMapsActivity(View view){
         Intent intent = new Intent(this, MapsActivity.class);
-        intent.putExtra("loged", (Serializable)loged); //Pasar al maps el usuario entero que hemos recibido en el registro
+        intent.putExtra("email",emilio); //Pasar al maps el usuario entero que hemos recibido en el registro
         startActivityForResult(intent, 100);    //ponemos el codigo 100 para monitorizar esta actividad y sus futuros resultados
     }
 
@@ -198,9 +258,5 @@ public class Login extends AppCompatActivity {
         startActivityForResult(intent, 500);
     }
 
-    public void goToActividadPrincipal(View view){
-        Intent intent = new Intent(this, ActividadPrincipal.class);
-        startActivity(intent);
-    }
 
 }

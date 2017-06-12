@@ -2,15 +2,22 @@ package com.example.dani.etakemongo.ProductionFrontends;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.dani.etakemongo.DevelopFrontends.Menu;
+import com.example.dani.etakemongo.Modelo.Usuario;
 import com.example.dani.etakemongo.R;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -22,6 +29,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.Serializable;
+
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -30,13 +39,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker marcador;
     double lat = 0.0;
     double ing = 0.0;
+   // String email2, emailaMenu;    ***********COMENTADO PARA HACER PRUEBAS CON MAPS******
+    int idusuario, idusuarioaMenu;
 
+
+    FloatingActionButton menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         Log.d(tag, "Event onCreate()");
+
+/*
+        email2 = getIntent().getExtras().getString("email");
+        emailaMenu = email2;
+
+
+        //BOTON MENU
+        menu = (FloatingActionButton) findViewById(R.id.fab_menu);
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    goToMenu(v);
+                } catch (Exception ex) {
+                    String error = ex.getMessage();
+                    Toast.makeText(MapsActivity.this, error, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+*/
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -52,8 +87,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return;
         }
         mMap.setMyLocationEnabled(true);
-
-
     }
 
 
@@ -70,20 +103,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         miUbicacion();
+        System.out.println("************************MIRAR AQUI************"+ lat+ing);
 
     }
 
     //Metodo para incluir un marker, CameraUpdate para centrar la camara a la posicion del marker
-    private void agregarMarcador(double lat, double Ing) {
+    private void agregarMarcador(double lat, double ing) {
+
         LatLng coordenadas = new LatLng(lat, ing);
-        CameraUpdate miUbivcacion = CameraUpdateFactory.newLatLngZoom(coordenadas, 16);
+        CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(coordenadas, 16);
         if (marcador != null)
             marcador.remove(); //Si el marcador diferente de null le añadimos propiedades, titulo, imagen
         marcador = mMap.addMarker(new MarkerOptions()
                 .position(coordenadas)
                 .title("Mi posicion")
                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
-        mMap.animateCamera(miUbivcacion);
+        mMap.animateCamera(miUbicacion);
+        System.out.println("************************MIRAR AQUI************"+ lat+ing);
     }
 
     //Metodo para obtener latitud y longitud de nuestra posicion actual
@@ -92,6 +128,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             lat = location.getLatitude();
             ing = location.getLongitude();
             agregarMarcador(lat, ing);
+            System.out.println("************************MIRAR AQUI************"+ lat+ing);
         }
     }
 
@@ -100,6 +137,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         @Override
         public void onLocationChanged(Location location) {
             actualizarUbicacion(location);//Llamamos anuestro metodo para actualizar la ubicacion
+            System.out.println("************************MIRAR AQUI************"+ lat+ing);
         }
 
         @Override
@@ -135,7 +173,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         actualizarUbicacion(location);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,15000,0,locListener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,10000,0,locListener);
+        System.out.println("************************MIRAR AQUI************"+ lat+ing);
     }
     @Override
     protected void onStart() {
@@ -177,4 +216,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.d(tag, "Event onDestroy()");
 
     }
+/*
+
+    public void goToMenu(View view){
+        Intent intent = new Intent(MapsActivity.this, Menu.class);
+        intent.putExtra("email2",emailaMenu);
+        startActivityForResult(intent, 800);
+    }
+    */
 }

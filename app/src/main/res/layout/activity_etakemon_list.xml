@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dani.etakemongo.ProductionFrontends.ObjetosUsuario"
-    android:background="@drawable/fondo">
+    tools:context="com.example.dani.etakemongo.DevelopFrontends.Etakemon_list"
+    android:background="@drawable/etakedexback">
 
 
     <LinearLayout
@@ -30,29 +30,42 @@
             android:orientation="horizontal">
 
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab_exit_objetos"
+                android:id="@+id/fab_exit_etakedex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="300dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="48dp"
                 android:layout_weight="1"
                 android:clickable="true"
+                app:backgroundTint="@android:color/holo_red_dark"
                 app:fabSize="mini"
                 app:srcCompat="@android:drawable/ic_notification_clear_all" />
+
+            <EditText
+                android:id="@+id/etSearch_etlist"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="125dp"
+                android:ems="10"
+                android:hint="Buscar"
+                android:inputType="textPersonName" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1.38"
             android:orientation="horizontal"
-            android:layout_weight="0.14"
             android:weightSum="1">
 
             <ListView
-                android:id="@+id/listObjetos"
-                android:layout_width="match_parent"
-                android:layout_height="263dp"
+                android:id="@+id/list"
+                android:layout_width="229dp"
+                android:layout_height="220dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
                 android:layout_marginTop="25dp"
+                android:layout_weight="0.36"
                 android:textAlignment="center"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="0dp">
@@ -66,10 +79,10 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="74dp"
+        android:layout_marginTop="43dp"
         android:fontFamily="sans-serif-condensed"
         android:shadowColor="#000000"
-        android:text="Mis Objetos"
+        android:text="ETAKEDEX"
         android:textAlignment="textStart"
         android:textColor="@android:color/black"
         android:textSize="36sp"

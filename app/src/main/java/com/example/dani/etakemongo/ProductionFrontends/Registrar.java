@@ -1,6 +1,7 @@
 package com.example.dani.etakemongo.ProductionFrontends;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,7 @@ public class Registrar extends AppCompatActivity {
     private Button registrar;
     private TextView datos;
 
+    private FloatingActionButton fabExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,6 @@ public class Registrar extends AppCompatActivity {
         email=(EditText)findViewById(R.id.etEmail);
         emailR=(EditText)findViewById(R.id.etEmailR);
         registrar=(Button)findViewById(R.id.btnRegistrar);
-        datos=(TextView)findViewById(R.id.tvRespuesta);
 
 //Al pulsar el boton lanzamos la activadad de registrar
         registrar.setOnClickListener(new View.OnClickListener(){
@@ -96,6 +97,16 @@ public class Registrar extends AppCompatActivity {
                     });
                 }
             });
+
+        fabExit = (FloatingActionButton) findViewById(R.id.fab_exit_registrar);
+        fabExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = getIntent();
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
         }
 
     @Override
