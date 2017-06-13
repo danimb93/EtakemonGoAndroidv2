@@ -61,7 +61,7 @@ public interface GitHubClient {
         @GET ("usuario/{email}/objetos")
         Call<List<Objetos>> getObjetosUser(@Path("email") String email);
 
-        //objenet todos los objetos
+        //obtener todos los objetos
         @GET("objetos/get_all")
         Call<List<Objetos>> getAllObjetos();
 

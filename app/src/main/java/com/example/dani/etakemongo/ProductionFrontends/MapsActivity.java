@@ -82,7 +82,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        mMap.setMyLocationEnabled(true);
+    //************************    mMap.setMyLocationEnabled(true);
     }
 
 
@@ -108,13 +108,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         LatLng coordenadas = new LatLng(lat, ing);
         CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(coordenadas, 16);
-        if (marcador == null){
-            marcador.remove(); //Si el marcador diferente de null le añadimos propiedades, titulo, imagen
+        if (marcador != null){
+            marcador.remove();
         }
         marcador = mMap.addMarker(new MarkerOptions()
                 .position(coordenadas)
                 .title("Mi posicion")
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
         mMap.animateCamera(miUbicacion);
         System.out.println("************************MIRAR AQUI************"+ lat+ing);
     }
@@ -165,13 +165,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
+
             return;
         }
 
         LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         actualizarUbicacion(location);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,10000,0,locListener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,4000,0,locListener);
         System.out.println("************************MIRAR AQUI************"+ lat+ing);
     }
     @Override
