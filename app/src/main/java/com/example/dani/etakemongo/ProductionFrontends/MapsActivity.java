@@ -2,23 +2,18 @@ package com.example.dani.etakemongo.ProductionFrontends;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
-import com.example.dani.etakemongo.DevelopFrontends.Menu;
-import com.example.dani.etakemongo.Modelo.Usuario;
 import com.example.dani.etakemongo.R;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -29,14 +24,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.io.Serializable;
-
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     String tag = "MapsActivity";
     private GoogleMap mMap;
     private Marker marcador;
+    private GoogleApiClient mGoogleApiClient;
     double lat = 0.0;
     double ing = 0.0;
    // String email2, emailaMenu;    ***********COMENTADO PARA HACER PRUEBAS CON MAPS******
@@ -76,6 +70,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -112,8 +108,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         LatLng coordenadas = new LatLng(lat, ing);
         CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(coordenadas, 16);
-        if (marcador != null)
+        if (marcador == null){
             marcador.remove(); //Si el marcador diferente de null le añadimos propiedades, titulo, imagen
+        }
         marcador = mMap.addMarker(new MarkerOptions()
                 .position(coordenadas)
                 .title("Mi posicion")
@@ -170,6 +167,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
         LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         actualizarUbicacion(location);
