@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,27 +26,27 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import com.bumptech.glide.Glide;
+
+import static com.example.dani.etakemongo.R.layout.etakemons_usuario;
+
 public class EtakemonsUsuario extends AppCompatActivity {
+
 
     String tag = "EtakemonsUsuario";
 
        ListView listView;
-////    String[] web2 = {
-////    };
-//    ArrayList<String> web2 = new ArrayList<>();
-//    Integer[] imageId2 = {
-//            R.drawable.davidos,
-//            R.drawable.livanny,
-//    };
-    private List<Captura> capturaList = new ArrayList<>();
-    private List<Captura> listarecibida;
-    private List<String> listacapturas;
+
+    private ArrayList<Captura> listarecibida;
+    private ArrayList<Captura> listacapturas;
     int idloged,idusuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.etakemons_usuario);
+        setContentView(etakemons_usuario);
+
+        listView = (ListView) findViewById(R.id.listEtakemons);
 
         idusuario = getIntent().getExtras().getInt("id");    //tenemos el id del usuario para hacer las llamadas q sean necesarias
         idloged = idusuario;
@@ -71,22 +73,24 @@ public class EtakemonsUsuario extends AppCompatActivity {
             public void onResponse(Call<List<Captura>> call, Response<List<Captura>> response) {
                 if (response.isSuccessful()){
 
-                    listView = (ListView) findViewById(R.id.listEtakemons);
-                    listarecibida = (List<Captura>) response.body();
-                    listacapturas = new ArrayList<String>();
+
+                    listarecibida = (ArrayList<Captura>) response.body();
+                    listacapturas = new ArrayList<Captura>();
 
                     for (int i = 0; i < listarecibida.size(); i++) {
                         Captura captura = listarecibida.get(i);
-                        listacapturas.add(captura.getNombreetakemon());
+                        listacapturas.add(captura);
                     }
 
-                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>
-                            (EtakemonsUsuario.this, android.R.layout.simple_list_item_1, listacapturas);
-                    listView.setAdapter(arrayAdapter);
+                    EtakemonsUsuarioListAdapter adapter = new EtakemonsUsuarioListAdapter(getApplicationContext(), R.layout.etakemons_usuario, listacapturas);
+                    listView.setAdapter(adapter);
                 }
                 else{
                     Toast.makeText(EtakemonsUsuario.this, "Peticion erronea!", Toast.LENGTH_SHORT).show();
                 }
+
+
+
             }
 
             @Override

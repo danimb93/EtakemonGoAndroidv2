@@ -181,5 +181,10 @@ public class Captura{
         public void setImagen(String imagen) {
             this.imagen = imagen;
         }
+
+        @Override
+        public String toString(){
+            return "Captura{"+"Nombre='"+nombreetakemon+'\'' +", Tipo='"+tipoetakemon+'\''+", Descripcion='"+habilidadetakemon+'\''+'}';
+        }
     }
 

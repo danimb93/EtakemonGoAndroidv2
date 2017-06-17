@@ -2,6 +2,7 @@ package com.example.dani.etakemongo.ProductionFrontends;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -11,7 +12,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
+import com.example.dani.etakemongo.DevelopFrontends.Menu;
 import com.example.dani.etakemongo.R;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdate;
@@ -33,7 +37,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleApiClient mGoogleApiClient;
     double lat = 0.0;
     double ing = 0.0;
-   // String email2, emailaMenu;    ***********COMENTADO PARA HACER PRUEBAS CON MAPS******
+    String email2, emailaMenu;
     int idusuario, idusuarioaMenu;
 
 
@@ -45,7 +49,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         Log.d(tag, "Event onCreate()");
 
-/*
+
         email2 = getIntent().getExtras().getString("email");
         emailaMenu = email2;
 
@@ -64,7 +68,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-*/
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -214,12 +218,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.d(tag, "Event onDestroy()");
 
     }
-/*
+
 
     public void goToMenu(View view){
         Intent intent = new Intent(MapsActivity.this, Menu.class);
         intent.putExtra("email2",emailaMenu);
         startActivityForResult(intent, 800);
     }
-    */
+
 }
