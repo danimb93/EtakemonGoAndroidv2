@@ -2,7 +2,6 @@ package com.example.dani.etakemongo.ProductionFrontends;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -12,10 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
-import com.example.dani.etakemongo.DevelopFrontends.Menu;
 import com.example.dani.etakemongo.R;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdate;
@@ -37,7 +33,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleApiClient mGoogleApiClient;
     double lat = 0.0;
     double ing = 0.0;
-    String email2, emailaMenu;
+   // String email2, emailaMenu;    ***********COMENTADO PARA HACER PRUEBAS CON MAPS******
     int idusuario, idusuarioaMenu;
 
 
@@ -49,7 +45,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         Log.d(tag, "Event onCreate()");
 
-
+/*
         email2 = getIntent().getExtras().getString("email");
         emailaMenu = email2;
 
@@ -68,7 +64,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-
+*/
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -104,7 +100,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         miUbicacion();
         System.out.println("************************MIRAR AQUI************"+ lat+ing);
+       /* mCircle = mMap.addCircle(new CircleOptions()
+                .center(new LatLng(37.4, -122.1))
+                .radius(1000)
+                .strokeWidth(10)
+                .strokeColor(Color.GREEN)
+                .fillColor(Color.argb(128, 255, 0, 0))
+                .clickable(true));
+*/
 
+        };
+    private void updateMarkerWithCircle(LatLng location) {
+        mCircle.setCenter(location);
+        mMarker.setPosition(location);
+    }
+
+    private void drawMarkerWithCircle(LatLng position){
+        double radiusInMeters = 100.0;
+        int strokeColor = 0xffff0000; //red outline
+        int shadeColor = 0x44ff0000; //opaque red fill
+
+        CircleOptions circleOptions = new CircleOptions().center(position).radius(radiusInMeters).fillColor(shadeColor).strokeColor(strokeColor).strokeWidth(8);
+        mCircle = mMap.addCircle(circleOptions);
+
+        MarkerOptions markerOptions = new MarkerOptions().position(position);
+        mMarker = mMap.addMarker(markerOptions);
     }
 
     //Metodo para incluir un marker, CameraUpdate para centrar la camara a la posicion del marker
@@ -120,6 +140,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .title("Mi posicion")
                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
         mMap.animateCamera(miUbicacion);
+        /*Circle circle = map.addCircle(new CircleOptions()
+                .center(new LatLng(-33.87365, 151.20689))
+                .radius(10000)
+                .strokeColor(Color.RED)
+                .fillColor(Color.BLUE));*/
         System.out.println("************************MIRAR AQUI************"+ lat+ing);
     }
 
@@ -175,9 +200,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         actualizarUbicacion(location);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,10000,0,locListener);
+      //  calculateAreaOfGPSPolygonOnEarthInSquareMeters(location,2.5);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,4000,0,locListener);
         System.out.println("************************MIRAR AQUI************"+ lat+ing);
     }
+private void recuperarEtakemons() {
+    //RETROFIT
+    RetrofitOwn retrofitOwn = new RetrofitOwn();
+    Retrofit retrofit = retrofitOwn.getObjectRetrofit();
+
+    //Creamos una instancia de retrofit
+    GitHubClient getListaEtakemons = retrofit.create(GitHubClient.class);
+
+
+    //Hacemos la llamada http
+    Call<List<Etakemon>> call = getListaEtakemons.getListaEtakemons();
+    System.out.println("***********DATOS**************************");
+
+
+    //Recibimos la llamada
+   //call.enqueue(new Callback() {
+    }
+
+
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -218,12 +264,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.d(tag, "Event onDestroy()");
 
     }
-
+/*
 
     public void goToMenu(View view){
         Intent intent = new Intent(MapsActivity.this, Menu.class);
         intent.putExtra("email2",emailaMenu);
         startActivityForResult(intent, 800);
     }
-
+    */
 }
