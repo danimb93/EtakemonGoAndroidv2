@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
     private ProgressBar progressBarLogin;
     private String isemail, ispassword;
     private String emilio;
-    //int idusuario;
+    int idusuario;
 
     private TextView registrar, recordar;
 
@@ -95,40 +95,40 @@ public class Login extends AppCompatActivity {
 
     }
 
-//    public void doGetData(String em){
-//        RetrofitOwn retrofitOwn = new RetrofitOwn();
-//        Retrofit retrofit = retrofitOwn.getObjectRetrofit();
-//
-//
-//        //Creamos una instancia de retrofit
-//        GitHubClient datos = retrofit.create(GitHubClient.class);
-//
-//        //Hacemos la llamada http
-//        Call<Usuario> call2 = datos.getUsuario(emilio);
-//
-//        call2.enqueue(new Callback<Usuario>() {
-//            @Override
-//            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-//
-//                if (response.isSuccessful()){
-//                    Usuario usuario = new Usuario();
-//                    // idusuario = usuario.getId();
-//                    idusuario = response.body().getId();
-//                    Log.d(tag, "Datos obtenidos correctamente");
-//                }
-//                else{
-//                    Log.d(tag, "Datos mal cogidos");
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Usuario> call, Throwable t) {
-//                Toast.makeText(Login.this, "Error al obtener datos del usuario", Toast.LENGTH_SHORT).show();
-//                Log.d(tag, "No conectado para coger datos");
-//            }
-//        });
-//    }
+    public void doGetData(String em){
+        RetrofitOwn retrofitOwn = new RetrofitOwn();
+        Retrofit retrofit = retrofitOwn.getObjectRetrofit();
+
+
+        //Creamos una instancia de retrofit
+        GitHubClient datos = retrofit.create(GitHubClient.class);
+
+        //Hacemos la llamada http
+        Call<Usuario> call2 = datos.getUsuario(emilio);
+
+        call2.enqueue(new Callback<Usuario>() {
+            @Override
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+
+                if (response.isSuccessful()){
+                    Usuario usuario = new Usuario();
+                    // idusuario = usuario.getId();
+                    idusuario = response.body().getId();
+                    Log.d(tag, "Datos obtenidos correctamente");
+                }
+                else{
+                    Log.d(tag, "Datos mal cogidos");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Usuario> call, Throwable t) {
+                Toast.makeText(Login.this, "Error al obtener datos del usuario", Toast.LENGTH_SHORT).show();
+                Log.d(tag, "No conectado para coger datos");
+            }
+        });
+    }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -239,7 +239,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void abrirRegistrar (View view) {
-        Intent intent = new Intent(this, MapsActivity.class);
+        Intent intent = new Intent(this, Registrar.class);
         startActivityForResult(intent, 200);
     }
     public void abrirRecuperar (View view) {

@@ -73,7 +73,7 @@ public interface GitHubClient {
         @GET ("usuario/{id}/get_capturas")
         Call<List<Captura>> getCapturasUsuario(@Path("id") int id);
 
-        @GET ("Eetakemon//get_all")
+        @GET ("eetakemon//get_all")
         Call<List<Etakemon>> getListaEtakemons();
 
         @GET ("localizacion/get_all")

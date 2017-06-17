@@ -60,8 +60,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     String email2, emailaMenu;
     int idusuario, idusuarioaMenu;
 
-    private List<Captura> listarecibida;
-    private List<Captura> capturaList;
+    private List<Captura> listarecibida = new ArrayList<>();
+    private List<Captura> capturaList = new ArrayList<Captura>();
 
     private List<Localizacion> listarecibidaloca;
     private List<Localizacion> localizacionList;
@@ -82,6 +82,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         email2 = getIntent().getExtras().getString("email");
         emailaMenu = email2;
+        recuperarLocalizaciones(); //rellenamos lista recibida loca
 
 
         //BOTON MENU
@@ -141,10 +142,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .strokeColor(Color.RED)
                 .fillColor(Color.TRANSPARENT));
 
-
-        spawns();
-
-
+        setLocationMarkers();
+        //spawns();
     }
 
 
@@ -231,6 +230,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,4000,0,locListener);
         System.out.println("************************MIRAR AQUI************"+ lat+ing);
     }
+
 private List<Captura> recuperarCapturas() {
     //RETROFIT
     RetrofitOwn retrofitOwn = new RetrofitOwn();
@@ -242,16 +242,12 @@ private List<Captura> recuperarCapturas() {
 
     //Hacemos la llamada http
     Call<List<Captura>> call = getListaCapturasGeneradas.getRandomCapturas();
+
     call.enqueue(new Callback<List<Captura>>() {
         @Override
         public void onResponse(Call<List<Captura>> call, Response<List<Captura>> response) {
             if (response.isSuccessful()){
-                listarecibida = (List<Captura>) response.body();
-                capturaList = new ArrayList<Captura>();
-                for (int i = 0; i < listarecibida.size(); i++){
-                    Captura captura = listarecibida.get(i);
-                    capturaList.add(captura);
-                }
+                listarecibida = response.body();
             }
             else {
                 Toast.makeText(MapsActivity.this, "response unsuccessful", Toast.LENGTH_SHORT).show();
@@ -266,10 +262,11 @@ private List<Captura> recuperarCapturas() {
         }
     });
 
-    return capturaList;
+        return listarecibida;
     }
 
-    private List<Localizacion> recuperarLocalizaciones(){
+    private void recuperarLocalizaciones(){
+
         //RETROFIT
         RetrofitOwn retrofitOwn = new RetrofitOwn();
         Retrofit retrofit = retrofitOwn.getObjectRetrofit();
@@ -282,17 +279,23 @@ private List<Captura> recuperarCapturas() {
         Call<List<Localizacion>> call = getListaLocalizaciones.getLocalizaciones();
 
         call.enqueue(new Callback<List<Localizacion>>() {
+
             @Override
             public void onResponse(Call<List<Localizacion>> call, Response<List<Localizacion>> response) {
+
                 if (response.isSuccessful()){
-                    listarecibidaloca = (List<Localizacion>) response.body();
-                    localizacionList = new ArrayList<Localizacion>();
-                    for (int j=0; j < listarecibidaloca.size(); j++){
-                        Localizacion localizacion = listarecibidaloca.get(j);
-                        localizacionList.add(localizacion);
+                    listarecibidaloca = response.body();
+//                    localizacionList = new ArrayList<Localizacion>();
+//                    for (int j=0; j < locas.size(); j++){
+//                        Localizacion localizacion = locas.get(j);
+//                        localizacionList.add(localizacion);
                     }
+                else {
+                    System.out.println("¡UNSUCESFUL");
+                    Toast.makeText(MapsActivity.this, "response unsuccessful All objetos", Toast.LENGTH_SHORT).show();
                 }
             }
+
 
             @Override
             public void onFailure(Call<List<Localizacion>> call, Throwable t) {
@@ -301,14 +304,22 @@ private List<Captura> recuperarCapturas() {
             }
         });
 
-        return localizacionList;
     }
 
+    public void setLocationMarkers(){
 
+        for (int y=0; y<listarecibidaloca.size(); y++){
+            LatLng positionSpawn = new LatLng(listarecibidaloca.get(y).getLatitud(), listarecibidaloca.get(y).getLongitud());
+            marcador = mMap.addMarker(new MarkerOptions()
+                    .position(positionSpawn)
+                    .title("Captura")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_etakemons)));
+        }
+    }
 
     public void spawns(){
         capturaspawn = recuperarCapturas();
-        locaspawn = recuperarLocalizaciones();
+        //locaspawn = recuperarLocalizaciones();
 
         double latitud, longitud;
         int idloca;
