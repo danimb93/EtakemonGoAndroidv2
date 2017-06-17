@@ -2,6 +2,7 @@ package com.example.dani.etakemongo.ProductionFrontends;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -12,8 +13,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
+import com.example.dani.etakemongo.DevelopFrontends.Menu;
+import com.example.dani.etakemongo.Modelo.Captura;
 import com.example.dani.etakemongo.Modelo.Etakemon;
+import com.example.dani.etakemongo.Modelo.Localizacion;
 import com.example.dani.etakemongo.R;
 import com.example.dani.etakemongo.SysTools.GitHubClient;
 import com.example.dani.etakemongo.SysTools.RetrofitOwn;
@@ -35,6 +41,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 import static com.example.dani.etakemongo.R.id.map;
@@ -50,8 +57,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleApiClient mGoogleApiClient;
     double lat = 0.0;
     double ing = 0.0;
-   // String email2, emailaMenu;    ***********COMENTADO PARA HACER PRUEBAS CON MAPS******
+    String email2, emailaMenu;
     int idusuario, idusuarioaMenu;
+
+    private List<Captura> listarecibida;
+    private List<Captura> capturaList;
+
+    private List<Localizacion> listarecibidaloca;
+    private List<Localizacion> localizacionList;
+
+    private List<Captura> capturaspawn;
+    private List<Localizacion> locaspawn;
+
 
 
     FloatingActionButton menu;
@@ -62,7 +79,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         Log.d(tag, "Event onCreate()");
 
-/*
+
         email2 = getIntent().getExtras().getString("email");
         emailaMenu = email2;
 
@@ -81,7 +98,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-*/
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -123,6 +140,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .radius(125)
                 .strokeColor(Color.RED)
                 .fillColor(Color.TRANSPARENT));
+
+
+        spawns();
+
+
     }
 
 
@@ -150,6 +172,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.animateCamera(miUbicacion);
         System.out.println("************************MIRAR AQUI************"+ lat+ing);
     }
+
 
     //Metodo para obtener latitud y longitud de nuestra posicion actual
     private void actualizarUbicacion(Location location) {
@@ -208,24 +231,111 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,4000,0,locListener);
         System.out.println("************************MIRAR AQUI************"+ lat+ing);
     }
-private void recuperarEtakemons() {
+private List<Captura> recuperarCapturas() {
     //RETROFIT
     RetrofitOwn retrofitOwn = new RetrofitOwn();
     Retrofit retrofit = retrofitOwn.getObjectRetrofit();
 
     //Creamos una instancia de retrofit
-    GitHubClient getListaEtakemons = retrofit.create(GitHubClient.class);
+    GitHubClient getListaCapturasGeneradas = retrofit.create(GitHubClient.class);
 
 
     //Hacemos la llamada http
-    Call<List<Etakemon>> call = getListaEtakemons.getListaEtakemons();
-    System.out.println("***********DATOS**************************");
+    Call<List<Captura>> call = getListaCapturasGeneradas.getRandomCapturas();
+    call.enqueue(new Callback<List<Captura>>() {
+        @Override
+        public void onResponse(Call<List<Captura>> call, Response<List<Captura>> response) {
+            if (response.isSuccessful()){
+                listarecibida = (List<Captura>) response.body();
+                capturaList = new ArrayList<Captura>();
+                for (int i = 0; i < listarecibida.size(); i++){
+                    Captura captura = listarecibida.get(i);
+                    capturaList.add(captura);
+                }
+            }
+            else {
+                Toast.makeText(MapsActivity.this, "response unsuccessful", Toast.LENGTH_SHORT).show();
 
+            }
+        }
 
-    //Recibimos la llamada
-   //call.enqueue(new Callback() {
+        @Override
+        public void onFailure(Call<List<Captura>> call, Throwable t) {
+            Toast.makeText(MapsActivity.this, "No hay conexión", Toast.LENGTH_SHORT).show();
+            Log.d(tag, "ERROR en el recogido de capturas generadas para mostrar en mapa");
+        }
+    });
+
+    return capturaList;
     }
 
+    private List<Localizacion> recuperarLocalizaciones(){
+        //RETROFIT
+        RetrofitOwn retrofitOwn = new RetrofitOwn();
+        Retrofit retrofit = retrofitOwn.getObjectRetrofit();
+
+        //Creamos una instancia de retrofit
+        GitHubClient getListaLocalizaciones = retrofit.create(GitHubClient.class);
+
+
+        //Hacemos la llamada http
+        Call<List<Localizacion>> call = getListaLocalizaciones.getLocalizaciones();
+
+        call.enqueue(new Callback<List<Localizacion>>() {
+            @Override
+            public void onResponse(Call<List<Localizacion>> call, Response<List<Localizacion>> response) {
+                if (response.isSuccessful()){
+                    listarecibidaloca = (List<Localizacion>) response.body();
+                    localizacionList = new ArrayList<Localizacion>();
+                    for (int j=0; j < listarecibidaloca.size(); j++){
+                        Localizacion localizacion = listarecibidaloca.get(j);
+                        localizacionList.add(localizacion);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Localizacion>> call, Throwable t) {
+                Toast.makeText(MapsActivity.this, "No hay conexión", Toast.LENGTH_SHORT).show();
+                Log.d(tag, "ERROR en el recogido de localizaciones asociadas a las capturas generadas para mostrar en mapa");
+            }
+        });
+
+        return localizacionList;
+    }
+
+
+
+    public void spawns(){
+        capturaspawn = recuperarCapturas();
+        locaspawn = recuperarLocalizaciones();
+
+        double latitud, longitud;
+        int idloca;
+
+        for (int x=0; x<capturaspawn.size(); x++){
+            idloca = capturaspawn.get(x).getIdlocalizacion();
+            for (int z=0; z<locaspawn.size(); z++){
+                if (idloca == locaspawn.get(z).getId()){
+                    latitud = locaspawn.get(z).getLatitud();
+                    longitud = locaspawn.get(z).getLongitud();
+
+                        LatLng posicionSpwan = new LatLng(latitud, longitud);
+                       // CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(posicionSpwan, 16);
+                        if (marcador != null){
+                            marcador.remove();
+                        }
+                        marcador = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_etakemons)));
+                        //mMap.animateCamera(miUbicacion);
+                        System.out.println("************************MIRAR AQUI************"+ lat+ing);
+                }
+            }
+
+        }
+    }
 
 
     @Override
@@ -268,12 +378,12 @@ private void recuperarEtakemons() {
         Log.d(tag, "Event onDestroy()");
 
     }
-/*
+
 
     public void goToMenu(View view){
         Intent intent = new Intent(MapsActivity.this, Menu.class);
         intent.putExtra("email2",emailaMenu);
         startActivityForResult(intent, 800);
     }
-    */
+
 }

@@ -4,6 +4,7 @@ package com.example.dani.etakemongo.SysTools;
 
 import com.example.dani.etakemongo.Modelo.Captura;
 import com.example.dani.etakemongo.Modelo.Etakemon;
+import com.example.dani.etakemongo.Modelo.Localizacion;
 import com.example.dani.etakemongo.Modelo.Logros;
 import com.example.dani.etakemongo.Modelo.Objetos;
 import com.example.dani.etakemongo.Modelo.Usuario;
@@ -74,6 +75,12 @@ public interface GitHubClient {
 
         @GET ("Eetakemon//get_all")
         Call<List<Etakemon>> getListaEtakemons();
+
+        @GET ("localizacion/get_all")
+        Call<List<Localizacion>> getLocalizaciones();
+
+        @GET ("captura/get_generated")
+        Call<List<Captura>> getRandomCapturas();
 
 
 
