@@ -116,33 +116,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         miUbicacion();
-        System.out.println("************************MIRAR AQUI************"+ lat+ing);
-       /* mCircle = mMap.addCircle(new CircleOptions()
-                .center(new LatLng(37.4, -122.1))
-                .radius(1000)
-                .strokeWidth(10)
-                .strokeColor(Color.GREEN)
-                .fillColor(Color.argb(128, 255, 0, 0))
-                .clickable(true));
-*/
+        System.out.println("************************MIRAR AQUI************" + lat + ing);
+        // ... get a map.
+        Circle circle = mMap.addCircle(new CircleOptions()
+                .center(new LatLng(lat, ing))
+                .radius(125)
+                .strokeColor(Color.RED)
+                .fillColor(Color.TRANSPARENT));
+    }
 
-        };
+
     private void updateMarkerWithCircle(LatLng location) {
         mCircle.setCenter(location);
         mMarker.setPosition(location);
     }
 
-    private void drawMarkerWithCircle(LatLng position){
-        double radiusInMeters = 100.0;
-        int strokeColor = 0xffff0000; //red outline
-        int shadeColor = 0x44ff0000; //opaque red fill
 
-        CircleOptions circleOptions = new CircleOptions().center(position).radius(radiusInMeters).fillColor(shadeColor).strokeColor(strokeColor).strokeWidth(8);
-        mCircle = mMap.addCircle(circleOptions);
 
-        MarkerOptions markerOptions = new MarkerOptions().position(position);
-        mMarker = mMap.addMarker(markerOptions);
-    }
+
 
     //Metodo para incluir un marker, CameraUpdate para centrar la camara a la posicion del marker
     private void agregarMarcador(double lat, double ing) {
@@ -157,11 +148,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .title("Mi posicion")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
         mMap.animateCamera(miUbicacion);
-        /*Circle circle = map.addCircle(new CircleOptions()
-                .center(new LatLng(-33.87365, 151.20689))
-                .radius(10000)
-                .strokeColor(Color.RED)
-                .fillColor(Color.BLUE));*/
         System.out.println("************************MIRAR AQUI************"+ lat+ing);
     }
 
