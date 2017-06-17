@@ -2,7 +2,11 @@ package com.example.dani.etakemongo.SysTools;
 
 
 
-import com.example.dani.etakemongo.Modelo.*;
+import com.example.dani.etakemongo.Modelo.Captura;
+import com.example.dani.etakemongo.Modelo.Etakemon;
+import com.example.dani.etakemongo.Modelo.Logros;
+import com.example.dani.etakemongo.Modelo.Objetos;
+import com.example.dani.etakemongo.Modelo.Usuario;
 
 import java.util.List;
 
@@ -67,6 +71,9 @@ public interface GitHubClient {
 
         @GET ("usuario/{id}/get_capturas")
         Call<List<Captura>> getCapturasUsuario(@Path("id") int id);
+
+        @GET ("Eetakemon//get_all")
+        Call<List<Etakemon>> getListaEtakemons();
 
 
 
