@@ -3,6 +3,7 @@ package com.example.dani.etakemongo.ProductionFrontends;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -12,6 +13,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
+import com.example.dani.etakemongo.Modelo.Etakemon;
 import com.example.dani.etakemongo.R;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdate;
@@ -20,9 +22,13 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.List;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -35,7 +41,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     double ing = 0.0;
    // String email2, emailaMenu;    ***********COMENTADO PARA HACER PRUEBAS CON MAPS******
     int idusuario, idusuarioaMenu;
-
+    private Circle mCircle;
+    private Marker mMarker;
 
     FloatingActionButton menu;
 
@@ -190,24 +197,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,4000,0,locListener);
         System.out.println("************************MIRAR AQUI************"+ lat+ing);
     }
-private void recuperarEtakemons() {
-    //RETROFIT
-    RetrofitOwn retrofitOwn = new RetrofitOwn();
-    Retrofit retrofit = retrofitOwn.getObjectRetrofit();
-
-    //Creamos una instancia de retrofit
-    GitHubClient getListaEtakemons = retrofit.create(GitHubClient.class);
-
-
-    //Hacemos la llamada http
-    Call<List<Etakemon>> call = getListaEtakemons.getListaEtakemons();
-    System.out.println("***********DATOS**************************");
-
-
-    //Recibimos la llamada
-   //call.enqueue(new Callback() {
-    }
-
 
 
     @Override
