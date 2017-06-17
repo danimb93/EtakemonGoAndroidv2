@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EtakemonGo.iml" filepath="$PROJECT_DIR$/EtakemonGo.iml" />
       <module fileurl="file://$PROJECT_DIR$/EtakemonGoAndroid_Testeo.iml" filepath="$PROJECT_DIR$/EtakemonGoAndroid_Testeo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EtakemonGoAndroidv2.iml" filepath="$PROJECT_DIR$/EtakemonGoAndroidv2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -15,6 +15,8 @@ import android.util.Log;
 
 import com.example.dani.etakemongo.Modelo.Etakemon;
 import com.example.dani.etakemongo.R;
+import com.example.dani.etakemongo.SysTools.GitHubClient;
+import com.example.dani.etakemongo.SysTools.RetrofitOwn;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,7 +30,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+
+import static com.example.dani.etakemongo.R.id.map;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -36,13 +45,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     String tag = "MapsActivity";
     private GoogleMap mMap;
     private Marker marcador;
+    private Circle mCircle;
+    private Marker mMarker;
     private GoogleApiClient mGoogleApiClient;
     double lat = 0.0;
     double ing = 0.0;
    // String email2, emailaMenu;    ***********COMENTADO PARA HACER PRUEBAS CON MAPS******
     int idusuario, idusuarioaMenu;
-    private Circle mCircle;
-    private Marker mMarker;
+
 
     FloatingActionButton menu;
 
@@ -75,7 +85,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(map);
         mapFragment.getMapAsync(this);
 
 
@@ -89,7 +99,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        mMap.setMyLocationEnabled(true);
+    //************************    mMap.setMyLocationEnabled(true);
     }
 
 
@@ -130,13 +140,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         LatLng coordenadas = new LatLng(lat, ing);
         CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(coordenadas, 16);
-        if (marcador == null){
-            marcador.remove(); //Si el marcador diferente de null le añadimos propiedades, titulo, imagen
+        if (marcador != null){
+            marcador.remove();
         }
         marcador = mMap.addMarker(new MarkerOptions()
                 .position(coordenadas)
                 .title("Mi posicion")
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
         mMap.animateCamera(miUbicacion);
         System.out.println("************************MIRAR AQUI************"+ lat+ing);
     }
@@ -187,6 +197,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
+
             return;
         }
 
@@ -197,6 +208,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,4000,0,locListener);
         System.out.println("************************MIRAR AQUI************"+ lat+ing);
     }
+private void recuperarEtakemons() {
+    //RETROFIT
+    RetrofitOwn retrofitOwn = new RetrofitOwn();
+    Retrofit retrofit = retrofitOwn.getObjectRetrofit();
+
+    //Creamos una instancia de retrofit
+    GitHubClient getListaEtakemons = retrofit.create(GitHubClient.class);
+
+
+    //Hacemos la llamada http
+    Call<List<Etakemon>> call = getListaEtakemons.getListaEtakemons();
+    System.out.println("***********DATOS**************************");
+
+
+    //Recibimos la llamada
+   //call.enqueue(new Callback() {
+    }
+
 
 
     @Override

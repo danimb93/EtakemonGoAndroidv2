@@ -43,12 +43,13 @@ public class EtakemonsUsuarioListAdapter extends ArrayAdapter<Captura> {
         ViewHolder holder;
         if (convertView == null){
             LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.list_item_etakemon, null, true);
+          //  convertView = layoutInflater.inflate(R.layout.list_item_etakemon, null, true);
             holder = new ViewHolder();
-            holder.hImage1 = (ImageView) convertView.findViewById(R.id.iv_avatar);
-            holder.hText1 = (TextView) convertView.findViewById(R.id.tv_name);
+           // holder.hImage1 = (ImageView) convertView.findViewById(R.id.iv_avatar);
+           // holder.hText1 = (TextView) convertView.findViewById(R.id.tv_name);
             convertView.setTag(holder);
         }
+
         else {
             holder = (ViewHolder) convertView.getTag();
         }
