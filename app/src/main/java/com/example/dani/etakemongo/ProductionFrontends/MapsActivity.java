@@ -142,7 +142,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .strokeColor(Color.RED)
                 .fillColor(Color.TRANSPARENT));
 
-        setLocationMarkers();
+       // setLocationMarkers();
         //spawns();
     }
 
@@ -284,7 +284,19 @@ private List<Captura> recuperarCapturas() {
             public void onResponse(Call<List<Localizacion>> call, Response<List<Localizacion>> response) {
 
                 if (response.isSuccessful()){
+                    Toast.makeText(MapsActivity.this, "response successful", Toast.LENGTH_LONG).show();
                     listarecibidaloca = response.body();
+                    System.out.println("OJIKOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO k viene");
+                    System.out.println(listarecibidaloca.get(1).getLatitud());
+                    localizacionList = new ArrayList<Localizacion>();
+                    for (int i=0; i<listarecibidaloca.size(); i++){
+                        localizacionList.add(listarecibidaloca.get(i));
+                        System.out.println("TAMAÑOOOOOO loco: "+localizacionList.size());
+                        System.out.println("ID: loco    "+localizacionList.get(i).getId());
+                        System.out.println("latitud: "+ localizacionList.get(i).getLatitud());
+                        System.out.println("longitud: " + localizacionList.get(i).getLongitud());
+                    }
+                  //  listarecibidaloca = response.body();
 //                    localizacionList = new ArrayList<Localizacion>();
 //                    for (int j=0; j < locas.size(); j++){
 //                        Localizacion localizacion = locas.get(j);

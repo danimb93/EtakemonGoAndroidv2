@@ -43,10 +43,10 @@ public class EtakemonsUsuarioListAdapter extends ArrayAdapter<Captura> {
         ViewHolder holder;
         if (convertView == null){
             LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-          //  convertView = layoutInflater.inflate(R.layout.list_item_etakemon, null, true);
+            convertView = layoutInflater.inflate(R.layout.list_item_etakemon, null, true);
             holder = new ViewHolder();
            // holder.hImage1 = (ImageView) convertView.findViewById(R.id.iv_avatar);
-           // holder.hText1 = (TextView) convertView.findViewById(R.id.tv_name);
+            holder.hText1 = (TextView) convertView.findViewById(R.id.tv_name);
             convertView.setTag(holder);
         }
 
@@ -57,13 +57,13 @@ public class EtakemonsUsuarioListAdapter extends ArrayAdapter<Captura> {
         Captura captura = getItem(position);
 
         holder.hText1.setText(captura.getNombreetakemon());
-        Glide.with(context).load("http://www.dropbox.com/home/eetakemon_photos?preview=Livanny.png").into(holder.hImage1);
+       // Glide.with(context).load("http://www.dropbox.com/home/eetakemon_photos?preview=Livanny.png").into(holder.hImage1);
 
         return convertView;
     }
 
     public static class ViewHolder{
-        private ImageView hImage1;
+        //private ImageView hImage1;
         private TextView hText1;
     }
 

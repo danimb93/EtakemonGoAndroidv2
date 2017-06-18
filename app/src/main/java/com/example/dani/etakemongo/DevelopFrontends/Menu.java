@@ -82,7 +82,7 @@ public class Menu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent viewIntent =
                         new Intent("android.intent.action.VIEW",
-                                Uri.parse("http://10.0.2.2:8080"));   // cuando sea publico cambiar aqui la URL
+                                Uri.parse("http://147.83.7.155:8080"));   // cuando sea publico cambiar aqui la URL
                 startActivity(viewIntent);
             }
         });
