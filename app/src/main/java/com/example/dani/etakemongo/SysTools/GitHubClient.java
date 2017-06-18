@@ -39,8 +39,8 @@ public interface GitHubClient {
         Call<Usuario> borrar (@Body Usuario body);
 
 //Recuperar datos por correo
-        @POST ("usuario/datos")
-        Call<Usuario> recuperardatos(@Body String body);
+        @POST ("usuario/{email}/datos")
+        Call<Usuario> recuperardatos(@Path("email") String email);
 
 //Devolver lista de objetos
         @GET("usuario/get_objetos")
