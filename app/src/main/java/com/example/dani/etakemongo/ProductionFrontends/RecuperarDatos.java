@@ -63,15 +63,20 @@ public class RecuperarDatos extends AppCompatActivity {
                     //***************Comprobacion de que recoge los datos**********
                     @Override
                     public void onResponse(Call call, Response response) {
-                        Usuario contributor = (Usuario) response.body();
-                        //si se ha logueado llamas a la funcion que te pasa a la siguiente actividad
-                        Log.d(tag, "Email enviado correctamente");
-                        String msg = "email enviado correctamente";
-                        Toast.makeText(RecuperarDatos.this, msg.toString() ,Toast.LENGTH_LONG).show();
-                        Intent intres = getIntent();
-                        intres.putExtra("enviado",sssemail);
-                        setResult(1700, intres);
-                        finish();
+                        if (response.isSuccessful()){
+                            Usuario contributor = (Usuario) response.body();
+                            //si se ha logueado llamas a la funcion que te pasa a la siguiente actividad
+                            Log.d(tag, "Email enviado correctamente");
+                            Toast.makeText(RecuperarDatos.this, "email enviado correctamente" ,Toast.LENGTH_SHORT).show();
+                            Intent intres = getIntent();
+                            intres.putExtra("enviado",sssemail);
+                            setResult(1700, intres);
+                            finish();
+                        }
+                        else {
+                            Toast.makeText(RecuperarDatos.this, "Error en la petición", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
 
                     @Override
