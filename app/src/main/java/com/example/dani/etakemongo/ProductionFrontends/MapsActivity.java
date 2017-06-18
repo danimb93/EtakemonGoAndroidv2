@@ -53,7 +53,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private Marker marcador;
     private Circle mCircle;
-    private Marker loc1, loc2, loc3, loc4, loc5;
+    private Marker loc1, loc2, loc3, loc4, loc5, loc6, loc7, loc8, loc9, loc10, loc11, loc12, loc13, loc14, loc15, loc16, loc17, loc18, loc19, loc20;
     private List<Marker> markerList = new ArrayList<>();
     private GoogleApiClient mGoogleApiClient;
     double lat = 0.0;
@@ -61,8 +61,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     String email2, emailaMenu;
     int idusuario, idusuarioaMenu;
 
-    private List<Captura> listarecibida = new ArrayList<>();
-    private List<Captura> capturaList = new ArrayList<Captura>();
+    private List<Captura> listarecibida;
+    private List<Captura> capturaList;
 
     private List<Localizacion> listarecibidaloca;
     private List<Localizacion> localizacionList;
@@ -84,11 +84,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         markerList.add(loc3);
         markerList.add(loc4);
         markerList.add(loc5);
+        markerList.add(loc6);
+        markerList.add(loc7);
+        markerList.add(loc8);
+        markerList.add(loc9);
+        markerList.add(loc10);
+        markerList.add(loc11);
+        markerList.add(loc12);
+        markerList.add(loc13);
+        markerList.add(loc14);
+        markerList.add(loc15);
+        markerList.add(loc16);
+        markerList.add(loc17);
+        markerList.add(loc18);
+        markerList.add(loc19);
+        markerList.add(loc20);
 
         email2 = getIntent().getExtras().getString("email");
         emailaMenu = email2;
-        recuperarLocalizaciones(); //rellenamos lista recibida loca
 
+
+        recuperarLocalizaciones(); //rellenamos lista recibida loca
+        recuperarCapturas();
 
         //BOTON MENU
         menu = (FloatingActionButton) findViewById(R.id.fab_menu);
@@ -249,7 +266,392 @@ private List<Captura> recuperarCapturas() {
         @Override
         public void onResponse(Call<List<Captura>> call, Response<List<Captura>> response) {
             if (response.isSuccessful()){
+                Toast.makeText(MapsActivity.this, "response successful", Toast.LENGTH_LONG).show();
                 listarecibida = response.body();
+                System.out.println("OJIKOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO k viene");
+                capturaList = new ArrayList<Captura>();
+                for (int i=0; i< listarecibida.size(); i++){
+                    capturaList.add(listarecibida.get(i));
+                    System.out.println("ID ETAKEMON:   "+capturaList.get(i).getIdetakemon());
+                    System.out.println("ID LOCALIZACION:    "+capturaList.get(i).getIdlocalizacion());
+                }
+                for (int j=0; j< capturaList.size(); j++){
+                    if (capturaList.get(j).getIdlocalizacion() == 1){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(1).getLatitud(), localizacionList.get(1).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                        //mMap.animateCamera(miUbicacion);
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 2){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(2).getLatitud(), localizacionList.get(2).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 3){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(3).getLatitud(), localizacionList.get(3).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 4){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(4).getLatitud(), localizacionList.get(4).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 5){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(5).getLatitud(), localizacionList.get(5).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 6){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(6).getLatitud(), localizacionList.get(6).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 7){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(1).getLatitud(), localizacionList.get(1).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 8){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(1).getLatitud(), localizacionList.get(1).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 9){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(9).getLatitud(), localizacionList.get(9).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 10){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(10).getLatitud(), localizacionList.get(10).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 11){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(11).getLatitud(), localizacionList.get(11).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 12){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(12).getLatitud(), localizacionList.get(12).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 13){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(13).getLatitud(), localizacionList.get(13).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 14){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(14).getLatitud(), localizacionList.get(14).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 15){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(15).getLatitud(), localizacionList.get(15).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 16){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(16).getLatitud(), localizacionList.get(16).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 17){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(17).getLatitud(), localizacionList.get(17).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 18){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(18).getLatitud(), localizacionList.get(18).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() ==19){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(19).getLatitud(), localizacionList.get(19).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 20){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(20).getLatitud(), localizacionList.get(20).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 21){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(21).getLatitud(), localizacionList.get(21).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 22){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(22).getLatitud(), localizacionList.get(22).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 23){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(23).getLatitud(), localizacionList.get(23).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 24){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(24).getLatitud(), localizacionList.get(24).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 25){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(25).getLatitud(), localizacionList.get(25).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 26){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(26).getLatitud(), localizacionList.get(26).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 27){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(27).getLatitud(), localizacionList.get(27).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 28){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(28).getLatitud(), localizacionList.get(28).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 29){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(29).getLatitud(), localizacionList.get(29).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+                    else if(capturaList.get(j).getIdlocalizacion() == 30){
+                        Marker marker = markerList.get(j);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(30).getLatitud(), localizacionList.get(30).getLongitud());
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+
+                    }
+//                    else if(capturaList.get(j).getIdlocalizacion() == 31){
+//                        Marker marker = markerList.get(j);
+//                        LatLng posicionSpwan = new LatLng(localizacionList.get(31).getLatitud(), localizacionList.get(31).getLongitud());
+//                        if (marker != null){
+//                            marker.remove();
+//                        }
+//                        marker = mMap.addMarker(new MarkerOptions()
+//                                .position(posicionSpwan)
+//                                .title("Captura")
+//                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+//
+//                    }
+
+
+
+                }
             }
             else {
                 Toast.makeText(MapsActivity.this, "response unsuccessful", Toast.LENGTH_SHORT).show();
@@ -291,23 +693,23 @@ private List<Captura> recuperarCapturas() {
                     System.out.println("OJIKOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO k viene");
                     System.out.println(listarecibidaloca.get(1).getLatitud());
                     localizacionList = new ArrayList<Localizacion>();
-                    for (int i=0; i<4; i++){
+                    for (int i=0; i<listarecibidaloca.size(); i++){
                         localizacionList.add(listarecibidaloca.get(i));
-                        System.out.println("TAMAÑOOOOOO loco: "+localizacionList.size());
-                        System.out.println("ID: loco    "+localizacionList.get(i).getId());
-                        System.out.println("latitud: "+ localizacionList.get(i).getLatitud());
-                        System.out.println("longitud: " + localizacionList.get(i).getLongitud());
-
-                        Marker marker = markerList.get(i);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(i).getLatitud(), localizacionList.get(i).getLongitud());
-                        // CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(posicionSpwan, 16);
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title("Captura")
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+//                        System.out.println("TAMAÑOOOOOO loco: "+localizacionList.size());
+//                        System.out.println("ID: loco    "+localizacionList.get(i).getId());
+//                        System.out.println("latitud: "+ localizacionList.get(i).getLatitud());
+//                        System.out.println("longitud: " + localizacionList.get(i).getLongitud());
+//
+//                        Marker marker = markerList.get(i);
+//                        LatLng posicionSpwan = new LatLng(localizacionList.get(i).getLatitud(), localizacionList.get(i).getLongitud());
+//                        // CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(posicionSpwan, 16);
+//                        if (marker != null){
+//                            marker.remove();
+//                        }
+//                        marker = mMap.addMarker(new MarkerOptions()
+//                                .position(posicionSpwan)
+//                                .title("Captura")
+//                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
                         //mMap.animateCamera(miUbicacion);
                     }
                   //  listarecibidaloca = response.body();
@@ -343,36 +745,36 @@ private List<Captura> recuperarCapturas() {
         }
     }
 
-    public void spawns(){
-        capturaspawn = recuperarCapturas();
-        //locaspawn = recuperarLocalizaciones();
-
-        double latitud, longitud;
-        int idloca;
-
-        for (int x=0; x<capturaspawn.size(); x++){
-            idloca = capturaspawn.get(x).getIdlocalizacion();
-            for (int z=0; z<locaspawn.size(); z++){
-                if (idloca == locaspawn.get(z).getId()){
-                    latitud = locaspawn.get(z).getLatitud();
-                    longitud = locaspawn.get(z).getLongitud();
-
-                        LatLng posicionSpwan = new LatLng(latitud, longitud);
-                       // CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(posicionSpwan, 16);
-                        if (marcador != null){
-                            marcador.remove();
-                        }
-                        marcador = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title("Captura")
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_etakemons)));
-                        //mMap.animateCamera(miUbicacion);
-                        System.out.println("************************MIRAR AQUI************"+ lat+ing);
-                }
-            }
-
-        }
-    }
+//    public void spawns(){
+//        capturaspawn = recuperarCapturas();
+//        //locaspawn = recuperarLocalizaciones();
+//
+//        double latitud, longitud;
+//        int idloca;
+//
+//        for (int x=0; x<capturaspawn.size(); x++){
+//            idloca = capturaspawn.get(x).getIdlocalizacion();
+//            for (int z=0; z<locaspawn.size(); z++){
+//                if (idloca == locaspawn.get(z).getId()){
+//                    latitud = locaspawn.get(z).getLatitud();
+//                    longitud = locaspawn.get(z).getLongitud();
+//
+//                        LatLng posicionSpwan = new LatLng(latitud, longitud);
+//                       // CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(posicionSpwan, 16);
+//                        if (marcador != null){
+//                            marcador.remove();
+//                        }
+//                        marcador = mMap.addMarker(new MarkerOptions()
+//                                .position(posicionSpwan)
+//                                .title("Captura")
+//                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_etakemons)));
+//                        //mMap.animateCamera(miUbicacion);
+//                        System.out.println("************************MIRAR AQUI************"+ lat+ing);
+//                }
+//            }
+//
+//        }
+//    }
 
 
     @Override
