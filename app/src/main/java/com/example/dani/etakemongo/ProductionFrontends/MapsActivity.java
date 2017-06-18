@@ -57,7 +57,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private Marker marcador;
     private Circle mCircle;
-    private Marker loc1, loc2, loc3, loc4, loc5, loc6, loc7, loc8, loc9, loc10, loc11, loc12, loc13, loc14, loc15, loc16, loc17, loc18, loc19, loc20;
+    private Marker loc1, loc2, loc3, loc4, loc5, loc6, loc7, loc8, loc9, loc10, loc11, loc12, loc13, loc14, loc15, loc16, loc17, loc18, loc19, loc20, loc21, loc22, loc23, loc24, loc25, loc26, loc27, loc28, loc29, loc30;
     private List<Marker> markerList = new ArrayList<>();
     private GoogleApiClient mGoogleApiClient;
     double lat = 0.0;
@@ -103,12 +103,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         markerList.add(loc18);
         markerList.add(loc19);
         markerList.add(loc20);
+        markerList.add(loc21);
+        markerList.add(loc22);
+        markerList.add(loc23);
+        markerList.add(loc24);
+        markerList.add(loc25);
+        markerList.add(loc26);
+        markerList.add(loc27);
+        markerList.add(loc28);
+        markerList.add(loc29);
+        markerList.add(loc30);
+
+
 
         email2 = getIntent().getExtras().getString("email");
         emailaMenu = email2;
 
 
-        recuperarLocalizaciones(); //rellenamos lista recibida loca
+       // recuperarLocalizaciones(); //rellenamos lista recibida loca
         recuperarCapturas();
 
         //BOTON MENU
@@ -167,7 +179,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .radius(125)
                 .strokeColor(Color.RED)
                 .fillColor(Color.TRANSPARENT));
-
+        mMap.getUiSettings().setZoomControlsEnabled(false);
+        mMap.getUiSettings().setScrollGesturesEnabled(false);
        // setLocationMarkers();
         //spawns();
     }
@@ -255,6 +268,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+
 private List<Captura> recuperarCapturas() {
     //RETROFIT
     RetrofitOwn retrofitOwn = new RetrofitOwn();
@@ -270,397 +284,23 @@ private List<Captura> recuperarCapturas() {
     call.enqueue(new Callback<List<Captura>>() {
         @Override
         public void onResponse(Call<List<Captura>> call, Response<List<Captura>> response) {
-            if (response.isSuccessful()){
+            if (response.isSuccessful()) {
                 ImageView imageview = new ImageView(MapsActivity.this);
                 Toast.makeText(MapsActivity.this, "response successful", Toast.LENGTH_LONG).show();
                 listarecibida = response.body();
                 System.out.println("OJIKOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO k viene");
                 capturaList = new ArrayList<Captura>();
-                for (int i=0; i< listarecibida.size(); i++){
+                for (int i = 0; i < listarecibida.size(); i++) {
                     capturaList.add(listarecibida.get(i));
-                    System.out.println("ID ETAKEMON:   "+capturaList.get(i).getIdetakemon());
-                    System.out.println("ID LOCALIZACION:    "+capturaList.get(i).getIdlocalizacion());
+                    System.out.println("ID ETAKEMON:   " + capturaList.get(i).getIdetakemon());
+                    System.out.println("ID LOCALIZACION:    " + capturaList.get(i).getIdlocalizacion());
                 }
-                for (int j=0; j< capturaList.size(); j++){
-                    final String nombre = capturaList.get(j).getNombreetakemon();
-                    if (capturaList.get(j).getIdlocalizacion() == 1){
-                        final Marker[] marker = {markerList.get(j)};
 
-                        final LatLng posicionSpwan = new LatLng(localizacionList.get(1).getLatitud(), localizacionList.get(1).getLongitud());
-                        if (marker[0] != null){
-                            marker[0].remove();
-                        }
+                for (int i = 0; i<capturaList.size(); i++){
+                        setLocationSpawn(capturaList.get(i),capturaList.get(i).getLatcaptura(),capturaList.get(i).getLoncaptura());
+                }
 
 
-                        Glide.with(MapsActivity.this).load(capturaList.get(j).getImagen()).asBitmap().override(120,120).into(new BitmapImageViewTarget(imageview){
-                            @Override
-                            protected void setResource(Bitmap resource){
-                                marker[0] = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                        .title(nombre)
-                                .icon(BitmapDescriptorFactory.fromBitmap(resource)));
-
-                            }
-                        });
-
-
-
-//                            marker = mMap.addMarker(new MarkerOptions()
-//                                    .position(posicionSpwan)
-//                                    .title(""+capturaList.get(j).getNombreetakemon()));
-//                                    //.icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 2){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(2).getLatitud(), localizacionList.get(2).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 3){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(3).getLatitud(), localizacionList.get(3).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 4){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(4).getLatitud(), localizacionList.get(4).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 5){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(5).getLatitud(), localizacionList.get(5).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 6){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(6).getLatitud(), localizacionList.get(6).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 7){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(1).getLatitud(), localizacionList.get(1).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 8){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(1).getLatitud(), localizacionList.get(1).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 9){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(9).getLatitud(), localizacionList.get(9).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 10){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(10).getLatitud(), localizacionList.get(10).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 11){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(11).getLatitud(), localizacionList.get(11).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 12){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(12).getLatitud(), localizacionList.get(12).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 13){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(13).getLatitud(), localizacionList.get(13).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 14){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(14).getLatitud(), localizacionList.get(14).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 15){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(15).getLatitud(), localizacionList.get(15).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 16){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(16).getLatitud(), localizacionList.get(16).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 17){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(17).getLatitud(), localizacionList.get(17).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 18){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(18).getLatitud(), localizacionList.get(18).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() ==19){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(19).getLatitud(), localizacionList.get(19).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 20){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(20).getLatitud(), localizacionList.get(20).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 21){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(21).getLatitud(), localizacionList.get(21).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 22){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(22).getLatitud(), localizacionList.get(22).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 23){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(23).getLatitud(), localizacionList.get(23).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 24){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(24).getLatitud(), localizacionList.get(24).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 25){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(25).getLatitud(), localizacionList.get(25).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 26){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(26).getLatitud(), localizacionList.get(26).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 27){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(27).getLatitud(), localizacionList.get(27).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 28){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(28).getLatitud(), localizacionList.get(28).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 29){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(29).getLatitud(), localizacionList.get(29).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-                    else if(capturaList.get(j).getIdlocalizacion() == 30){
-                        Marker marker = markerList.get(j);
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(30).getLatitud(), localizacionList.get(30).getLongitud());
-                        if (marker != null){
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-
-                    }
-         }
             }
             else {
                 Toast.makeText(MapsActivity.this, "response unsuccessful", Toast.LENGTH_SHORT).show();
@@ -678,7 +318,31 @@ private List<Captura> recuperarCapturas() {
         return listarecibida;
     }
 
+    Marker m1;
 
+    public void setLocationSpawn(final Captura captura, final double lat, final double longi){ //Al fer el get, se li haurà de passar el nom del eetakemon per pritar-lo al mapa
+
+        ImageView imageview = new ImageView(MapsActivity.this);
+
+        //{
+        final LatLng loc = new LatLng(lat, longi);
+
+        Glide.with(MapsActivity.this)
+                .load(captura.getImagen())
+                .asBitmap()
+                .override(100, 100)
+                .into(new BitmapImageViewTarget(imageview){
+                    @Override
+                    protected void setResource(Bitmap resource){
+                        m1 = mMap.addMarker(new MarkerOptions()
+                                .position(loc)
+                                .icon(BitmapDescriptorFactory.fromBitmap(resource)));
+
+                  //      m1.setTag(captura.getId()+"-"+captura.getNombreetakemon()+"-"+);
+                        m1.setTitle(captura.getNombreetakemon());
+
+                    }
+                });}
 
     private void recuperarLocalizaciones(){
 

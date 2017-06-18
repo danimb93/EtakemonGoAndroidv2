@@ -10,6 +10,7 @@ public class Captura{
         private int id, idusuariosss, idetakemon, idlocalizacion, nivel, experiencia, vida, ataque, defensa, estado, tipoetakemon;
         private Date fecha;
         private String nombreetakemon, habilidadetakemon, imagen;
+        private double latcaptura, loncaptura;
 
         public Captura(int id, int idusuariosss, int idetakemon, int idlocalizacion, int nivel, int experiencia, int vida, int ataque, int defensa, int estado, int tipoetakemon, Date fecha, String nombreetakemon, String habilidadetakemon, String imagen) {
             this.id = id;
@@ -29,11 +30,17 @@ public class Captura{
             this.imagen = imagen;
         }
 
-        //para los SPAWNS de las capturas
-        public Captura(int idetakemon, int idlocalizacion){
-            this.idetakemon = idetakemon;
-            this.idlocalizacion = idlocalizacion;
-        }
+    //para los SPAWNS de las capturas
+    public Captura(int idetakemon, int idlocalizacion, String nombreetakemon, String habilidadetakemon, String imagen, double latcaptura, double loncaptura){
+        this.idetakemon = idetakemon;
+        this.idlocalizacion = idlocalizacion;
+        this.nombreetakemon = nombreetakemon;
+        this.habilidadetakemon = habilidadetakemon;
+        this.imagen = imagen;
+        this.latcaptura = latcaptura;
+        this.loncaptura = loncaptura;
+
+    }
 
         public Captura(int idusuariosss, int idetakemon, int idlocalizacion, int nivel, int experiencia, int vida, int ataque, int defensa, int estado, int tipoetakemon, Date fecha, String nombreetakemon, String habilidadetakemon, String imagen) {
             this.idusuariosss = idusuariosss;
@@ -181,6 +188,23 @@ public class Captura{
         public void setImagen(String imagen) {
             this.imagen = imagen;
         }
+
+
+    public double getLatcaptura() {
+        return latcaptura;
+    }
+
+    public void setLatcaptura(double latcaptura) {
+        this.latcaptura = latcaptura;
+    }
+
+    public double getLoncaptura() {
+        return loncaptura;
+    }
+
+    public void setLoncaptura(double loncaptura) {
+        this.loncaptura = loncaptura;
+    }
 
         @Override
         public String toString(){
