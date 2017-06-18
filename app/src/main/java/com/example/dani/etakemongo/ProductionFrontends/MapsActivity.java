@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
@@ -17,6 +18,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.dani.etakemongo.DevelopFrontends.Menu;
 import com.example.dani.etakemongo.Modelo.Captura;
 import com.example.dani.etakemongo.Modelo.Localizacion;
@@ -44,6 +47,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import static com.example.dani.etakemongo.R.id.imageView;
 import static com.example.dani.etakemongo.R.id.map;
 
 
@@ -250,6 +254,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         System.out.println("************************MIRAR AQUI************"+ lat+ing);
     }
 
+
 private List<Captura> recuperarCapturas() {
     //RETROFIT
     RetrofitOwn retrofitOwn = new RetrofitOwn();
@@ -266,6 +271,7 @@ private List<Captura> recuperarCapturas() {
         @Override
         public void onResponse(Call<List<Captura>> call, Response<List<Captura>> response) {
             if (response.isSuccessful()){
+                ImageView imageview = new ImageView(MapsActivity.this);
                 Toast.makeText(MapsActivity.this, "response successful", Toast.LENGTH_LONG).show();
                 listarecibida = response.body();
                 System.out.println("OJIKOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO k viene");
@@ -276,18 +282,33 @@ private List<Captura> recuperarCapturas() {
                     System.out.println("ID LOCALIZACION:    "+capturaList.get(i).getIdlocalizacion());
                 }
                 for (int j=0; j< capturaList.size(); j++){
+                    final String nombre = capturaList.get(j).getNombreetakemon();
                     if (capturaList.get(j).getIdlocalizacion() == 1){
-                        Marker marker = markerList.get(j);
-                        ImageView imageView = null;
-                        LatLng posicionSpwan = new LatLng(localizacionList.get(1).getLatitud(), localizacionList.get(1).getLongitud());
-                        if (marker != null){
-                            marker.remove();
+                        final Marker[] marker = {markerList.get(j)};
+
+                        final LatLng posicionSpwan = new LatLng(localizacionList.get(1).getLatitud(), localizacionList.get(1).getLongitud());
+                        if (marker[0] != null){
+                            marker[0].remove();
                         }
-                            marker = mMap.addMarker(new MarkerOptions()
-                                    .position(posicionSpwan)
-                                    .title(""+capturaList.get(j).getNombreetakemon())
-                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
-                            //mMap.animateCamera(miUbicacion);
+
+
+                        Glide.with(MapsActivity.this).load(capturaList.get(j).getImagen()).asBitmap().override(120,120).into(new BitmapImageViewTarget(imageview){
+                            @Override
+                            protected void setResource(Bitmap resource){
+                                marker[0] = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                        .title(nombre)
+                                .icon(BitmapDescriptorFactory.fromBitmap(resource)));
+
+                            }
+                        });
+
+
+
+//                            marker = mMap.addMarker(new MarkerOptions()
+//                                    .position(posicionSpwan)
+//                                    .title(""+capturaList.get(j).getNombreetakemon()));
+//                                    //.icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
 
                     }
@@ -657,6 +678,8 @@ private List<Captura> recuperarCapturas() {
         return listarecibida;
     }
 
+
+
     private void recuperarLocalizaciones(){
 
         //RETROFIT
@@ -722,16 +745,13 @@ private List<Captura> recuperarCapturas() {
 
     }
 
-    public void setLocationMarkers(){
-
-        for (int y=0; y<listarecibidaloca.size(); y++){
-            LatLng positionSpawn = new LatLng(listarecibidaloca.get(y).getLatitud(), listarecibidaloca.get(y).getLongitud());
-            marcador = mMap.addMarker(new MarkerOptions()
-                    .position(positionSpawn)
-                    .title("Captura")
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_etakemons)));
-        }
-    }
+//    Marker marker;
+//
+//    private void setLocationMarkers(){
+//
+//
+//
+//    }
 
 //    public void spawns(){
 //        capturaspawn = recuperarCapturas();
