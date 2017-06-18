@@ -284,7 +284,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
                         //mMap.animateCamera(miUbicacion);
                     }
@@ -296,7 +296,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -308,7 +308,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -320,7 +320,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -332,7 +332,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -344,7 +344,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -356,7 +356,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -368,7 +368,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -380,7 +380,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -392,7 +392,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -404,7 +404,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -416,7 +416,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -428,7 +428,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -440,7 +440,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -452,7 +452,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -464,7 +464,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -476,7 +476,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -488,7 +488,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -500,7 +500,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -512,7 +512,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -524,7 +524,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -536,7 +536,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -548,7 +548,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -560,7 +560,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -572,7 +572,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -584,7 +584,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -596,7 +596,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -608,7 +608,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -620,7 +620,7 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
@@ -632,26 +632,11 @@ private List<Captura> recuperarCapturas() {
                         }
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
-                                .title("Captura")
+                                .title(""+capturaList.get(j).getNombreetakemon())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
 
                     }
-//                    else if(capturaList.get(j).getIdlocalizacion() == 31){
-//                        Marker marker = markerList.get(j);
-//                        LatLng posicionSpwan = new LatLng(localizacionList.get(31).getLatitud(), localizacionList.get(31).getLongitud());
-//                        if (marker != null){
-//                            marker.remove();
-//                        }
-//                        marker = mMap.addMarker(new MarkerOptions()
-//                                .position(posicionSpwan)
-//                                .title("Captura")
-//                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
-//
-//                    }
-
-
-
-                }
+         }
             }
             else {
                 Toast.makeText(MapsActivity.this, "response unsuccessful", Toast.LENGTH_SHORT).show();
