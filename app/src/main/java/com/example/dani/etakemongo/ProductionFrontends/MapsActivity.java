@@ -14,11 +14,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.dani.etakemongo.DevelopFrontends.Menu;
 import com.example.dani.etakemongo.Modelo.Captura;
-import com.example.dani.etakemongo.Modelo.Etakemon;
 import com.example.dani.etakemongo.Modelo.Localizacion;
 import com.example.dani.etakemongo.R;
 import com.example.dani.etakemongo.SysTools.GitHubClient;
@@ -278,15 +278,18 @@ private List<Captura> recuperarCapturas() {
                 for (int j=0; j< capturaList.size(); j++){
                     if (capturaList.get(j).getIdlocalizacion() == 1){
                         Marker marker = markerList.get(j);
+                        ImageView imageView = null;
                         LatLng posicionSpwan = new LatLng(localizacionList.get(1).getLatitud(), localizacionList.get(1).getLongitud());
                         if (marker != null){
                             marker.remove();
                         }
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(posicionSpwan)
-                                .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
-                        //mMap.animateCamera(miUbicacion);
+                            marker = mMap.addMarker(new MarkerOptions()
+                                    .position(posicionSpwan)
+                                    .title(""+capturaList.get(j).getNombreetakemon())
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
+                            //mMap.animateCamera(miUbicacion);
+
+
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 2){
                         Marker marker = markerList.get(j);
@@ -297,7 +300,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 3){
@@ -309,7 +312,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 4){
@@ -321,7 +324,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 5){
@@ -333,7 +336,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 6){
@@ -345,7 +348,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 7){
@@ -357,7 +360,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 8){
@@ -369,7 +372,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 9){
@@ -381,7 +384,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 10){
@@ -393,7 +396,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 11){
@@ -405,7 +408,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 12){
@@ -417,7 +420,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 13){
@@ -429,7 +432,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 14){
@@ -441,7 +444,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 15){
@@ -453,7 +456,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 16){
@@ -465,7 +468,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 17){
@@ -477,7 +480,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 18){
@@ -489,7 +492,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() ==19){
@@ -501,7 +504,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 20){
@@ -513,7 +516,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 21){
@@ -525,7 +528,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 22){
@@ -537,7 +540,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 23){
@@ -549,7 +552,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 24){
@@ -561,7 +564,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 25){
@@ -573,7 +576,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 26){
@@ -585,7 +588,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 27){
@@ -597,7 +600,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 28){
@@ -609,7 +612,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 29){
@@ -621,7 +624,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
                     else if(capturaList.get(j).getIdlocalizacion() == 30){
@@ -633,7 +636,7 @@ private List<Captura> recuperarCapturas() {
                         marker = mMap.addMarker(new MarkerOptions()
                                 .position(posicionSpwan)
                                 .title(""+capturaList.get(j).getNombreetakemon())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeballicon)));
 
                     }
          }
