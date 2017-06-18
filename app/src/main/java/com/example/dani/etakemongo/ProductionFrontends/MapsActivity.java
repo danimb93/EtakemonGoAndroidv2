@@ -53,7 +53,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private Marker marcador;
     private Circle mCircle;
-    private Marker mMarker;
+    private Marker loc1, loc2, loc3, loc4, loc5;
+    private List<Marker> markerList = new ArrayList<>();
     private GoogleApiClient mGoogleApiClient;
     double lat = 0.0;
     double ing = 0.0;
@@ -78,7 +79,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         Log.d(tag, "Event onCreate()");
-
+        markerList.add(loc1);
+        markerList.add(loc2);
+        markerList.add(loc3);
+        markerList.add(loc4);
+        markerList.add(loc5);
 
         email2 = getIntent().getExtras().getString("email");
         emailaMenu = email2;
@@ -147,13 +152,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    private void updateMarkerWithCircle(LatLng location) {
-        mCircle.setCenter(location);
-        mMarker.setPosition(location);
-    }
-
-
-
+//    private void updateMarkerWithCircle(LatLng location) {
+//        mCircle.setCenter(location);
+//        mMarker.setPosition(location);
+//    }
 
 
     //Metodo para incluir un marker, CameraUpdate para centrar la camara a la posicion del marker
@@ -289,12 +291,24 @@ private List<Captura> recuperarCapturas() {
                     System.out.println("OJIKOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO k viene");
                     System.out.println(listarecibidaloca.get(1).getLatitud());
                     localizacionList = new ArrayList<Localizacion>();
-                    for (int i=0; i<listarecibidaloca.size(); i++){
+                    for (int i=0; i<4; i++){
                         localizacionList.add(listarecibidaloca.get(i));
                         System.out.println("TAMAÑOOOOOO loco: "+localizacionList.size());
                         System.out.println("ID: loco    "+localizacionList.get(i).getId());
                         System.out.println("latitud: "+ localizacionList.get(i).getLatitud());
                         System.out.println("longitud: " + localizacionList.get(i).getLongitud());
+
+                        Marker marker = markerList.get(i);
+                        LatLng posicionSpwan = new LatLng(localizacionList.get(i).getLatitud(), localizacionList.get(i).getLongitud());
+                        // CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(posicionSpwan, 16);
+                        if (marker != null){
+                            marker.remove();
+                        }
+                        marker = mMap.addMarker(new MarkerOptions()
+                                .position(posicionSpwan)
+                                .title("Captura")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+                        //mMap.animateCamera(miUbicacion);
                     }
                   //  listarecibidaloca = response.body();
 //                    localizacionList = new ArrayList<Localizacion>();
