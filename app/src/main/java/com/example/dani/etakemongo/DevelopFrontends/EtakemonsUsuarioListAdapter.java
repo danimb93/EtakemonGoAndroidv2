@@ -49,6 +49,8 @@ public class EtakemonsUsuarioListAdapter extends ArrayAdapter<Captura> {
             holder = new ViewHolder();
             holder.hImage1 = (ImageView) convertView.findViewById(R.id.iv_avatar);
             holder.hText1 = (TextView) convertView.findViewById(R.id.tv_name);
+            holder.hText2 = (TextView) convertView.findViewById(R.id.tv_habilidad);
+            holder.hText3 = (TextView) convertView.findViewById(R.id.tv_nivel);
             convertView.setTag(holder);
         }
 
@@ -59,6 +61,8 @@ public class EtakemonsUsuarioListAdapter extends ArrayAdapter<Captura> {
         Captura captura = getItem(position);
 
         holder.hText1.setText(captura.getNombreetakemon());
+        holder.hText2.setText("Habilidad:  "+captura.getHabilidadetakemon());
+        holder.hText3.setText("Nivel:  "+String.valueOf(captura.getNivel()));
         Glide.with(context).load(captura.getImagen()).into(holder.hImage1);
 
         return convertView;
@@ -67,6 +71,8 @@ public class EtakemonsUsuarioListAdapter extends ArrayAdapter<Captura> {
     public static class ViewHolder{
         private ImageView hImage1;
         private TextView hText1;
+        private TextView hText2;
+        private TextView hText3;
     }
 
 
