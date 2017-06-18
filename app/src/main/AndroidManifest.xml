@@ -47,6 +47,7 @@
         <activity android:name=".DevelopFrontends.Menu" />
         <activity android:name=".DevelopFrontends.Etakemon_list" />
         <activity android:name=".DevelopFrontends.EtakemonsUsuario" />
+        <activity android:name=".ProductionFrontends.game"></activity>
     </application>
 
 </manifest>

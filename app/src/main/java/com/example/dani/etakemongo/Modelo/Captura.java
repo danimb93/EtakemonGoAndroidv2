@@ -1,11 +1,12 @@
 package com.example.dani.etakemongo.Modelo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
  * Created by ivanm on 24/04/2017.
  */
-public class Captura{
+public class Captura implements Serializable{
 
         private int id, idusuariosss, idetakemon, idlocalizacion, nivel, experiencia, vida, ataque, defensa, estado, tipoetakemon;
         private Date fecha;

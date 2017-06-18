@@ -23,6 +23,7 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.dani.etakemongo.DevelopFrontends.Menu;
 import com.example.dani.etakemongo.Modelo.Captura;
 import com.example.dani.etakemongo.Modelo.Localizacion;
+import com.example.dani.etakemongo.Modelo.Usuario;
 import com.example.dani.etakemongo.R;
 import com.example.dani.etakemongo.SysTools.GitHubClient;
 import com.example.dani.etakemongo.SysTools.RetrofitOwn;
@@ -39,6 +40,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,68 +59,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private Marker marcador;
     private Circle mCircle;
-    private Marker loc1, loc2, loc3, loc4, loc5, loc6, loc7, loc8, loc9, loc10, loc11, loc12, loc13, loc14, loc15, loc16, loc17, loc18, loc19, loc20, loc21, loc22, loc23, loc24, loc25, loc26, loc27, loc28, loc29, loc30;
-    private List<Marker> markerList = new ArrayList<>();
     private GoogleApiClient mGoogleApiClient;
     double lat = 0.0;
     double ing = 0.0;
     String email2, emailaMenu;
-    int idusuario, idusuarioaMenu;
-
+    int idlogedmap, idrecibed;
     private List<Captura> listarecibida;
     private List<Captura> capturaList;
-
     private List<Localizacion> listarecibidaloca;
     private List<Localizacion> localizacionList;
-
-    private List<Captura> capturaspawn;
-    private List<Localizacion> locaspawn;
-
-
-
-    FloatingActionButton menu;
+    private FloatingActionButton menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         Log.d(tag, "Event onCreate()");
-        markerList.add(loc1);
-        markerList.add(loc2);
-        markerList.add(loc3);
-        markerList.add(loc4);
-        markerList.add(loc5);
-        markerList.add(loc6);
-        markerList.add(loc7);
-        markerList.add(loc8);
-        markerList.add(loc9);
-        markerList.add(loc10);
-        markerList.add(loc11);
-        markerList.add(loc12);
-        markerList.add(loc13);
-        markerList.add(loc14);
-        markerList.add(loc15);
-        markerList.add(loc16);
-        markerList.add(loc17);
-        markerList.add(loc18);
-        markerList.add(loc19);
-        markerList.add(loc20);
-        markerList.add(loc21);
-        markerList.add(loc22);
-        markerList.add(loc23);
-        markerList.add(loc24);
-        markerList.add(loc25);
-        markerList.add(loc26);
-        markerList.add(loc27);
-        markerList.add(loc28);
-        markerList.add(loc29);
-        markerList.add(loc30);
-
-
 
         email2 = getIntent().getExtras().getString("email");
         emailaMenu = email2;
 
+        doGetData(emailaMenu);
+
+        Toast.makeText(MapsActivity.this, "response unsuccessful", Toast.LENGTH_SHORT).show();
 
        // recuperarLocalizaciones(); //rellenamos lista recibida loca
         recuperarCapturas();
@@ -136,7 +99,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         });
-
 
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -174,11 +136,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         miUbicacion();
         System.out.println("************************MIRAR AQUI************" + lat + ing);
         // ... get a map.
-        Circle circle = mMap.addCircle(new CircleOptions()
-                .center(new LatLng(lat, ing))
-                .radius(125)
-                .strokeColor(Color.RED)
-                .fillColor(Color.TRANSPARENT));
+//        Circle circle = mMap.addCircle(new CircleOptions()
+//                .center(new LatLng(lat, ing))
+//                .radius(125)
+//                .strokeColor(Color.RED)
+//                .fillColor(Color.TRANSPARENT));
         mMap.getUiSettings().setZoomControlsEnabled(false);
         mMap.getUiSettings().setScrollGesturesEnabled(false);
        // setLocationMarkers();
@@ -204,8 +166,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .position(coordenadas)
                 .title("Mi posicion")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
+        marcador.setTag("user");
         mMap.animateCamera(miUbicacion);
         System.out.println("************************MIRAR AQUI************"+ lat+ing);
+
     }
 
 
@@ -277,7 +241,6 @@ private List<Captura> recuperarCapturas() {
     //Creamos una instancia de retrofit
     GitHubClient getListaCapturasGeneradas = retrofit.create(GitHubClient.class);
 
-
     //Hacemos la llamada http
     Call<List<Captura>> call = getListaCapturasGeneradas.getRandomCapturas();
 
@@ -286,25 +249,18 @@ private List<Captura> recuperarCapturas() {
         public void onResponse(Call<List<Captura>> call, Response<List<Captura>> response) {
             if (response.isSuccessful()) {
                 ImageView imageview = new ImageView(MapsActivity.this);
-                Toast.makeText(MapsActivity.this, "response successful", Toast.LENGTH_LONG).show();
                 listarecibida = response.body();
-                System.out.println("OJIKOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO k viene");
                 capturaList = new ArrayList<Captura>();
                 for (int i = 0; i < listarecibida.size(); i++) {
                     capturaList.add(listarecibida.get(i));
-                    System.out.println("ID ETAKEMON:   " + capturaList.get(i).getIdetakemon());
-                    System.out.println("ID LOCALIZACION:    " + capturaList.get(i).getIdlocalizacion());
                 }
 
                 for (int i = 0; i<capturaList.size(); i++){
                         setLocationSpawn(capturaList.get(i),capturaList.get(i).getLatcaptura(),capturaList.get(i).getLoncaptura());
                 }
-
-
             }
             else {
                 Toast.makeText(MapsActivity.this, "response unsuccessful", Toast.LENGTH_SHORT).show();
-
             }
         }
 
@@ -320,7 +276,7 @@ private List<Captura> recuperarCapturas() {
 
     Marker m1;
 
-    public void setLocationSpawn(final Captura captura, final double lat, final double longi){ //Al fer el get, se li haurà de passar el nom del eetakemon per pritar-lo al mapa
+    public void setLocationSpawn(final Captura captura, final double lat, final double longi){
 
         ImageView imageview = new ImageView(MapsActivity.this);
 
@@ -338,11 +294,64 @@ private List<Captura> recuperarCapturas() {
                                 .position(loc)
                                 .icon(BitmapDescriptorFactory.fromBitmap(resource)));
 
-                  //      m1.setTag(captura.getId()+"-"+captura.getNombreetakemon()+"-"+);
+                        m1.setTag(captura);
+
+                        //m1.setTag(captura);
+                        // m1.setTag(captura.getId()+"-"+captura.getNombreetakemon()+"-"+captura.getTipoetakemon());
                         m1.setTitle(captura.getNombreetakemon());
 
                     }
-                });}
+                });
+
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener()
+        {
+
+
+            @Override
+            public boolean onMarkerClick(Marker arg0) {
+               // Toast.makeText(MapsActivity.this, "clicado correctamente", Toast.LENGTH_LONG).show();
+
+                    if (arg0.getTag().equals("user")){
+                        Toast.makeText(MapsActivity.this, idlogedmap, Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                    else {
+                        //   Log.d(tag, "Marker "+ arg0.getTag());
+
+                        //Toast.makeText(MapsActivity.this,arg0.getTag().toString(), Toast.LENGTH_LONG);
+                        Log.d(tag, "Marker " + arg0.getTag().getClass().getSimpleName() + "Eetakemon seleccionada: " + arg0.getTitle());
+//                     captura1 = (Captura) m1.getTag();
+//                     Toast.makeText(MapsActivity.this, captura1.getNombreetakemon(), Toast.LENGTH_LONG);
+
+                        Intent intent = new Intent(MapsActivity.this, game.class);
+                        //Bundle bundle = new Bundle();
+
+                        //   bundle.putString("nameExtra",arg0.getTitle());
+                        //   bundle.putString("objetoExtra",arg0.getTag().toString());
+                        // bundle.putString("list",captura);
+                        // intent.putExtras(bundle);
+
+
+//                        Bundle bundle = new Bundle();
+//                        bundle.putSerializable("captura", (Serializable) arg0.getTag());
+//                        bundle.putInt("userLoger", idlogedmap);
+
+                        intent.putExtra("captura", (Serializable) arg0.getTag());
+                        intent.putExtra("userLoger", idlogedmap);
+                        startActivity(intent);
+                        return false;
+                    }
+            }
+
+
+
+        });
+
+
+    }
+
+
 
     private void recuperarLocalizaciones(){
 
@@ -362,37 +371,16 @@ private List<Captura> recuperarCapturas() {
             @Override
             public void onResponse(Call<List<Localizacion>> call, Response<List<Localizacion>> response) {
 
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Toast.makeText(MapsActivity.this, "response successful", Toast.LENGTH_LONG).show();
                     listarecibidaloca = response.body();
                     System.out.println("OJIKOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO k viene");
                     System.out.println(listarecibidaloca.get(1).getLatitud());
                     localizacionList = new ArrayList<Localizacion>();
-                    for (int i=0; i<listarecibidaloca.size(); i++){
+                    for (int i = 0; i < listarecibidaloca.size(); i++) {
                         localizacionList.add(listarecibidaloca.get(i));
-//                        System.out.println("TAMAÑOOOOOO loco: "+localizacionList.size());
-//                        System.out.println("ID: loco    "+localizacionList.get(i).getId());
-//                        System.out.println("latitud: "+ localizacionList.get(i).getLatitud());
-//                        System.out.println("longitud: " + localizacionList.get(i).getLongitud());
-//
-//                        Marker marker = markerList.get(i);
-//                        LatLng posicionSpwan = new LatLng(localizacionList.get(i).getLatitud(), localizacionList.get(i).getLongitud());
-//                        // CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(posicionSpwan, 16);
-//                        if (marker != null){
-//                            marker.remove();
-//                        }
-//                        marker = mMap.addMarker(new MarkerOptions()
-//                                .position(posicionSpwan)
-//                                .title("Captura")
-//                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.player8bits)));
-                        //mMap.animateCamera(miUbicacion);
                     }
-                  //  listarecibidaloca = response.body();
-//                    localizacionList = new ArrayList<Localizacion>();
-//                    for (int j=0; j < locas.size(); j++){
-//                        Localizacion localizacion = locas.get(j);
-//                        localizacionList.add(localizacion);
-                    }
+                }
                 else {
                     System.out.println("¡UNSUCESFUL");
                     Toast.makeText(MapsActivity.this, "response unsuccessful All objetos", Toast.LENGTH_SHORT).show();
@@ -409,45 +397,42 @@ private List<Captura> recuperarCapturas() {
 
     }
 
-//    Marker marker;
-//
-//    private void setLocationMarkers(){
-//
-//
-//
-//    }
+    public void doGetData(String em){
+        RetrofitOwn retrofitOwn = new RetrofitOwn();
+        Retrofit retrofit = retrofitOwn.getObjectRetrofit();
 
-//    public void spawns(){
-//        capturaspawn = recuperarCapturas();
-//        //locaspawn = recuperarLocalizaciones();
-//
-//        double latitud, longitud;
-//        int idloca;
-//
-//        for (int x=0; x<capturaspawn.size(); x++){
-//            idloca = capturaspawn.get(x).getIdlocalizacion();
-//            for (int z=0; z<locaspawn.size(); z++){
-//                if (idloca == locaspawn.get(z).getId()){
-//                    latitud = locaspawn.get(z).getLatitud();
-//                    longitud = locaspawn.get(z).getLongitud();
-//
-//                        LatLng posicionSpwan = new LatLng(latitud, longitud);
-//                       // CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(posicionSpwan, 16);
-//                        if (marcador != null){
-//                            marcador.remove();
-//                        }
-//                        marcador = mMap.addMarker(new MarkerOptions()
-//                                .position(posicionSpwan)
-//                                .title("Captura")
-//                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_etakemons)));
-//                        //mMap.animateCamera(miUbicacion);
-//                        System.out.println("************************MIRAR AQUI************"+ lat+ing);
-//                }
-//            }
-//
-//        }
-//    }
+        //Creamos una instancia de retrofit
+        GitHubClient datos = retrofit.create(GitHubClient.class);
 
+        //Hacemos la llamada http
+        Call<Usuario> call2 = datos.getUsuario(em);
+
+        call2.enqueue(new Callback<Usuario>() {
+            @Override
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+
+                if (response.isSuccessful()){
+                    Usuario usuario = new Usuario();
+                    // idusuario = usuario.getId();
+                    idrecibed = response.body().getId();
+                    idlogedmap = idrecibed;
+                    //   Toast.makeText(Menu.this, String.valueOf(idlogedparatodos), Toast.LENGTH_SHORT).show();
+                    Log.d(tag, "Datos obtenidos correctamente");
+
+                }
+                else{
+                    Log.d(tag, "Datos mal cogidos");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Usuario> call, Throwable t) {
+                Toast.makeText(MapsActivity.this, "Error al obtener datos del usuario", Toast.LENGTH_SHORT).show();
+                Log.d(tag, "No conectado para coger datos");
+            }
+        });
+    }
 
     @Override
     protected void onStart() {
@@ -489,7 +474,6 @@ private List<Captura> recuperarCapturas() {
         Log.d(tag, "Event onDestroy()");
 
     }
-
 
     public void goToMenu(View view){
         Intent intent = new Intent(MapsActivity.this, Menu.class);
