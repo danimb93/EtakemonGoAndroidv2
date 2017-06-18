@@ -1,8 +1,11 @@
 package com.example.dani.etakemongo.DevelopFrontends;
 
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -41,6 +44,8 @@ public class EtakemonsUsuario extends AppCompatActivity {
     private ArrayList<Captura> listacapturas;
     int idloged,idusuario;
 
+    FloatingActionButton fabExit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +62,16 @@ public class EtakemonsUsuario extends AppCompatActivity {
         catch (Exception ex){
             ex.getMessage();
         }
+
+        fabExit = (FloatingActionButton) findViewById(R.id.fab_goMenufrometakemons);
+        fabExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intres = getIntent();
+                setResult(RESULT_OK, intres);
+                finish();
+            }
+        });
 
     }
 

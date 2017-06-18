@@ -4,8 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dani.etakemongo.DevelopFrontends.EtakemonsUsuario">
+    tools:context="com.example.dani.etakemongo.DevelopFrontends.EtakemonsUsuario"
+    android:background="@drawable/fondo"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
 
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="71dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginRight="55dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-condensed"
+        android:shadowColor="#000000"
+        android:text="     Mis etakemons"
+        android:textAlignment="textStart"
+        android:textColor="#1B5E20"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -22,40 +44,27 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="210dp"
-            android:layout_weight="0.13"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/etSearch_misetakemons"
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
-                android:layout_marginTop="125dp"
-                android:ems="10"
-                android:hint="Buscar"
-                android:inputType="textPersonName"
-                android:textAlignment="center" />
-        </LinearLayout>
+            android:layout_height="200dp"
+            android:layout_weight="0.33"
+            android:orientation="horizontal"></LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="0.54"
             android:orientation="horizontal"
-            android:layout_weight="0.14"
             android:weightSum="1">
 
             <ListView
                 android:id="@+id/listEtakemons"
-                android:layout_width="229dp"
-                android:layout_height="220dp"
+                android:layout_width="match_parent"
+                android:layout_height="301dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:layout_marginTop="25dp"
-                android:layout_weight="0.36"
+                android:layout_weight="0.34"
                 android:textAlignment="center"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="0dp">
@@ -63,25 +72,23 @@
             </ListView>
         </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="0.11"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="41dp"
-        android:fontFamily="sans-serif-condensed"
-        android:shadowColor="#000000"
-        android:text="Mis etakemons"
-        android:textAlignment="textStart"
-        android:textColor="@android:color/black"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_goMenufrometakemons"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="170dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                app:backgroundTint="@android:color/holo_green_dark"
+                app:fabSize="mini"
+                app:srcCompat="@android:drawable/ic_notification_clear_all" />
+        </LinearLayout>
+
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
