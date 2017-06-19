@@ -81,8 +81,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         doGetData(emailaMenu);
 
-        Toast.makeText(MapsActivity.this, "response unsuccessful", Toast.LENGTH_SHORT).show();
-
        // recuperarLocalizaciones(); //rellenamos lista recibida loca
         recuperarCapturas();
 

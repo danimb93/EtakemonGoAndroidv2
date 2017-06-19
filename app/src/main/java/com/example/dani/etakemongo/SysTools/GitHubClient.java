@@ -8,12 +8,14 @@ import com.example.dani.etakemongo.Modelo.Localizacion;
 import com.example.dani.etakemongo.Modelo.Logros;
 import com.example.dani.etakemongo.Modelo.Objetos;
 import com.example.dani.etakemongo.Modelo.Usuario;
+import com.google.android.gms.maps.model.Cap;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -81,6 +83,10 @@ public interface GitHubClient {
 
         @GET ("captura/get_generated")
         Call<List<Captura>> getRandomCapturas();
+
+        @Headers("Accept: application/json")
+        @POST ("captura/{iduser}/capture")
+        Call<Captura> setCapturaToUsuario(@Path("iduser") int id, @Body Captura captura);
 
 
 
