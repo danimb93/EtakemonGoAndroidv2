@@ -81,13 +81,21 @@ public class EtakemonsUsuario extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Captura captura = (Captura) listView.getItemAtPosition(position);
+                Captura rival = (Captura) listView.getItemAtPosition(randomPositionLista());
                 Intent intent = new Intent(EtakemonsUsuario.this, BatallaEtakemons.class);
                 intent.putExtra("captura", (Serializable) captura);
+                intent.putExtra("rival", (Serializable) rival);
+                intent.putExtra("idusuario", idloged);
                 startActivity(intent);
-//                Toast.makeText(EtakemonsUsuario.this, captura.getNombreetakemon().toString()+captura.getHabilidadetakemon()+captura.getTipoetakemon(), Toast.LENGTH_LONG).show();
+//              Toast.makeText(EtakemonsUsuario.this, captura.getNombreetakemon().toString()+captura.getHabilidadetakemon()+captura.getTipoetakemon(), Toast.LENGTH_LONG).show();
             }
         });
 
+    }
+
+    public int randomPositionLista(){
+        int random = (int) Math.floor(Math.random()*((listacapturas.size()-0)+0));
+        return random;
     }
 
     public void doLista(){
