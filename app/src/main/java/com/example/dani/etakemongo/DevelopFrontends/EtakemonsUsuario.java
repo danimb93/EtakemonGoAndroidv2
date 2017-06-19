@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -13,6 +14,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.dani.etakemongo.Modelo.Captura;
+import com.example.dani.etakemongo.ProductionFrontends.BatallaEtakemons;
 import com.example.dani.etakemongo.R;
 import com.example.dani.etakemongo.SysTools.CustomListMisEtakemons;
 import com.example.dani.etakemongo.SysTools.GitHubClient;
@@ -20,6 +22,7 @@ import com.example.dani.etakemongo.SysTools.RetrofitOwn;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,6 +76,18 @@ public class EtakemonsUsuario extends AppCompatActivity {
             }
         });
 
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Captura captura = (Captura) listView.getItemAtPosition(position);
+                Intent intent = new Intent(EtakemonsUsuario.this, BatallaEtakemons.class);
+                intent.putExtra("captura", (Serializable) captura);
+                startActivity(intent);
+//                Toast.makeText(EtakemonsUsuario.this, captura.getNombreetakemon().toString()+captura.getHabilidadetakemon()+captura.getTipoetakemon(), Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     public void doLista(){
@@ -103,9 +118,6 @@ public class EtakemonsUsuario extends AppCompatActivity {
                 else{
                     Toast.makeText(EtakemonsUsuario.this, "Peticion erronea!", Toast.LENGTH_SHORT).show();
                 }
-
-
-
             }
 
             @Override

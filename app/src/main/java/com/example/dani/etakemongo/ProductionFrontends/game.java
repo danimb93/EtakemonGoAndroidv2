@@ -53,15 +53,13 @@ public class game extends AppCompatActivity {
         eetakemon.setText(eetakemon.getText()+" "+capturaToUse.getNombreetakemon());
         habilidad.setText(habilidad.getText()+" "+capturaToUse.getHabilidadetakemon());
 
-        Toast.makeText(game.this,capturaToUse.getNombreetakemon()+" "+capturaToUse.getHabilidadetakemon()+" "+idToUse, Toast.LENGTH_LONG).show();
-
         buttoncapturar = (Button) findViewById(R.id.button2);
         buttoncapturar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try{
                     doCapture();
-                    Toast.makeText(game.this, "successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(game.this, "¡Capturado!", Toast.LENGTH_SHORT).show();
                     Intent intent = getIntent();
                     setResult(RESULT_OK, intent);
                     finish();
@@ -97,7 +95,7 @@ public class game extends AppCompatActivity {
             public void onResponse(Call<Captura> call, Response<Captura> response) {
 
                 if (response.isSuccessful()){
-                    Toast.makeText(game.this, "successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(game.this, "Capturado!", Toast.LENGTH_SHORT).show();
                     Intent intent = getIntent();
                     setResult(RESULT_OK, intent);
                     finish();

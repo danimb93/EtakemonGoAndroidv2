@@ -139,8 +139,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //                .radius(125)
 //                .strokeColor(Color.RED)
 //                .fillColor(Color.TRANSPARENT));
-        mMap.getUiSettings().setZoomControlsEnabled(false);
-        mMap.getUiSettings().setScrollGesturesEnabled(false);
+//        mMap.getUiSettings().setZoomControlsEnabled(false);
+       mMap.getUiSettings().setScrollGesturesEnabled(false);
        // setLocationMarkers();
         //spawns();
     }
@@ -156,7 +156,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void agregarMarcador(double lat, double ing) {
 
         LatLng coordenadas = new LatLng(lat, ing);
-        CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(coordenadas, 16);
+        CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(coordenadas, 18);
         if (marcador != null){
             marcador.remove();
         }
@@ -225,7 +225,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         actualizarUbicacion(location);
       //  calculateAreaOfGPSPolygonOnEarthInSquareMeters(location,2.5);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,4000,0,locListener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,1000,0,locListener);
         System.out.println("************************MIRAR AQUI************"+ lat+ing);
     }
 
@@ -329,8 +329,6 @@ private List<Captura> recuperarCapturas() {
                         //   bundle.putString("objetoExtra",arg0.getTag().toString());
                         // bundle.putString("list",captura);
                         // intent.putExtras(bundle);
-
-
 //                        Bundle bundle = new Bundle();
 //                        bundle.putSerializable("captura", (Serializable) arg0.getTag());
 //                        bundle.putInt("userLoger", idlogedmap);
@@ -348,8 +346,6 @@ private List<Captura> recuperarCapturas() {
 
 
     }
-
-
 
     private void recuperarLocalizaciones(){
 
