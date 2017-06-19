@@ -1,23 +1,10 @@
 package com.example.dani.etakemongo.DevelopFrontends;
 
-//import android.support.v7.app.AppCompatActivity;
-//import android.os.Bundle;
-//
-//import com.example.dani.etakemongo.R;
-//
-//public class Etakemon_list extends AppCompatActivity {
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_etakemon_list);
-//    }
-//}
-
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
+import android.telecom.Call;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -29,86 +16,38 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
 import java.util.ArrayList;
+import java.util.List;
 
+import com.example.dani.etakemongo.Modelo.Etakemon;
 import com.example.dani.etakemongo.R;
 import com.example.dani.etakemongo.SysTools.CustomListEtakedex;
+import com.example.dani.etakemongo.SysTools.GitHubClient;
+import com.example.dani.etakemongo.SysTools.RetrofitOwn;
 
-public class Etakemon_list extends Activity {
-    ListView list;
-    String[] web = {
-            "Alakasals",
-            "Danisloth",
-            "Davidos",
-            "Livanny",
-            "Robat",
-            "Tonix",
-            "Wooperal"
-    } ;
-    Integer[] imageId = {
-            R.drawable.alakasals,
-            R.drawable.danisloth,
-            R.drawable.davidos,
-            R.drawable.livanny,
-            R.drawable.robat,
-            R.drawable.tonix,
-            R.drawable.wooperal
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
-    };
+public class Etakemon_list extends AppCompatActivity {
 
-    private EditText editText;
-    private int textlenght = 0;
-    private ArrayList<String> array_sort = new ArrayList<>();
     private FloatingActionButton fabExit;
+    private  ListView listView;
+    private ArrayList<Etakemon> listarecibida;
+    private ArrayList<Etakemon> listaetakemons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_etakemon_list);
 
+        listView = (ListView) findViewById(R.id.list);
 
-        CustomListEtakedex adapter = new
-                CustomListEtakedex(Etakemon_list.this, web, imageId);
-        list=(ListView)findViewById(R.id.list);
-        list.setAdapter(adapter);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Toast.makeText(Etakemon_list.this, "You Clicked at " +web[+ position], Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        editText = (EditText) findViewById(R.id.etSearch_etlist);
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                textlenght = editText.getText().length();
-                array_sort.clear();
-
-                for (int i = 0; i < web.length; i++){
-                    if (textlenght < web[i].length()){
-                        if (editText.getText().toString().equalsIgnoreCase((String) web[i].subSequence(0, textlenght))){
-                            array_sort.add(web[i]);
-                        }
-                    }
-
-                }
-
-                list.setAdapter((new ArrayAdapter<String>(Etakemon_list.this, android.R.layout.simple_list_item_1, array_sort)));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        try{
+            doEtakedex();
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }
 
         fabExit = (FloatingActionButton) findViewById(R.id.fab_exit_etakedex);
         fabExit.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +56,43 @@ public class Etakemon_list extends Activity {
                 Intent intres = getIntent();
                 setResult(RESULT_OK, intres);
                 finish();
+            }
+        });
+
+    }
+
+    public void doEtakedex(){
+
+        RetrofitOwn retro = new RetrofitOwn();
+        Retrofit retrofit = retro.getObjectRetrofit();
+
+        GitHubClient etakedex = retrofit.create(GitHubClient.class);
+
+        retrofit2.Call<List<Etakemon>> call = etakedex.getListaEtakemons();
+
+        call.enqueue(new Callback<List<Etakemon>>() {
+            @Override
+            public void onResponse(retrofit2.Call<List<Etakemon>> call, Response<List<Etakemon>> response) {
+                if (response.isSuccessful()){
+                    listarecibida = (ArrayList<Etakemon>) response.body();
+                    listaetakemons = new ArrayList<Etakemon>();
+
+                    for (int i = 0; i < listarecibida.size(); i++){
+                        listaetakemons.add(listarecibida.get(i));
+                    }
+
+                    EtakedexListAdapter adapter = new EtakedexListAdapter(getApplicationContext(), R.layout.activity_etakemon_list, listaetakemons);
+                    listView.setAdapter(adapter);
+                }
+                else{
+                    Toast.makeText(Etakemon_list.this, "Petición erronea!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<List<Etakemon>> call, Throwable t) {
+                Toast.makeText(Etakemon_list.this, "Error al conectar", Toast.LENGTH_SHORT).show();
+
             }
         });
     }

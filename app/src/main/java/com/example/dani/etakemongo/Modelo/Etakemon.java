@@ -10,6 +10,17 @@ public class Etakemon{
     private String nombre;
     private String habilidad;
     private int tipo;
+    private String imagen, descripcion;
+
+
+    public Etakemon(int id, String nombre, String habilidad, int tipo, String imagen, String descripcion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.habilidad = habilidad;
+        this.tipo = tipo;
+        this.imagen = imagen;
+        this.descripcion = descripcion;
+    }
 
     public Etakemon(int id, String nombre, String habilidad, int tipo) {
         this.id = id;
@@ -56,5 +67,21 @@ public class Etakemon{
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }
