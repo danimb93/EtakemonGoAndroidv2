@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -69,6 +70,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private List<Localizacion> listarecibidaloca;
     private List<Localizacion> localizacionList;
     private FloatingActionButton menu;
+    private MediaPlayer ring;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +82,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         emailaMenu = email2;
 
         doGetData(emailaMenu);
+
+
 
        // recuperarLocalizaciones(); //rellenamos lista recibida loca
         recuperarCapturas();
@@ -97,6 +101,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         });
+
+        ring = MediaPlayer.create(MapsActivity.this,R.raw.ruta);
+        ring.start();
 
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -322,6 +329,8 @@ private List<Captura> recuperarCapturas() {
 //                     captura1 = (Captura) m1.getTag();
 //                     Toast.makeText(MapsActivity.this, captura1.getNombreetakemon(), Toast.LENGTH_LONG);
 
+
+
                         Intent intent = new Intent(MapsActivity.this, game.class);
                         //Bundle bundle = new Bundle();
 
@@ -437,6 +446,7 @@ private List<Captura> recuperarCapturas() {
     @Override
     protected void onResume() {
         super.onResume();
+        ring.start();
         Log.d(tag, "Event onResume()");
 
     }
@@ -458,7 +468,9 @@ private List<Captura> recuperarCapturas() {
     @Override
     protected void onRestart() {
         super.onRestart();
+        ring.start();
         Log.d(tag, "Event onRestart()");
+
 
     }
 
@@ -470,6 +482,7 @@ private List<Captura> recuperarCapturas() {
     }
 
     public void goToMenu(View view){
+        ring.stop();
         Intent intent = new Intent(MapsActivity.this, Menu.class);
         intent.putExtra("email2",emailaMenu);
         startActivityForResult(intent, 800);

@@ -1,8 +1,10 @@
 package com.example.dani.etakemongo.ProductionFrontends;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dani.etakemongo.DevelopFrontends.EtakemonsUsuario;
+import com.example.dani.etakemongo.Modelo.Batalla;
 import com.example.dani.etakemongo.Modelo.Captura;
 import com.example.dani.etakemongo.R;
 import com.example.dani.etakemongo.SysTools.ImageLoadTask;
@@ -31,15 +34,21 @@ public class BatallaEtakemons extends AppCompatActivity {
     Boolean energyRival;
     int hpMeBatalla, hpRivalBatalla;
 
+  //  MediaPlayer ring2;
+
+
+    String tag = "Login";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_batalla_etakemons);
 
+    //   ring2 = MediaPlayer.create(BatallaEtakemons.this,R.raw.batalla);
+      //  ring2.start();
+
         capturaBatalla = (Captura) getIntent().getSerializableExtra("captura");
         capturaRival = (Captura) getIntent().getSerializableExtra("rival");
         idUsuario = getIntent().getExtras().getInt("idusuario");
-
 
 //        Toast.makeText(BatallaEtakemons.this, capturaBatalla.getNombreetakemon().toString()+capturaBatalla.getHabilidadetakemon()+capturaBatalla.getAtaque()+" "+capturaBatalla.getVida(), Toast.LENGTH_LONG).show();
 
@@ -184,5 +193,47 @@ public class BatallaEtakemons extends AppCompatActivity {
             selected = (int) Math.floor(Math.random()*((3-2)+2));
         }
         return selected;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(tag, "Event onStart()");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(tag, "Event onResume()");
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(tag, "Event onPause()");
+
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(tag, "Event onStop()");
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(tag, "Event onRestart()");
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(tag, "Event onDestroy()");
+
     }
 }

@@ -1,6 +1,7 @@
 package com.example.dani.etakemongo.ProductionFrontends;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,11 +39,16 @@ public class Login extends AppCompatActivity {
 
     private TextView registrar, recordar;
 
+    private MediaPlayer ring1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Log.d(tag, "Event onCreate()");
+
+        ring1 = MediaPlayer.create(Login.this,R.raw.init);
+        ring1.start();
 
         progressBarLogin = (ProgressBar) findViewById(R.id.progressLogin);
         progressBarLogin.setVisibility(View.GONE);
@@ -67,6 +73,7 @@ public class Login extends AppCompatActivity {
                         emilio = email.getText().toString();
                         //doGetData(emilio);
                         doLogin(v);
+                        ring1.stop();
                     }
                     catch (Exception ex){
                         ex.getMessage();
